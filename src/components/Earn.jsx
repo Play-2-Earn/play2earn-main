@@ -76,7 +76,17 @@ const TaskModal = ({ task, onClose, onAccept }) => {
               checked={agreed}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="terms">I agree to the terms and services</label>
+            <label htmlFor="terms">
+              I agree to the{" "}
+              <a
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="terms-link"
+              >
+                terms and services
+              </a>
+            </label>
           </div>
           <button
             onClick={() => onAccept(task)}

@@ -222,6 +222,15 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+.terms-link {
+  color: black;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
 .terms {
   display: flex;
   align-items: center;
