@@ -16,17 +16,24 @@ const SignUpPopup = ({ isOpen, onClose, innLogInlink }) => {
 
 
   const handleSignUp = async (e) => {
-    e.preventDefault()
-    axios.post('http://localhost:5002/api/users/sign_up', { firstName, lastName, email, password, refBy })
-      .then(result => {
-        console.log(result)
-        alert("you are signed up successfully!! Now, you can log in to your account!!")
-        innLogInlink()
-      }
-      )
-      .catch(err => console.log(err))
-    onClose();
-  };
+    e.preventDefault();
+
+    try {
+        const response = await axios.post('http://localhost:5002/api/users/sign_up', {
+            firstName, lastName, email, password, refBy
+        });
+
+        console.log(response);
+        alert("You are signed up successfully! Now, you can log in to your account!");
+        innLogInlink();
+
+    } catch (err) {
+        console.error("Error during sign up:", err);
+        alert("Sign up failed. Please try again.");
+    }
+
+    onClose(); // Close the sign-up form/modal
+};
 
   if (!isOpen) return null;
 

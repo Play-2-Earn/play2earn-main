@@ -19,28 +19,43 @@ router.get('/', getAllUsers);
 
 // mit prajapati (authentication system)
 
-// code for generating the ref code...
+// code for generating the reference code...
 function generateReferralCode(firstName, lastName) {
     const data = `${firstName}-${crypto.randomInt(100000, 999999)}-${lastName}`;
     const hash = crypto.createHash('sha256').update(data).digest('hex');
-    
+
     // Truncate the hash to the first 8 characters (you can choose a different length)
     const referralCode = hash.substring(0, 10);
-    
     return referralCode;
 }
 
 
 router.post("/sign_up", (request, response) => {
+    const { firstName, lastName, email, password, refBy } = request.body;
 
-    const {firstName, lastName, email, password, refBy} = request.body
-    
-    const userRefNum = generateReferralCode(firstName, lastName)
-    // console.log(userRefNum)
+    const username = firstName + crypto.randomInt(100000, 999999);
+    // Check if a user with the given email already exists
+    UserModel.findOne({ email: email })
+        .then(user => {
+            if (user) {
+                // If the user is found, send a response indicating the email is already in use
+                return response.status(400).json({ error: "Email already exists" });
+            } else {
+                // Generate the referral code and create the new user
+                const userRefNum = generateReferralCode(firstName, lastName);
 
-    UserModel.create({firstName, lastName, email, password, userRefNum, refBy})
-        .then(users => response.json(users))
-        .catch(err => response.json(err));
+                UserModel.create({ firstName, lastName, username, email, password, userRefNum, refBy })
+                    .then(newUser => response.status(201).json(newUser))
+                    .catch(err => {
+                        console.error("Error creating user:", err);
+                        response.status(500).json({ error: "Error creating user" });
+                    });
+            }
+        })
+        .catch(err => {
+            console.error("Error finding user:", err);
+            response.status(500).json({ error: "Error finding user" });
+        });
 });
 
 router.post("/log_in", (request, response) => {
