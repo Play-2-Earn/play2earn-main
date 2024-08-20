@@ -151,7 +151,7 @@ const About = () => {
             </div>
 
             <div className="relative min-h-[50rem] rounded-3xl overflow-hidden bg-gradient-to-b from-sky-200 to-sky-300">
-              <div className="relative z-10 py-12 px-4 xl:px-8">
+              <div className="relative z-10 py-8 px-4 xl:px-8">
                 <h4 className="h4 mb-4 text-gray-800 text-2xl">Task Rewards</h4>
                 <p className="body-2 mb-0 text-gray-800 text-justify">
                   Complete micro tasks and earn rewards effortlessly! Enjoy
