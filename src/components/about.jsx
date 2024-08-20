@@ -93,20 +93,43 @@ const About = () => {
             </div>
 
             <div className="relative z-1 max-w-[17rem] ml-auto">
-              <h4 className="h4 mb-4 text-gray-800 text-2xl">Learn Crypto</h4>
-              <p className="body-2 mb-[3rem] text-gray-800 text-justify">
-                Discover the world of cryptocurrency by starting with the basics
-                of blockchain technology and digital currencies. Understand how
-                blockchain works, explore major cryptocurrencies like Bitcoin
-                and Ethereum, and learn about key concepts such as smart
-                contracts and mining. Use reputable resources, join crypto
-                communities, and take introductory courses to build your
-                knowledge. Staying updated with the latest trends and gaining
-                practical experience will help you navigate this evolving field
-                effectively.
-              </p>
+            <h4 className="h4 mb-4 text-gray-800 text-2xl">Our Mission</h4>
+                <p className="body-2 text-gray-800 ">
+                  At Play2Earn.ai, our mission is to create a platform where gaming and AI development work hand in hand,
+                  rewarding players for their time, skill, and contributions to AI advancements. We’re building an ecosystem where gameplay fuels AI evolution,
+                  ensuring that everyone benefits from the intersection of play and purpose. Through this innovative approach,
+                  we’re empowering players to actively shape the future of technology while earning rewards in a mutually beneficial environment.
+                </p>
             </div>
           </div>
+
+          {/* what we do and Vision Section */}
+<div className="relative bg-white mb-10">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="relative border border-n-1/10 rounded-3xl p-8 bg-sky-100">
+      <div className="relative z-10 flex flex-col justify-between h-full">
+        <h4 className="h4 mb-4 text-gray-800 text-2xl">What we do</h4>
+        <p className="body-2 text-gray-800 text-justify">
+          At Play2Earn.ai, what we do is creating a platform where gaming and AI development work hand in hand,
+          rewarding players for their time, skill, and contributions to AI advancements. We’re building an ecosystem where gameplay fuels AI evolution,
+          ensuring that everyone benefits from the intersection of play and purpose. Through this innovative approach,
+          we’re empowering players to actively shape the future of technology while earning rewards in a mutually beneficial environment.
+        </p>
+      </div>
+    </div>
+    <div className="relative border border-n-1/10 rounded-3xl p-8 bg-sky-100">
+      <div className="relative z-10 flex flex-col justify-between h-full">
+        <h4 className="h4 mb-4 text-gray-800 text-2xl">Our Vision</h4>
+        <p className="body-2 text-gray-800 text-justify">
+        At Play2Earn.ai, we envision a world where gaming goes beyond entertainment to become a catalyst for technological advancement and personal growth.
+        Our goal is to make gaming a meaningful experience that contributes to AI and digital innovation while providing real-world rewards.
+        By blending immersive gameplay with cutting-edge technology,
+        we aim to build a global community that shapes the future of technology and fosters collaboration through play.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
           <div className="relative z-1 grid gap-5 lg:grid-cols-2">
             <div className="relative min-h-[39rem] border border-n-1/10 rounded-3xl overflow-hidden bg-sky-300">
@@ -142,6 +165,7 @@ const About = () => {
                 className="w-full h-auto object-cover"
               />
             </div>
+            
 
             {/* General info */}
             <div className="relative p-4 bg-gradient-to-b bg-sky-200 rounded-xl overflow-hidden lg:min-h-[20rem] lg:min-w-[80rem]">
