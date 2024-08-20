@@ -12,7 +12,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import About from "./components/about.jsx";
 import Leaderboard from "./components/leaderboard";
-import Survey from "./components/surveyTasks/survey";
+import AdminDashboard from "./components/Admin-dash/AdminDashboard";
 
 const App = () => {
   return (
@@ -23,9 +23,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/referrals" element={<ReferralsPage />} />
           <Route path="/earn" element={<Earn />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/survey" element={<Survey />} />
-
+          {/* by mit prajapati 14-08-2024 */}
+          <Route path="/leaderboard" element={<Leaderboard />} /> 
+          <Route path="/dashboard" element={<AdminDashboard />} />
           {/* Add other routes here */}
 
           {/* foorter routes */}
