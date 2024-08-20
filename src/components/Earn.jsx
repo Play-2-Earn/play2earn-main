@@ -115,7 +115,7 @@ const Earn = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:5002/api/tasks");
+        const response = await fetch("https://g4irdwc3el.execute-api.eu-north-1.amazonaws.com/tasks");
         if (!response.ok) {
           throw new Error(
             `Network response was not ok: ${response.statusText}`
