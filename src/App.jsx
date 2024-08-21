@@ -13,6 +13,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import About from "./components/about.jsx";
 import Leaderboard from "./components/leaderboard";
 import Survey from "./components/surveyTasks/survey";
+import Ecosystem from "./components/ecosystem";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/earn" element={<Earn />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/survey" element={<Survey />} />
+          <Route path="/ecosystem" element={<Ecosystem />} /> 
 
           {/* Add other routes here */}
 
