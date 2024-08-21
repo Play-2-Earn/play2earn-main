@@ -1,6 +1,6 @@
-# Play2Earn Landing Page
+# Play2Earn
 
-This repository contains the code for the Play2Earn landing page, a play-to-earn platform where users can complete tasks and earn rewards. The application is built using React, Vite, and various other libraries to provide a seamless user experience.
+This repository contains the code for the Play2Earn, It is a platform where users can complete tasks and earn rewards. The application is built using React, Vite, and various other libraries to provide a seamless user experience.
 
 ## Table of Contents
 
@@ -42,8 +42,8 @@ To get a local copy up and running, follow these steps:
 
 1. Clone the repository:
 
-   git clone https://github.com/Nedal1994/play2earn-frontend.git
-   cd play2earn-frontend
+   git clone https://github.com/Play-2-Earn/play2earn-main.git
+   cd play2earn-main
 
 2. Install dependencies:
 
@@ -62,4 +62,5 @@ Start the development server:
     npm start
 
     Open http://localhost:5173 to view the application in the browser.
+
 # play2earn-main
