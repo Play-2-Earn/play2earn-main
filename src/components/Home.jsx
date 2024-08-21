@@ -13,6 +13,9 @@ import {
   Crown,
   CircleDollarSign,
   UserPlus,
+  Gamepad,
+  CreditCard,
+  Brain,
 } from "lucide-react";
 import {
   FaTwitter,
@@ -26,17 +29,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../App.css";
 import { CustomPrevArrow, CustomNextArrow } from "./ui/CustomArrows";
-// added by mit prajapati
 import LoginPopup from "./Login";
 import SignUpPopup from "./Signup";
 import ForgetPassPopup from "./Forgetpassword";
 import PasswordReset from "./PassReset";
 import Leaderboard from "./leaderboard";
+import TasksWeOffer from "./TasksWeOffer";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  // (authentication_system by mit prajapati)
   const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
   const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false);
@@ -89,24 +91,24 @@ const Home = () => {
   const taskTypes = useMemo(
     () => [
       {
+        icon: Gamepad,
+        title: "Play Games",
+        description: "Choose from a variety of AI-enhanced games",
+      },
+      {
         icon: DollarSign,
-        title: "Staking Coins",
-        description: "Increase volume by staking coins",
+        title: "Earn PlayCredits",
+        description: "Earn credits based on your performance and achievements",
       },
       {
-        icon: FaTwitter,
-        title: "Twitter Growth",
-        description: "Gain followers on Twitter",
+        icon: CreditCard,
+        title: "Use PlayCredits",
+        description: "Transfer credits to your PlayCreditCard for real-world use",
       },
       {
-        icon: FaDiscord,
-        title: "Discord Engagement",
-        description: "Participate in Discord communities",
-      },
-      {
-        icon: FaTelegramPlane,
-        title: "Telegram Tasks",
-        description: "Engage with Telegram groups",
+        icon: Brain,
+        title: "Contribute to AI",
+        description: "Your gameplay helps develop cutting-edge AI models",
       },
     ],
     []
@@ -114,22 +116,19 @@ const Home = () => {
 
   const [heroCards] = useState([
     {
-      title: "Complete Tasks, Earn Reward",
-      description:
-        "Join our platform to tackle exciting tasks and get paid for your skills!",
+      title: "Empower Your Play, Earn Rewards, and Shape the Future of AI",
+      description: "Play exciting games, earn PlayCredits, and use them in the real world with our PlayCreditCard. Welcome to the Play2Earn ecosystem – where your gameplay fuels AI development.",
       image: "assets/f.jpg",
     },
     {
-      title: "Another Company",
-      description: "Description for another company.",
-      reward: "0.05 ~ $0.05",
+      title: "AI-Driven Games",
+      description: "Our games are not just fun; they contribute to the development of cutting-edge AI models.",
       image: "assets/pic1.png",
     },
     {
-      title: "Another Company",
-      description: "Description for another company.",
-      reward: "0.05 ~ $0.05",
-      image: "",
+      title: "Global PlayCreditCard",
+      description: "Use your PlayCredits in the real world, just like any other debit or credit card.",
+      image: "assets/light_blue.jpg",
     },
   ]);
 
@@ -141,7 +140,7 @@ const Home = () => {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 5000,
       nextArrow: <CustomNextArrow />,
       prevArrow: <CustomPrevArrow />,
       responsive: [
@@ -201,7 +200,6 @@ const Home = () => {
         return <Award className="h-6 w-6 text-amber-600" />;
       case 4:
         return <Medal className="h-6 w-6 text-grey-100" />;
-
       default:
         return null;
     }
@@ -211,19 +209,19 @@ const Home = () => {
     {
       icon: <UserPlus size={24} />,
       title: "Sign Up",
-      description: "Register using your crypto wallet or social accounts.",
+      description: "Create your account and join the Play2Earn ecosystem.",
       color: "bg-blue-100",
     },
     {
-      icon: <CheckCircle size={24} />,
-      title: "Complete a Task",
-      description: "Select a task that interests you and complete it.",
+      icon: <Gamepad size={24} />,
+      title: "Play Games",
+      description: "Choose from a variety of AI-enhanced games and start playing.",
       color: "bg-blue-200",
     },
     {
       icon: <CircleDollarSign size={24} />,
-      title: "Get Paid",
-      description: "Get paid immediately with $ once you complete the task.",
+      title: "Earn & Use PlayCredits",
+      description: "Earn PlayCredits and use them with your PlayCreditCard.",
       color: "bg-blue-100",
     },
   ];
@@ -234,7 +232,7 @@ const Home = () => {
       <header className="relative overflow-hidden bg-gradient-to-b from-blue-500 to-blue-300 text-white p-4">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10">
           <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0 text-white">
-            Play2Earn
+            Play2Earn.ai
           </h1>
           <nav className="flex flex-wrap justify-center md:justify-end items-center">
             <Link to="#" className="text-white hover:text-blue-200 mx-2 my-1">
@@ -293,14 +291,10 @@ const Home = () => {
                   <Button
                     size="lg"
                     className="bg-blue-500 hover:bg-blue-600 text-white"
+                    onClick={() => handleSignUpClick()}
                   >
-                    Learn More
+                    Start Playing
                   </Button>
-                  {card.reward && (
-                    <div className="mt-2 md:mt-4 text-gray-200">
-                      {card.reward}
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
@@ -312,7 +306,7 @@ const Home = () => {
       <section className="py-10 md:py-16 bg-blue-50">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
-            Tasks We Offer
+            How It Works
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {taskTypes.map((task, index) => (
@@ -342,24 +336,24 @@ const Home = () => {
       <section className="py-10 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
-            Why Choose Us?
+            Feature Highlights
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {[
               {
-                icon: CheckCircle,
-                title: "Diverse Tasks",
-                description: "Find tasks that match your skills and interests.",
+                icon: Gamepad,
+                title: "AI-Driven Games",
+                description: "Enjoy games that are not just fun but contribute to AI development.",
               },
               {
                 icon: DollarSign,
-                title: "Fair Compensation",
-                description: "Get paid competitively for your time and effort.",
+                title: "Secure PlayCredit Wallet",
+                description: "Your earnings are stored in a secure wallet accessible anytime.",
               },
               {
-                icon: Users,
-                title: "Growing Community",
-                description: "Join a vibrant community of taskmasters.",
+                icon: CreditCard,
+                title: "Global PlayCreditCard",
+                description: "Use your PlayCredits in the real world like any other card.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -383,6 +377,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+       {/* Tasks We Offer Section */}
+       <TasksWeOffer />
 
       {/* Leaderboard Section */}
       <section
@@ -418,7 +415,7 @@ const Home = () => {
                     </div>
                     <div className="bg-blue-50 rounded-lg p-3">
                       <p className="text-sm font-medium text-blue-800">
-                        Rewards Earned
+                        PlayCredits Earned
                       </p>
                       <p className="text-2xl font-bold text-blue-600">
                         {player.points.toFixed(2)}
@@ -436,7 +433,7 @@ const Home = () => {
       <section className="bg-gradient-to-b from-gray-50 to-gray-100 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-black mb-12">
-            How to use Play2Earn
+            How to use Play2Earn.ai
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
@@ -494,11 +491,12 @@ const Home = () => {
             Ready to Start Earning?
           </h3>
           <p className="text-base md:text-xl mb-4 md:mb-8">
-            Create your account today and dive into a world of opportunities.
+            Create your account today and dive into a world of AI-powered gaming opportunities.
           </p>
           <Button
             size="lg"
             className="bg-blue-500 hover:bg-blue-600 text-white"
+            onClick={() => handleSignUpClick()}
           >
             Sign Up Now
           </Button>
@@ -510,9 +508,9 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-xl md:text-2xl font-bold mb-4">Play2Earn</h4>
+              <h4 className="text-xl md:text-2xl font-bold mb-4">Play2Earn.ai</h4>
               <p className="text-sm md:text-base">
-                Empowering individuals to earn through meaningful tasks.
+                Empowering individuals to earn through AI-powered gaming.
               </p>
             </div>
             <div>
@@ -563,12 +561,12 @@ const Home = () => {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-blue-400 text-center text-sm md:text-base">
-            <p>&copy; 2024 Play2Earn. All rights reserved.</p>
+            <p>&copy; 2024 Play2Earn.ai. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
-      {/* Login and Sign Up Popups- Mit Prajapati*/}
+      {/* Login and Sign Up Popups */}
       <LoginPopup
         isOpen={isLoginPopupOpen}
         onClose={closeLoginPopup}
