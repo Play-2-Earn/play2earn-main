@@ -1,0 +1,289 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: url('C:\Users\Ryan Prajoth\Desktop\Play2Earn\my-new-app\src\assets\audiopic.jpg');
+  color: #080808;
+  min-height: 100vh;
+  display: flex;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.829);
+  border: 2px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 800px;
+  margin: 10px auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 60px;
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  margin-bottom: 10px;
+  color: #230232;
+  text-shadow: 2px 2px 5px rgba(73, 0, 126, 0.712);
+}
+
+h2 {
+  font-size: 60px;
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  margin-bottom: 10px;
+  color: #230232;
+  text-shadow: 2px 2px 5px rgba(73, 0, 126, 0.712);
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 20px 0;
+  width: 100%;
+}
+
+textarea {
+  width: 75%;
+  height: 150px;
+  resize: none;
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #22045a52;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.start-button {
+  background-color: #22045A;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+  width: 75%;
+}
+
+.level-button {
+  background-color: #22045A;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+  width: 25%;
+}
+
+.level-button.locked {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.level-button.locked:hover {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.back-button {
+  background-color: #22045A;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+  width: 25%;
+}
+
+.start-button:hover, .level-button:hover, .back-button:hover {
+  background-color: #4a007e;
+}
+
+.submit-button {
+  background-color: #22045A;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.submit-button:hover {
+  background-color: #4a007e;
+}
+
+.exit-button {
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #00000041;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.exit-button:hover {
+  background-color: #22045A;
+  color: #fff;
+}
+
+.points {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #000;
+}
+
+.lives {
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+
+.point-lives {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: #000;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.points-lives p {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 1.2rem;
+}
+
+.heart {
+  color: red;
+  margin: 0 5px;
+  font-size: 1.5rem;
+}
+
+.empty {
+  color: #ccc;
+}
+
+.level-button.locked {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.level-button.completed {
+  background-color: #9d8fb6;
+  cursor: not-allowed;
+}
+
+.level-button.completed:hover {
+  background-color: #b0a0ca;
+}
+
+/* Additional styles for the locked and unlocked icons */
+.icon {
+  margin-right: 5px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 320px) {
+  .App {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  textarea {
+    width: 70%;
+    height: 120px;
+  }
+
+  .start-button, .level-button, .back-button, .submit-button {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .level-button {
+    width: 100%;
+  }
+
+  .points, .lives {
+    font-size: 1rem;
+  }
+
+  .point-lives {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 600px) {
+  .App {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  textarea {
+    width: 70%;
+    height: 130px;
+  }
+
+  .start-button, .level-button, .back-button, .submit-button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+
+  .level-button {
+    width: 45%;
+    margin: 5px;
+  }
+
+  .points, .lives {
+    font-size: 1.1rem;
+  }
+
+  .point-lives {
+    flex-wrap: wrap;
+  }
+}
