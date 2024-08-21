@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './Audio.css';
 import AudioPlayer from './components/AudioPlayer';
 import Feedback from './components/Feedback';
 import spellingVariations from './components/spellingVariations';
