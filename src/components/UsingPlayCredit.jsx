@@ -14,27 +14,27 @@ const Card = ({ imageSrc, title, description }) => {
   );
 };
 
-const CardContainer = () => {
+const UsingPlayCredit = () => {
   const cards = [
     {
-      imageSrc: "/assets/play_credits.svg",
-      title: "Card 1",
-      description: "This is the description for card 1."
+      imageSrc: "/assets/upc1.svg",
+      title: "In-Game Purchases",
+      description: "Use PlayCredits to buy items, upgrades, and additional content within our games."
     },
     {
-      imageSrc: "/assets/play_credits.svg",
-      title: "Card 2",
-      description: "This is the description for card 2."
+      imageSrc: "/assets/upc2.svg",
+      title: "Real-World Spending",
+      description: " Transfer your PlayCredits to your PlayCreditCard to spend them in the real world, just like cash or other digital currencies."
     },
     {
-      imageSrc: "/assets/play_credits.svg",
-      title: "Card 3",
-      description: "This is the description for card 3."
+      imageSrc: "/assets/upc3.svg",
+      title: "Crypto Conversion",
+      description: " Convert your PlayCredits into other cryptocurrencies like Bitcoin, Ethereum, or stablecoins. "
     }
   ];
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+    <div className="flex flex-col md:flex-row  justify-center items-center mb-30 space-y-4 md:space-y-0 md:space-x-4">
       {cards.map((card, index) => (
         <Card 
           key={index}
@@ -47,5 +47,5 @@ const CardContainer = () => {
   );
 };
 
-export default CardContainer;
+export default UsingPlayCredit;
 

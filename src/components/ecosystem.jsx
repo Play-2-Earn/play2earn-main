@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./css/Leaderboard.css";
 // changes made into the path for integration
 // import CardContainer from './' 
-import CardContainer from "./UsingPlayCredit";
+import UsingPlayCredit from "./UsingPlayCredit";
+import EarningPlayCredit from "./EarningPlayCredit";
 
 const Ecosystem = () => {
   
@@ -12,13 +13,13 @@ const Ecosystem = () => {
   return (
     <div>
       
-      <h1>The Play2Earn Ecosystem</h1>
-      <h1>The Play2Earn.ai ecosystem is a dynamic environment where players, AI developers, and the <br/>  broader community interact. Here’s how it all connects</h1>
+      <h1 className="h-200 mt-40 mb-20 text-2xl">The Play2Earn Ecosystem</h1>
+      <h1 className="h-200 mb-20  text-2xl">The Play2Earn.ai ecosystem is a dynamic environment where players, AI developers, and the <br/>  broader community interact. Here’s how it all connects</h1>
       
 
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
-      <div className="rounded overflow-hidden shadow-lg">
+      <div className="rounded overflow-hidden shadow-lg p-5 ">
         <div> 
         <img 
           className="w-full" 
@@ -33,8 +34,8 @@ const Ecosystem = () => {
       </div>
 
 
-      <div className="rounded overflow-hidden shadow-lg">
-        <div>
+      <div className="rounded overflow-hidden shadow-lg p-5 ">
+        <div >
         <img 
           className="w-full" 
           src="/assets/play_credits.svg" 
@@ -47,7 +48,7 @@ const Ecosystem = () => {
          </div>
       </div>
 
-      <div className="rounded overflow-hidden shadow-lg">
+      <div className="rounded overflow-hidden shadow-lg  p-5">
         <div> 
         <img 
           className="w-full" 
@@ -60,7 +61,7 @@ const Ecosystem = () => {
         </div>
         </div>
       </div>
-      <div className="rounded overflow-hidden shadow-lg">
+      <div className="rounded overflow-hidden shadow-lg p-5 ">
         <div> </div>
         <img 
           className="w-full" 
@@ -75,10 +76,17 @@ const Ecosystem = () => {
       
     </div>
 
-    <div className="m20" > 
-    <h1> Earning Play Credits</h1>
+    <div className="m-auto " > 
+    <h1 className="text-2xl mt-20 mb-20 hover:shadow-lg"> Earning Play Credits</h1>
+    <EarningPlayCredit /> 
+    
 
-    <CardContainer /> 
+    </div>
+
+    <div className=" mb-30"> 
+      <h1 className="text-2xl mt-20 mb-20 "> Using Play Credits </h1>
+      <UsingPlayCredit /> 
+    
     </div>
 
       
