@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Pointer } from 'lucide-react';
-// import SignUpPopup from './Signup';
-// import { BrowserRouter as Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPopup = ({ isOpen, onClose, innSignUpLink, innForgetPasswordLink}) => {
+const LoginPopup = ({ isOpen, onClose, innSignUpLink, innForgetPasswordLink }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const navigate = useNavigate()
+  const [role, setRole] = useState('User');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault()
-    axios.post('http://localhost:5002/api/users/log_in', { email, password })
-      .then(result => {
-        console.log(result)
-        if (result.data === "success") {
-          onClose();
-          alert('Welcome to play2earn')
+    e.preventDefault();
+    const endpoint = role === 'Admin' ? '/api/admin/log_in' : '/api/users/log_in';
+    try {
+        const response = await axios.post(`http://localhost:5002${endpoint}`, {
+            email,
+            password,
+        });
+        console.log(response.data);
+        if (response.data.message === 'success') {
+            // Redirect based on role
+            if (role === 'Admin') {
+                navigate('/dashboard');
+            } 
+        } else {
+            alert('Incorrect email or password');
         }
-        else {
-          alert('user is not exist')
-        }
-      }
-      )
-      .catch(err => console.log(err))
+    } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred during login');
+    }
   };
+
+  const toggleRole = () => {
+    setRole(prevRole => (prevRole === 'User' ? 'Admin' : 'User'));
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -34,6 +44,7 @@ const LoginPopup = ({ isOpen, onClose, innSignUpLink, innForgetPasswordLink}) =>
           <h2 className="text-xl font-bold">Login</h2>
           <button onClick={onClose} className="text-gray-600 hover:text-gray-800">&times;</button>
         </div>
+
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
@@ -61,14 +72,12 @@ const LoginPopup = ({ isOpen, onClose, innSignUpLink, innForgetPasswordLink}) =>
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-
               style={{
                 width: 'calc(100% - 0.5rem)',
                 backgroundColor: '#d5dbdb30',
                 borderBottom: '1px solid rgba(193, 199, 205, 1)'
               }}
             />
-
           </div>
           <div className="mb-4 text-center">
             <button
@@ -77,19 +86,34 @@ const LoginPopup = ({ isOpen, onClose, innSignUpLink, innForgetPasswordLink}) =>
             >
               Login
             </button>
-            <a onClick={() => innForgetPasswordLink()} className="text-blue-500" >Forgot password?</a>
+            <a onClick={() => innForgetPasswordLink()} className="text-blue-500 cursor-pointer">Forgot password?</a>
           </div>
         </form>
+
         <div className="flex items-center justify-center mb-4">
           <span className="text-gray-600">OR</span>
         </div>
-        {/* clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} isSignedIn={true}  */}
 
-        <div className="flex justify-between items-center">
-          <span>Don't have an account? <a onClick={() => innSignUpLink()} className="text-blue-500">Sign up</a></span>
+        <div className="flex justify-between items-center mb-4">
+          <span>Don't have an account? <a onClick={() => innSignUpLink()} className="text-blue-500 cursor-pointer">Sign up</a></span>
         </div>
+
+        {/* Switch Role Button at the bottom */}
+        <div className="flex justify-center mb-4">
+          <button
+            onClick={toggleRole}
+            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${
+              role === 'Admin' ? 'bg-green-500 text-white' : 'bg-blue-500 text-white'
+            }`}
+          >
+            {role === 'Admin' ? 'Switch to User' : 'Switch to Admin'}
+          </button>
+        </div>
+
+        <p className="text-center text-gray-700">You are logging in as: <span className="font-bold">{role}</span></p>
       </div>
     </div>
   );
 };
+
 export default LoginPopup;

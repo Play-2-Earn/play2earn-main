@@ -58,6 +58,16 @@ router.post("/sign_up", (request, response) => {
         });
 });
 
+// else {
+//     const userRefNum = generateReferralCode(firstName, lastName)
+//     // console.log(userRefNum)
+
+//     UserModel.create({firstName, lastName, email, password, userRefNum, refBy})
+//         .then(users => response.json(users))
+//         .catch(err => response.json(err));
+// }
+// });
+
 router.post("/log_in", (request, response) => {
     const { email, password } = request.body;
     UserModel.findOne({ email: email })
