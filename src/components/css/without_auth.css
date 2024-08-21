@@ -1,0 +1,23 @@
+.nav_user_logo {
+    width: 2.9em;
+}
+
+.nav_user_logo:hover{
+    cursor: pointer;
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+
+.dropdown_item{
+    padding: 5px;
+    color: white;
+    background-color: #93c5fd ;
+
+
+} 
+ 
