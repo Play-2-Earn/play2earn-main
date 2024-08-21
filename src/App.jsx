@@ -13,6 +13,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import About from "./components/about.jsx";
 import Leaderboard from "./components/leaderboard";
 import Survey from "./components/surveyTasks/survey";
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/terms" element={<TermsAndConditions />} />
         </Routes>
         <Chatbox />
+        <ScrollToTop />
       </div>
     </Router>
   );
