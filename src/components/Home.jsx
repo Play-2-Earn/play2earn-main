@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  CheckCircle,
   DollarSign,
-  Users,
   Trophy,
   Medal,
   Award,
@@ -17,13 +15,7 @@ import {
   CreditCard,
   Brain,
 } from "lucide-react";
-import {
-  FaTwitter,
-  FaInstagram,
-  FaGithub,
-  FaDiscord,
-  FaTelegramPlane,
-} from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -103,7 +95,8 @@ const Home = () => {
       {
         icon: CreditCard,
         title: "Use PlayCredits",
-        description: "Transfer credits to your PlayCreditCard for real-world use",
+        description:
+          "Transfer credits to your PlayCreditCard for real-world use",
       },
       {
         icon: Brain,
@@ -117,18 +110,21 @@ const Home = () => {
   const [heroCards] = useState([
     {
       title: "Empower Your Play, Earn Rewards, and Shape the Future of AI",
-      description: "Play exciting games, earn PlayCredits, and use them in the real world with our PlayCreditCard. Welcome to the Play2Earn ecosystem – where your gameplay fuels AI development.",
+      description:
+        "Play exciting games, earn PlayCredits, and use them in the real world with our PlayCreditCard. Welcome to the Play2Earn ecosystem – where your gameplay fuels AI development.",
       image: "assets/f.jpg",
     },
     {
       title: "AI-Driven Games",
-      description: "Our games are not just fun; they contribute to the development of cutting-edge AI models.",
+      description:
+        "Our games are not just fun; they contribute to the development of cutting-edge AI models.",
       image: "assets/pic1.png",
     },
     {
       title: "Global PlayCreditCard",
-      description: "Use your PlayCredits in the real world, just like any other debit or credit card.",
-      image: "assets/light_blue.jpg",
+      description:
+        "Use your PlayCredits in the real world, just like any other debit or credit card.",
+      image: "assets/hero3.png",
     },
   ]);
 
@@ -215,7 +211,8 @@ const Home = () => {
     {
       icon: <Gamepad size={24} />,
       title: "Play Games",
-      description: "Choose from a variety of AI-enhanced games and start playing.",
+      description:
+        "Choose from a variety of AI-enhanced games and start playing.",
       color: "bg-blue-200",
     },
     {
@@ -343,17 +340,20 @@ const Home = () => {
               {
                 icon: Gamepad,
                 title: "AI-Driven Games",
-                description: "Enjoy games that are not just fun but contribute to AI development.",
+                description:
+                  "Enjoy games that are not just fun but contribute to AI development.",
               },
               {
                 icon: DollarSign,
                 title: "Secure PlayCredit Wallet",
-                description: "Your earnings are stored in a secure wallet accessible anytime.",
+                description:
+                  "Your earnings are stored in a secure wallet accessible anytime.",
               },
               {
                 icon: CreditCard,
                 title: "Global PlayCreditCard",
-                description: "Use your PlayCredits in the real world like any other card.",
+                description:
+                  "Use your PlayCredits in the real world like any other card.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -378,8 +378,8 @@ const Home = () => {
         </div>
       </section>
 
-       {/* Tasks We Offer Section */}
-       <TasksWeOffer />
+      {/* Tasks We Offer Section */}
+      <TasksWeOffer />
 
       {/* Leaderboard Section */}
       <section
@@ -491,7 +491,8 @@ const Home = () => {
             Ready to Start Earning?
           </h3>
           <p className="text-base md:text-xl mb-4 md:mb-8">
-            Create your account today and dive into a world of AI-powered gaming opportunities.
+            Create your account today and dive into a world of AI-powered gaming
+            opportunities.
           </p>
           <Button
             size="lg"
@@ -508,7 +509,9 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-xl md:text-2xl font-bold mb-4">Play2Earn.ai</h4>
+              <h4 className="text-xl md:text-2xl font-bold mb-4">
+                Play2Earn.ai
+              </h4>
               <p className="text-sm md:text-base">
                 Empowering individuals to earn through AI-powered gaming.
               </p>
