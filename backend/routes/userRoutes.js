@@ -6,8 +6,13 @@ const { request } = require("http");
 require("dotenv").config();
 const crypto = require("crypto");
 
+// logout fuctionality
+// const session = require('express-session');
+const jwt = require('jsonwebtoken');
+
 
 const { getUserProfile, updateUserProfile, deleteUser, getAllUsers, sign_up, log_in, requestUserPasswordReset, passwordSet } = require('../controllers/userController');
+const { error } = require('console');
 
 const router = express.Router();
 // router.use(express.json());
@@ -18,6 +23,9 @@ router.delete('/:id', deleteUser);
 router.get('/', getAllUsers);
 
 // mit prajapati (authentication system)
+const app = express();
+
+
 
 // code for generating the reference code...
 function generateReferralCode(firstName, lastName) {
@@ -31,42 +39,62 @@ function generateReferralCode(firstName, lastName) {
 
 
 router.post("/sign_up", (request, response) => {
-    const { firstName, lastName, email, password, refBy } = request.body;
+    const { firstName, lastName, email, username, password, refBy } = request.body;
+    // this code if for the functionality to generate the usename by itself with the firstname of a user
+    // const username = firstName + crypto.randomInt(100000, 999999);
 
-    const username = firstName + crypto.randomInt(100000, 999999);
-    // Check if a user with the given email already exists
+    // Checking that if a user with the given email already exists
     UserModel.findOne({ email: email })
         .then(user => {
             if (user) {
                 // If the user is found, send a response indicating the email is already in use
                 return response.status(400).json({ error: "Email already exists" });
-            } else {
-                // Generate the referral code and create the new user
-                const userRefNum = generateReferralCode(firstName, lastName);
 
-                UserModel.create({ firstName, lastName, username, email, password, userRefNum, refBy })
-                    .then(newUser => response.status(201).json(newUser))
-                    .catch(err => {
-                        console.error("Error creating user:", err);
-                        response.status(500).json({ error: "Error creating user" });
-                    });
+                //  checking that the username is arleady exists
+                // UserModel.findOne({username : username})
+            }
+
+            else {
+                return UserModel.findOne({ username: username })
             }
         })
+        .then(ifSimilarUsername => {
+            if (ifSimilarUsername) {
+                response.status(401).json({ error: "Username is already taken! Enter unique username." })
+            }
+            // Generate the referral code and create the new user
+            const userRefNum = generateReferralCode(firstName, lastName);
+
+            return UserModel.create({ firstName, lastName, username, email, password, userRefNum, refBy })
+
+        })
+        .then(newUser => {
+            return response.status(201).json({ message: "User created successfully", user: newUser });
+        })
         .catch(err => {
+            if (response.headersSent) {
+                // If headers are already sent, do not attempt to send another response
+                console.error("Headers already sent. Cannot send another response.");
+                return;
+            }
+
+            if (error.code === "11000") {
+                response.status(300).json({ error: "Either the username or the email address already exist" })
+
+            }
             console.error("Error finding user:", err);
             response.status(500).json({ error: "Error finding user" });
         });
 });
 
-// else {
-//     const userRefNum = generateReferralCode(firstName, lastName)
-//     // console.log(userRefNum)
+// logout
+// app.use(session({
+//     secret: '123',  // Replace with a secure key
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false }  
+// }));
 
-//     UserModel.create({firstName, lastName, email, password, userRefNum, refBy})
-//         .then(users => response.json(users))
-//         .catch(err => response.json(err));
-// }
-// });
 
 router.post("/log_in", (request, response) => {
     const { email, password } = request.body;
@@ -74,6 +102,8 @@ router.post("/log_in", (request, response) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
+                    const JWT_SECRET = process.env.JWT_SECRET || 'your-hardcoded-secret-key';
+                    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
                     response.json("success");
                 } else {
                     response.json("The credentials are incorrect");
@@ -148,4 +178,19 @@ router.post("/passwordSet", (request, response) => {
         });
 })
 
+// logout function
+
+router.post('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Failed to logout', error: err });
+            }
+            res.clearCookie('connect.sid');  // Clears the session cookie on logout
+            return res.status(200).json({ message: 'Successfully logged out' });
+        });
+    } else {
+        return res.status(400).json({ message: 'No active session to log out' });
+    }
+});
 module.exports = router;
