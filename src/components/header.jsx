@@ -1,0 +1,156 @@
+import React from "react"
+import { Link } from "react-router-dom"
+import WithAuth from "./nav_with_auth"
+import WithoutAuth from "./nav_without_auth"
+import DropdownAfterAuth from "./user_dropdown"
+import logo from "../../public/assets/Logo4.png"
+
+import LoginPopup from "./Login";
+import SignUpPopup from "./Signup";
+import ForgetPassPopup from "./Forgetpassword";
+import PasswordReset from "./PassReset";
+import Leaderboard from "./leaderboard";
+import { useState } from "react"
+
+const Header = () => {
+     // (authentication_system by mit prajapati)
+  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+  const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
+  const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false);
+  const [isPassResetOpen, setPassResetOpen] = useState(false);
+  const [userLoginStatus, setuserLoginStatus] = useState(false)
+  // (user dropdown menu by mit prajapati)
+  const [isDropdownMenu, setDropdownMenu] =  useState(false)
+
+  const handleLoginClick = () => {
+    setLoginPopupOpen(true);
+  };
+
+  const closeLoginPopup = () => {
+    setLoginPopupOpen(false);
+  };
+
+  const innSignUpLink = () => {
+    setSignUpPopupOpen(true);
+    setLoginPopupOpen(false);
+  };
+
+  const closeSignUpPopup = () => {
+    setSignUpPopupOpen(false);
+  };
+
+  const handleSignUpClick = () => {
+    setSignUpPopupOpen(true);
+  };
+
+  const innLogInlink = () => {
+    setSignUpPopupOpen(false);
+    setLoginPopupOpen(true);
+  };
+
+  const innForgetPasswordLink = () => {
+    setLoginPopupOpen(false);
+    setForgetPasswordOpen(true);
+  };
+
+  const closeForgetPasswordLink = () => {
+    setForgetPasswordOpen(false);
+  };
+
+  const innResetPasswordLink = () => {
+    setForgetPasswordOpen(false);
+    setPassResetOpen(true);
+  };
+
+  const closeResetPasswordLink = () => {
+    setPassResetOpen(false);
+  };
+
+  const userLoginStatusDone = () =>{
+    setuserLoginStatus(true)
+  } 
+
+  const userLogOut = () =>{
+    setuserLoginStatus(false)
+  }
+  const dropdownMenuLink = () => {
+    setDropdownMenu(true)
+    console.log("the dropdown open")
+  }
+
+  const closDropdownMenuLink = () => {
+    setDropdownMenu(false)
+    console.log("the dropdown close")
+  }
+
+
+    return (
+    <>
+        <header className="relative overflow-hidden bg-gradient-to-b from-blue-500 to-blue-300 text-white p-4">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10">
+                {/* <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-0 text-white">
+        Play2Earn
+      </h1> */}
+                <img className='headerlogo' src={logo} alt="play2earn" />
+                <nav className="flex flex-wrap justify-center md:justify-end items-center">
+                    <Link to="/" className="text-white hover:text-blue-200 mx-2 my-1">
+                        Home
+                    </Link>
+                    <Link
+                        to="/earn"
+                        className="text-white hover:text-blue-200 mx-2 my-1"
+                    >
+                        Earn
+                    </Link>
+                    <Link
+                        to="/Leaderboard"
+                        className="text-white hover:text-blue-200 mx-2 my-1"
+                    >
+                        Leaderboard
+                    </Link>
+                    <Link
+                        to="/referrals"
+                        className="text-white hover:text-blue-200 mx-2 my-1"
+                    >
+                        Referrals
+                    </Link>
+
+                    {userLoginStatus ? (
+                        <WithoutAuth userLogOut={userLogOut} dropdownMenuOpen={dropdownMenuLink} closeDropdownMenu={closDropdownMenuLink} />
+                    ) : (
+                        <WithAuth
+                            handleLoginClick={handleLoginClick}
+                            handleSignUpClick={handleSignUpClick}
+                        />
+                    )}
+
+                </nav>
+            </div>
+        </header>
+
+        <LoginPopup
+        isOpen={isLoginPopupOpen}
+        onClose={closeLoginPopup}
+        innSignUpLink={innSignUpLink}
+        innForgetPasswordLink={innForgetPasswordLink}
+        userLoginStatusDone = {userLoginStatusDone} />
+      <SignUpPopup
+        isOpen={isSignUpPopupOpen}
+        onClose={closeSignUpPopup}
+        innLogInlink={innLogInlink} />
+      <ForgetPassPopup
+        isOpen={isForgetPasswordOpen}
+        onClose={closeForgetPasswordLink}
+        innResetPasswordLink={innResetPasswordLink} />
+      <PasswordReset
+        isOpen={isPassResetOpen}
+        onClose={closeResetPasswordLink} />
+      
+      {/* mit prajapati dropdown menu */}
+        {/* onClose={closeSignUpPopup} */}
+        <DropdownAfterAuth isOpen={isDropdownMenu} onClose={closDropdownMenuLink}/>
+    </>
+    )
+}
+
+export default Header;

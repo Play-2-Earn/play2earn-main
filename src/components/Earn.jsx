@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./css/Earn.css";
 
-// TaskCard Component
 const TaskCard = ({ task, onSelect }) => (
   <div className="task-card" onClick={() => onSelect(task)}>
     <div className="task-card-content">
@@ -21,7 +19,6 @@ const TaskCard = ({ task, onSelect }) => (
   </div>
 );
 
-// TaskModal Component
 const TaskModal = ({ task, onClose, onAccept }) => {
   const [agreed, setAgreed] = useState(false);
 
@@ -76,20 +73,10 @@ const TaskModal = ({ task, onClose, onAccept }) => {
               checked={agreed}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="terms">
-              I agree to the{" "}
-              <a
-                href="/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="terms-link"
-              >
-                terms and services
-              </a>
-            </label>
+            <label htmlFor="terms">I agree to the terms and services</label>
           </div>
           <button
-            onClick={() => onAccept(task)}
+            onClick={onAccept}
             className="accept-button"
             disabled={!agreed}
           >
@@ -101,7 +88,6 @@ const TaskModal = ({ task, onClose, onAccept }) => {
   );
 };
 
-// Earn Component
 const Earn = () => {
   const [tasks, setTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -109,8 +95,6 @@ const Earn = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -140,7 +124,6 @@ const Earn = () => {
   useEffect(() => {
     const filtered = tasks.filter(
       (task) =>
-        task.category &&
         (selectedCategory === "All" || task.category === selectedCategory) &&
         task.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -156,9 +139,7 @@ const Earn = () => {
   };
 
   const handleTaskAccept = (task) => {
-    if (task.category === "Survey") {
-      navigate("/survey");
-    }
+    console.log(`Task ${task.id} accepted`);
     setSelectedTask(null);
   };
 
@@ -209,7 +190,7 @@ const Earn = () => {
         <TaskModal
           task={selectedTask}
           onClose={() => setSelectedTask(null)}
-          onAccept={handleTaskAccept}
+          onAccept={() => handleTaskAccept(selectedTask)}
         />
       )}
     </div>
