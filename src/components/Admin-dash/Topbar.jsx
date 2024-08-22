@@ -1,18 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
-import './CSS/Topbar.css';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import "./CSS/Topbar.css";
 
 function TopBar({
   adminAccount,
   setIsEditingAdminAccount,
   setIsResettingPassword,
   handleLogout,
-  toggleSidebar
+  toggleSidebar,
 }) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleProfileDropdown = () => {
-    setIsProfileDropdownOpen(prevState => !prevState);
+    setIsProfileDropdownOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -22,12 +24,12 @@ function TopBar({
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  const navigate = useNavigate();
   return (
     <header className="topbar">
       <button className="sidebar-toggle" onClick={toggleSidebar}>
@@ -43,22 +45,32 @@ function TopBar({
         />
         {isProfileDropdownOpen && (
           <div className="dropdown-menu">
-            <button className="dropdown-item" onClick={() => {
-              setIsEditingAdminAccount(true);
-              setIsProfileDropdownOpen(false);
-            }}>
+            <button
+              className="dropdown-item"
+              onClick={() => {
+                setIsEditingAdminAccount(true);
+                setIsProfileDropdownOpen(false);
+              }}
+            >
               Edit Account
             </button>
-            <button className="dropdown-item" onClick={() => {
-              setIsResettingPassword(true);
-              setIsProfileDropdownOpen(false);
-            }}>
+            <button
+              className="dropdown-item"
+              onClick={() => {
+                setIsResettingPassword(true);
+                setIsProfileDropdownOpen(false);
+              }}
+            >
               Reset Password
             </button>
-            <button className="dropdown-item" onClick={() => {
-              handleLogout();
-              setIsProfileDropdownOpen(false);
-            }}>
+            <button
+              className="dropdown-item"
+              onClick={() => {
+                handleLogout();
+                setIsProfileDropdownOpen(false);
+                navigate("/");
+              }}
+            >
               Logout
             </button>
           </div>
