@@ -9,6 +9,8 @@ import {
   SquareCheckBig,
   SquareUser,
 } from "lucide-react";
+import Footer from "./footer";
+import Header from "./header";
 
 const HelpAndSupport = () => {
   const [activeSection, setActiveSection] = useState("faq");
@@ -57,7 +59,8 @@ const HelpAndSupport = () => {
     { id: "contact", name: "Contact", icon: Mail },
   ];
 
-  return (
+  return (<>
+    <Header />
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100 p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-extrabold text-blue-500 mb-12 text-center">
@@ -75,11 +78,10 @@ const HelpAndSupport = () => {
               <button
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
-                className={`w-full p-4 rounded-lg flex items-center space-x-4 transition duration-300 ${
-                  activeSection === section.id
-                    ? "bg-blue-500 text-white shadow-lg"
-                    : "bg-white hover:bg-blue-50 text-blue-800"
-                }`}
+                className={`w-full p-4 rounded-lg flex items-center space-x-4 transition duration-300 ${activeSection === section.id
+                  ? "bg-blue-500 text-white shadow-lg"
+                  : "bg-white hover:bg-blue-50 text-blue-800"
+                  }`}
               >
                 <section.icon className="w-6 h-6" />
                 <span className="font-medium">{section.name}</span>
@@ -111,13 +113,9 @@ const HelpAndSupport = () => {
           </motion.div>
         </div>
       </div>
-      <div className="mt-8 pt-8 border-t border-blue-400 text-center text-sm md:text-base">
-        <p>&copy; 2024 Play2Earn. All rights reserved.</p>
-        <a className="text-blue-500" href="#">
-          Report Bug
-        </a>
-      </div>
     </div>
+    <Footer />
+  </>
   );
 };
 

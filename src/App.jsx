@@ -12,9 +12,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import About from "./components/about.jsx";
 import Leaderboard from "./components/leaderboard";
-import AdminDashboard from "./components/Admin-dash/AdminDashboard";
-import ScrollToTop from "./components/ui/ScrollToTop";
-import Survey from "./components/surveyTasks/survey";
 
 const App = () => {
   return (
@@ -25,10 +22,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/referrals" element={<ReferralsPage />} />
           <Route path="/earn" element={<Earn />} />
-          <Route path="/survey" element={<Survey />} />
           {/* by mit prajapati 14-08-2024 */}
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/leaderboard" element={<Leaderboard />} /> 
           {/* Add other routes here */}
 
           {/* foorter routes */}
@@ -38,7 +33,6 @@ const App = () => {
           <Route path="/terms" element={<TermsAndConditions />} />
         </Routes>
         <Chatbox />
-        <ScrollToTop />
       </div>
     </Router>
   );

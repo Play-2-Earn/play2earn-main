@@ -1,0 +1,47 @@
+.nav_user_logo {
+    width: 2.9em;
+}
+
+.nav_user_logo:hover{
+    cursor: pointer;
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: row;  
+}
+
+.dropdown_item{
+    padding: 5px;
+    color: white;
+    background-color: #93c5fd ;
+} 
+.dropdu {
+    padding: 1em;
+    border-radius: 5px;
+    margin-left: -14em;
+    color: #6da8fa;
+    position: fixed;
+    background-color: #e6ecff;
+    display: flex;
+    flex-direction: column;
+    /* padding: 1.3em 3.4em; */
+    /* border-top-left-radius: 13px; */
+}
+
+.dropitms{
+    padding: 0.3em 3.3em;
+}
+
+.dropitms:hover{
+background-color: #84bafc;
+color: white;
+cursor: pointer;
+}
+
+.dropwallet{
+        padding: 0.5em;
+        border: 1px solid #84bafc;
+        margin-bottom: 0.9em;
+}
+
