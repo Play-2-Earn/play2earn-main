@@ -1,11 +1,12 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const userRoutes = require('./routes/userRoutes'); 
+const userRoutes = require('./routes/userRoutes');
+const progressRoutes = require('./routes/progressRoutes');
 const bodyParser = require('body-parser');
 
 dotenv.config();
@@ -30,7 +31,8 @@ server.use(express.json());
 server.use('/api/auth', authRoutes);
 server.use('/api/tasks', taskRoutes);
 server.use('/api/admin', adminRoutes);
-server.use('/api/users', userRoutes); 
+server.use('/api/users', userRoutes);
+server.use('/api/progress', progressRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

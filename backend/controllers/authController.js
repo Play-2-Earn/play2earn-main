@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const Admin = require('../models/admin');
-const User = require('../models/User');
+const User = require('../models/user');
 
-// const JWT_SECRET = process.env.JWT_SECRET; //uncomment it later (for jwt)
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Register User
 exports.registerUser = async (req, res) => {
-    res.log("the server is conncted properly")
+    console.log("the server is conncted properly")
     const { firstName, lastName, otp, otpExpires, username, email, password} = req.body;
 
     try {
@@ -55,25 +55,41 @@ exports.registerAdmin = async (req, res) => {
     }
 };
 
-// Login User
+
+
+
+
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate('taskProgress.task');
         if (!user) return res.status(400).json({ error: 'Email or password is wrong' });
-    
+
         const validPass = await bcrypt.compare(password, user.password);
         if (!validPass) return res.status(400).json({ error: 'Email or password is wrong' });
-    
+
         // const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '1h' }); //jwt uncomment later
         // res.header('auth-token', token).json({ token });
-        res.json({ message: 'Login successful', user }); 
-        // res.json({ message: 'Login successful', token }); //uncomment it later (for token)
+
+        res.json({
+            message: 'Login successful',
+            // res.json({ message: 'Login successful', token }); //uncomment it later (for token)
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                tasks_completed: user.tasks_completed,
+                total_rewards: user.total_rewards,
+                taskProgress: user.taskProgress // Include task progress in the response
+            }
+        });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
+
 
 // Login Admin
 exports.loginAdmin = async (req, res) => {
@@ -82,13 +98,13 @@ exports.loginAdmin = async (req, res) => {
     try {
         const admin = await Admin.findOne({ email });
         if (!admin) return res.status(400).json({ error: 'Email or password is wrong' });
-    
+
         const validPass = await bcrypt.compare(password, admin.password);
         if (!validPass) return res.status(400).json({ error: 'Email or password is wrong' });
 
         // const token = jwt.sign({ _id: admin._id }, JWT_SECRET, { expiresIn: '1h' }); //jwt uncomment later
         // res.header('auth-token', token).json({ token });
-        res.json({ message: 'Login successful', admin }); 
+        res.json({ message: 'Login successful', admin });
         // res.json({ message: 'Login successful', token }); //uncomment it later (for token)
     } catch (error) {
         res.status(400).json({ error: error.message });
