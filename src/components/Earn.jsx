@@ -165,10 +165,13 @@ const Earn = () => {
   const categories = [
     "All",
     "Survey",
-    "Data Science",
     "CAPTCHA",
     "Feedback",
     "Audio Transcription",
+    "Follow task",
+    "Text Tagging ",
+    "Image captcha task",
+    "Translation challenge",
   ];
 
   return (
