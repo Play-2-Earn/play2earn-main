@@ -7,6 +7,7 @@ const taskRoutes = require('./routes/taskRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const bodyParser = require('body-parser');
+const addressRoutes = require('./routes/addressRoutes');
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ server.use('/api/auth', authRoutes);
 server.use('/api/tasks', taskRoutes);
 server.use('/api/admin', adminRoutes);
 server.use('/api/users', userRoutes); 
+server.use('/api', addressRoutes);
 
 // Connect to MongoDB
 
