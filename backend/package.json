@@ -16,14 +16,10 @@
     "mongood": "^0.0.5",
     "mongoose": "^8.5.2",
     "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "serverless-dotenv-plugin": "^6.0.0",
-    "serverless-http": "^3.2.0",
-    "serverless-offline": "^13.7.0",
-    "serverless-plugin-include-dependencies": "^6.1.1",
-    "serverless-prune-plugin": "^2.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

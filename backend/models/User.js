@@ -61,6 +61,11 @@ const UserSchema = new mongoose.Schema({
     refBy: {
         type: String,
         unique: true,
+    },
+
+    token : {
+        type: String,
+        unique: true,
     }
 
 }, { timestamps: true });
