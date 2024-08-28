@@ -1,16 +1,12 @@
-import "../css/survey.css";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import '../css/survey.css'; 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import FormfacadeEmbed from "@formfacade/embed-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimesCircle,
-  faPlayCircle,
-  faCheckCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ShareAchievement from "./ShareAchievement";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle, faPlayCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+import ShareAchievement from './ShareAchievement';
 
 function Survey() {
   const [tasks, setTasks] = useState([]);
@@ -21,39 +17,24 @@ function Survey() {
   const [showShareOptions, setShowShareOptions] = useState([]);
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const API_BASE_URL =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5002"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-        const apiUrl = `${API_BASE_URL}/api/tasks`;
-
-        const response = await axios.get(apiUrl);
-
-        const surveyTasks = response.data.filter((task) =>
-          task.title.includes("Survey")
-        );
-
+    axios.get('http://localhost:5002/api/tasks') 
+      .then(response => {
+        const surveyTasks = response.data.filter(task => task.title.includes('Survey'));
         setTasks(surveyTasks);
         setShowForm(new Array(surveyTasks.length).fill(false));
         setFormSubmitted(new Array(surveyTasks.length).fill(false));
-        setTaskStatus(new Array(surveyTasks.length).fill("Incomplete"));
+        setTaskStatus(new Array(surveyTasks.length).fill('Incomplete'));
         setShowShareOptions(new Array(surveyTasks.length).fill(false));
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      }
-    };
-
-    fetchTasks();
+      })
+      .catch(error => {
+        console.error('Error fetching tasks', error);
+      });
   }, []);
+
   const completeSurvey = (surveyNumber) => {
     setTimeout(() => {
-      const surveyNames = tasks.map((task) => task.title);
-      toast.success(
-        `Congratulations on completing ${surveyNames[surveyNumber]}!`
-      );
+      const surveyNames = tasks.map(task => task.title);
+      toast.success(`Congratulations on completing ${surveyNames[surveyNumber]}!`);
       setPoints(points + 10);
       const newFormSubmitted = [...formSubmitted];
       newFormSubmitted[surveyNumber] = true;
@@ -62,7 +43,7 @@ function Survey() {
       newShowForm[surveyNumber] = false;
       setShowForm(newShowForm);
       const newTaskStatus = [...taskStatus];
-      newTaskStatus[surveyNumber] = "Completed";
+      newTaskStatus[surveyNumber] = 'Completed';
       setTaskStatus(newTaskStatus);
       const newShowShareOptions = [...showShareOptions];
       newShowShareOptions[surveyNumber] = true;
@@ -77,27 +58,21 @@ function Survey() {
       newShowForm[surveyNumber] = true;
       setShowForm(newShowForm);
       const newTaskStatus = [...taskStatus];
-      newTaskStatus[surveyNumber] = "In Progress";
+      newTaskStatus[surveyNumber] = 'In Progress';
       setTaskStatus(newTaskStatus);
     } else {
-      toast.error("Please complete the previous task before opening this one.");
+      toast.error('Please complete the previous task before opening this one.');
     }
   };
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case "Incomplete":
-        return (
-          <FontAwesomeIcon icon={faTimesCircle} style={{ color: "red" }} />
-        );
-      case "In Progress":
-        return (
-          <FontAwesomeIcon icon={faPlayCircle} style={{ color: "orange" }} />
-        );
-      case "Completed":
-        return (
-          <FontAwesomeIcon icon={faCheckCircle} style={{ color: "green" }} />
-        );
+      case 'Incomplete':
+        return <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red' }} />;
+      case 'In Progress':
+        return <FontAwesomeIcon icon={faPlayCircle} style={{ color: 'orange' }} />;
+      case 'Completed':
+        return <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green' }} />;
       default:
         return null;
     }
@@ -109,7 +84,7 @@ function Survey() {
 
   return (
     <div className="survey">
-      <ToastContainer />
+      <ToastContainer /> 
       <header className="survey-header">
         <div className="header-content">
           <div className="header-left">
@@ -122,21 +97,14 @@ function Survey() {
         </div>
         <div className="tasks-container">
           {tasks.map((task, index) => (
-            <div
-              key={task._id}
-              className={`task-card ${taskStatus[index]
-                ?.toLowerCase()
-                .replace(" ", "-")}`}
-            >
+            <div key={task._id} className={`task-card ${taskStatus[index]?.toLowerCase().replace(' ', '-')}`}>
               <div className="task-content">
                 <div className="task-details">
                   <h3>{task.title}</h3>
                 </div>
                 <div className="task-actions">
                   {!formSubmitted[index] && (
-                    <button onClick={() => handleButtonClick(index)}>
-                      Open
-                    </button>
+                    <button onClick={() => handleButtonClick(index)}>Open</button>
                   )}
                   {formSubmitted[index] && <button disabled>Submitted</button>}
                 </div>
@@ -144,7 +112,7 @@ function Survey() {
               {showForm[index] && (
                 <div className="form-container">
                   <FormfacadeEmbed
-                    formFacadeURL={task.formURL}
+                    formFacadeURL={task.formURL} 
                     onSubmitForm={() => completeSurvey(index)}
                   />
                 </div>

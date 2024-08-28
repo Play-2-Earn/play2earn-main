@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
-import Sidebar from "./Sidebar";
-import TopBar from "./Topbar";
-import Analytics from "./Analytics";
-import TaskManagement from "./TaskManagement";
-import UserManagement from "./UserManagement";
-import TaskTransactions from "./TaskTransactions";
-import UpdateAdminAccount from "./UpdateAdminAccount";
-import ResetPassword from "./ResetPassword";
-import "./CSS/AdminDashboard.css";
+import React, { useState, useEffect, useRef } from 'react';
+import Sidebar from './Sidebar';
+import TopBar from './Topbar';
+import Analytics from './Analytics';
+import TaskManagement from './TaskManagement';
+import UserManagement from './UserManagement';
+import TaskTransactions from './TaskTransactions';
+import UpdateAdminAccount from './UpdateAdminAccount';
+import ResetPassword from './ResetPassword';
+import './CSS/AdminDashboard.css';
 
 function AdminDashboard() {
-  const [currentPage, setCurrentPage] = useState("analytics");
+  const [currentPage, setCurrentPage] = useState('analytics');
   const [adminAccount, setAdminAccount] = useState({
-    username: "admin",
-    email: "admin@example.com",
+    username: 'admin',
+    email: 'admin@example.com',
     profilePic: null,
   });
   const [isEditingAdminAccount, setIsEditingAdminAccount] = useState(false);
@@ -41,23 +41,19 @@ function AdminDashboard() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target) &&
-        sidebarOpen
-      ) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && sidebarOpen) {
         setSidebarOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [sidebarOpen]);
 
   return (
-    <div className={`dashboard ${sidebarOpen ? "sidebar-open" : ""}`}>
+    <div className={`dashboard ${sidebarOpen ? 'sidebar-open' : ''}`}>
       <TopBar
         adminAccount={adminAccount}
         setIsEditingAdminAccount={setIsEditingAdminAccount}
@@ -73,11 +69,11 @@ function AdminDashboard() {
           currentPage={currentPage}
           ref={sidebarRef}
         />
-        <main className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
-          {currentPage === "analytics" && <Analytics />}
-          {currentPage === "task-management" && <TaskManagement />}
-          {currentPage === "user-management" && <UserManagement />}
-          {currentPage === "task-transactions" && <TaskTransactions />}
+        <main className={`main-content ${sidebarOpen ? 'sidebar-open' : ''}`}>
+          {currentPage === 'analytics' && <Analytics />}
+          {currentPage === 'task-management' && <TaskManagement />}
+          {currentPage === 'user-management' && <UserManagement />}
+          {currentPage === 'task-transactions' && <TaskTransactions />}
         </main>
       </div>
       {isEditingAdminAccount && (

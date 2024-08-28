@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./CSS/UserManagement.css";
+import React, { useState, useEffect } from 'react';
+import './CSS/UserManagement.css';
 
 function EditUserModal({ user, onUpdate, onClose }) {
   const [editedUser, setEditedUser] = useState(user);
@@ -37,9 +37,7 @@ function EditUserModal({ user, onUpdate, onClose }) {
             placeholder="Country"
           />
           <button type="submit">Update</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
+          <button type="button" onClick={onClose}>Cancel</button>
         </form>
       </div>
     </div>
@@ -62,65 +60,23 @@ function UserManagement() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(6);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [editingUser, setEditingUser] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationAction, setConfirmationAction] = useState(null);
-  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   useEffect(() => {
     // Simulated API call to fetch users
     const fetchUsers = () => {
       const sampleUsers = [
-        {
-          id: 1,
-          username: "michaelwilliams",
-          email: "erick@example.net",
-          country: "Saint Barthelemy",
-          totalRewards: 130,
-          status: "active",
-        },
-        {
-          id: 2,
-          username: "sean78",
-          email: "ksaunders@example.net",
-          country: "Faroe Islands",
-          totalRewards: 2300,
-          status: "active",
-        },
-        {
-          id: 3,
-          username: "chaveztraoey",
-          email: "fisher@example.com",
-          country: "Costa Rica",
-          totalRewards: 75,
-          status: "inactive",
-        },
-        {
-          id: 4,
-          username: "ganthony",
-          email: "walkermichael@example.com",
-          country: "Costa Rica",
-          totalRewards: 0,
-          status: "banned",
-        },
-        {
-          id: 5,
-          username: "charlottewilliams",
-          email: "hhughes@example.net",
-          country: "Germany",
-          totalRewards: 600,
-          status: "inactive",
-        },
-        {
-          id: 6,
-          username: "tina13",
-          email: "kelly@example.org",
-          country: "Austria",
-          totalRewards: 10000,
-          status: "active",
-        },
+        { id: 1, username: 'michaelwilliams', email: 'erick@example.net', country: 'Saint Barthelemy', totalRewards: 130, status: 'active' },
+        { id: 2, username: 'sean78', email: 'ksaunders@example.net', country: 'Faroe Islands', totalRewards: 2300, status: 'active' },
+        { id: 3, username: 'chaveztraoey', email: 'fisher@example.com', country: 'Costa Rica', totalRewards: 75, status: 'inactive' },
+        { id: 4, username: 'ganthony', email: 'walkermichael@example.com', country: 'Costa Rica', totalRewards: 0, status: 'banned' },
+        { id: 5, username: 'charlottewilliams', email: 'hhughes@example.net', country: 'Germany', totalRewards: 600, status: 'inactive' },
+        { id: 6, username: 'tina13', email: 'kelly@example.org', country: 'Austria', totalRewards: 10000, status: 'active' },
       ];
       setUsers(sampleUsers);
     };
@@ -138,28 +94,21 @@ function UserManagement() {
   };
 
   const handleUpdateUser = (updatedUser) => {
-    setUsers(
-      users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-    );
+    setUsers(users.map(user => user.id === updatedUser.id ? updatedUser : user));
     setEditingUser(null);
   };
 
   const handleDelete = (userId) => {
-    setUsers(users.filter((user) => user.id !== userId));
+    setUsers(users.filter(user => user.id !== userId));
   };
 
   const handleBanUnban = (userId) => {
-    setUsers(
-      users.map((user) => {
-        if (user.id === userId) {
-          return {
-            ...user,
-            status: user.status === "banned" ? "active" : "banned",
-          };
-        }
-        return user;
-      })
-    );
+    setUsers(users.map(user => {
+      if (user.id === userId) {
+        return { ...user, status: user.status === 'banned' ? 'active' : 'banned' };
+      }
+      return user;
+    }));
   };
 
   const handleDeleteConfirmation = (userId) => {
@@ -180,9 +129,9 @@ function UserManagement() {
   };
 
   const handleSelectUser = (userId) => {
-    setSelectedUsers((prevSelected) =>
+    setSelectedUsers(prevSelected => 
       prevSelected.includes(userId)
-        ? prevSelected.filter((id) => id !== userId)
+        ? prevSelected.filter(id => id !== userId)
         : [...prevSelected, userId]
     );
   };
@@ -190,21 +139,18 @@ function UserManagement() {
   const handleDeleteSelected = () => {
     if (selectedUsers.length > 0) {
       setConfirmationAction(() => () => {
-        setUsers(users.filter((user) => !selectedUsers.includes(user.id)));
+        setUsers(users.filter(user => !selectedUsers.includes(user.id)));
         setSelectedUsers([]);
       });
-      setConfirmationMessage(
-        `Are you sure you want to delete ${selectedUsers.length} selected user(s)?`
-      );
+      setConfirmationMessage(`Are you sure you want to delete ${selectedUsers.length} selected user(s)?`);
       setShowConfirmation(true);
     }
   };
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.country.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.country.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastUser = currentPage * usersPerPage;
@@ -216,10 +162,7 @@ function UserManagement() {
 
   const getPageNumbers = () => {
     const pageNumbers = [];
-    const startPage = Math.max(
-      1,
-      currentPage - Math.floor(maxVisiblePages / 2)
-    );
+    const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     const endPage = Math.min(pageCount, startPage + maxVisiblePages - 1);
 
     for (let i = startPage; i <= endPage; i++) {
@@ -243,11 +186,7 @@ function UserManagement() {
           className="search-input"
         />
       </div>
-      <button
-        className="btn btn-danger"
-        onClick={handleDeleteSelected}
-        disabled={selectedUsers.length === 0}
-      >
+      <button className="btn btn-danger" onClick={handleDeleteSelected} disabled={selectedUsers.length === 0}>
         Delete Selected ({selectedUsers.length})
       </button>
       <div className="table-responsive">
@@ -255,19 +194,16 @@ function UserManagement() {
           <thead>
             <tr>
               <th>
-                <input
-                  type="checkbox"
+                <input 
+                  type="checkbox" 
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedUsers(currentUsers.map((user) => user.id));
+                      setSelectedUsers(currentUsers.map(user => user.id));
                     } else {
                       setSelectedUsers([]);
                     }
                   }}
-                  checked={
-                    selectedUsers.length === currentUsers.length &&
-                    currentUsers.length > 0
-                  }
+                  checked={selectedUsers.length === currentUsers.length && currentUsers.length > 0}
                 />
               </th>
               <th>User ID</th>
@@ -280,11 +216,11 @@ function UserManagement() {
             </tr>
           </thead>
           <tbody>
-            {currentUsers.map((user) => (
+            {currentUsers.map(user => (
               <tr key={user.id}>
                 <td>
-                  <input
-                    type="checkbox"
+                  <input 
+                    type="checkbox" 
                     checked={selectedUsers.includes(user.id)}
                     onChange={() => handleSelectUser(user.id)}
                   />
@@ -298,25 +234,13 @@ function UserManagement() {
                   <span className={`status ${user.status}`}>{user.status}</span>
                 </td>
                 <td>
-                  <button
-                    className="btn btn-edit"
-                    onClick={() => handleEdit(user)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-delete"
-                    onClick={() => handleDeleteConfirmation(user.id)}
-                  >
-                    Delete
-                  </button>
-                  <button
-                    className={`btn ${
-                      user.status === "banned" ? "btn-unban" : "btn-ban"
-                    }`}
+                  <button className="btn btn-edit" onClick={() => handleEdit(user)}>Edit</button>
+                  <button className="btn btn-delete" onClick={() => handleDeleteConfirmation(user.id)}>Delete</button>
+                  <button 
+                    className={`btn ${user.status === 'banned' ? 'btn-unban' : 'btn-ban'}`} 
                     onClick={() => handleBanConfirmation(user.id)}
                   >
-                    {user.status === "banned" ? "Unban" : "Ban"}
+                    {user.status === 'banned' ? 'Unban' : 'Ban'}
                   </button>
                 </td>
               </tr>
@@ -325,32 +249,22 @@ function UserManagement() {
         </table>
       </div>
       <div className="pagination">
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
-        {getPageNumbers().map((number) => (
+        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
+        {getPageNumbers().map(number => (
           <button
             key={number}
             onClick={() => paginate(number)}
-            className={currentPage === number ? "active" : ""}
+            className={currentPage === number ? 'active' : ''}
           >
             {number}
           </button>
         ))}
-        <button
-          onClick={() => paginate(currentPage + 1)}
-          disabled={currentPage === pageCount}
-        >
-          Next
-        </button>
+        <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === pageCount}>Next</button>
       </div>
       {editingUser && (
-        <EditUserModal
-          user={editingUser}
-          onUpdate={handleUpdateUser}
+        <EditUserModal 
+          user={editingUser} 
+          onUpdate={handleUpdateUser} 
           onClose={() => setEditingUser(null)}
         />
       )}

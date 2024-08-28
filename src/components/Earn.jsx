@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/Earn.css";
+import Header from "./header";
+import Footer from "./footer";
 
 // TaskCard Component
 const TaskCard = ({ task, onSelect }) => (
@@ -115,14 +117,7 @@ const Earn = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const API_BASE_URL =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5002"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-        const apiUrl = `${API_BASE_URL}/api/tasks`;
-
-        const response = await fetch(apiUrl);
+        const response = await fetch("http://localhost:5002/api/tasks");
         if (!response.ok) {
           throw new Error(
             `Network response was not ok: ${response.statusText}`
@@ -182,47 +177,51 @@ const Earn = () => {
   ];
 
   return (
-    <div className="earn-container">
-      <h1>Task Marketplace</h1>
-      <div className="search-filter-container">
-        <input
-          type="text"
-          placeholder="Search tasks..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="search-input"
-        />
-        <div className="category-filters">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`category-btn ${
-                selectedCategory === category ? "active" : ""
-              }`}
-              onClick={() => handleCategoryChange(category)}
-            >
-              {category}
-            </button>
-          ))}
+    <>
+      <Header />
+      <div className="earn-container">
+
+        <h1>Task Marketplace</h1>
+        <div className="search-filter-container">
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+          />
+          <div className="category-filters">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-btn ${selectedCategory === category ? "active" : ""
+                  }`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
+        {error ? (
+          <p className="error-message">{error}</p>
+        ) : (
+          <div className="task-grid">
+            {filteredTasks.map((task) => (
+              <TaskCard key={task.id} task={task} onSelect={setSelectedTask} />
+            ))}
+          </div>
+        )}
+        {selectedTask && (
+          <TaskModal
+            task={selectedTask}
+            onClose={() => setSelectedTask(null)}
+            onAccept={handleTaskAccept}
+          />
+        )}
       </div>
-      {error ? (
-        <p className="error-message">{error}</p>
-      ) : (
-        <div className="task-grid">
-          {filteredTasks.map((task) => (
-            <TaskCard key={task.id} task={task} onSelect={setSelectedTask} />
-          ))}
-        </div>
-      )}
-      {selectedTask && (
-        <TaskModal
-          task={selectedTask}
-          onClose={() => setSelectedTask(null)}
-          onAccept={handleTaskAccept}
-        />
-      )}
-    </div>
+      <Footer />
+    </>
   );
 };
 
