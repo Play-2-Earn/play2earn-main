@@ -1,25 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { FaTwitter, FaLinkedin, FaTelegram, FaYoutube, FaInstagram, FaTiktok } from 'react-icons/fa';
-import './CSS/TaskManagement.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaTelegram,
+  FaYoutube,
+  FaInstagram,
+  FaTiktok,
+} from "react-icons/fa";
+import "./CSS/TaskManagement.css";
 
 function TaskManagement() {
   const [tasks, setTasks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [tasksPerPage] = useState(5);
-  const [taskSearchTerm, setTaskSearchTerm] = useState('');
+  const [taskSearchTerm, setTaskSearchTerm] = useState("");
   const [editingTask, setEditingTask] = useState(null);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
-  const [categoryFilter, setCategoryFilter] = useState('All');
+  const [categoryFilter, setCategoryFilter] = useState("All");
   const [newTask, setNewTask] = useState({
-    title: '',
-    description: '',
-    category: '',
+    title: "",
+    description: "",
+    category: "",
     reward: 0,
     isFollowTask: false,
-    platform: '',
-    accountLink: '',
+    platform: "",
+    accountLink: "",
   });
 
   useEffect(() => {
@@ -36,45 +43,64 @@ function TaskManagement() {
     try {
       const taskData = { ...newTask };
       let response;
-      
-      if (taskData.category === 'Follow Task') {
-        response = await axios.post('http://localhost:5001/api/follow-tasks', taskData);
+
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5001"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+      if (taskData.category === "Follow Task") {
+        response = await axios.post(
+          `${API_BASE_URL}/api/follow-tasks`,
+          taskData
+        );
         // Ensure the new follow task has the correct category
-        response.data.task.category = 'Follow Task';
+        response.data.task.category = "Follow Task";
       } else {
-        response = await axios.post('http://localhost:5001/api/tasks', taskData);
+        response = await axios.post(`${API_BASE_URL}/api/tasks`, taskData);
       }
-      
       setTasks([...tasks, response.data.task]);
       setNewTask({
-        title: '',
-        description: '',
-        category: '',
+        title: "",
+        description: "",
+        category: "",
         reward: 0,
-        platform: '',
-        accountLink: '',
+        platform: "",
+        accountLink: "",
       });
     } catch (error) {
-      console.error('Error adding task:', error);
+      console.error("Error adding task:", error);
     }
   };
 
   const fetchTasks = async () => {
     try {
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5001"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
       const [tasksResponse, followTasksResponse] = await Promise.all([
-        axios.get('http://localhost:5001/api/tasks'),
-        axios.get('http://localhost:5001/api/follow-tasks')
+        axios.get(`${API_BASE_URL}/api/tasks`),
+        axios.get(`${API_BASE_URL}/api/follow-tasks`),
       ]);
-      const regularTasks = tasksResponse.data.map(task => ({ ...task, category: task.category || 'Other' }));
-      const followTasks = followTasksResponse.data.map(task => ({ ...task, category: 'Follow Task' }));
+      const regularTasks = tasksResponse.data.map((task) => ({
+        ...task,
+        category: task.category || "Other",
+      }));
+      const followTasks = followTasksResponse.data.map((task) => ({
+        ...task,
+        category: "Follow Task",
+      }));
       const allTasks = [...regularTasks, ...followTasks];
       // Remove duplicate tasks based on _id
-      const uniqueTasks = allTasks.filter((task, index, self) =>
-        index === self.findIndex((t) => t._id === task._id)
+      const uniqueTasks = allTasks.filter(
+        (task, index, self) =>
+          index === self.findIndex((t) => t._id === task._id)
       );
       setTasks(uniqueTasks);
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      console.error("Error fetching tasks:", error);
     }
   };
 
@@ -85,16 +111,31 @@ function TaskManagement() {
   const handleUpdateTask = async (e) => {
     e.preventDefault();
     try {
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5001"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
       let response;
-      if (editingTask.category === 'Follow Task') {
-        response = await axios.patch(`http://localhost:5001/api/follow-tasks/${editingTask._id}`, editingTask);
+      if (editingTask.category === "Follow Task") {
+        response = await axios.patch(
+          `${API_BASE_URL}/api/follow-ttasks/${editingTask._id}`,
+          editingTask
+        );
       } else {
-        response = await axios.patch(`http://localhost:5001/api/tasks/${editingTask._id}`, editingTask);
+        response = await axios.patch(
+          `${API_BASE_URL}/api/tasks/${editingTask._id}`,
+          editingTask
+        );
       }
-      setTasks(tasks.map(task => task._id === editingTask._id ? response.data : task));
+      setTasks(
+        tasks.map((task) =>
+          task._id === editingTask._id ? response.data : task
+        )
+      );
       setEditingTask(null);
     } catch (error) {
-      console.error('Error updating task:', error);
+      console.error("Error updating task:", error);
     }
   };
 
@@ -105,60 +146,86 @@ function TaskManagement() {
 
   const confirmDeleteTask = async () => {
     try {
-      const taskToDeleteData = tasks.find(task => task._id === taskToDelete);
-      if (taskToDeleteData.category === 'Follow Task') {
-        await axios.delete(`http://localhost:5001/api/follow-tasks/${taskToDelete}`);
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5001"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+      const taskToDeleteData = tasks.find((task) => task._id === taskToDelete);
+      if (taskToDeleteData.category === "Follow Task") {
+        await axios.delete(`${API_BASE_URL}/api/follow-tasks/${taskToDelete}`);
       } else {
-        await axios.delete(`http://localhost:5001/api/tasks/${taskToDelete}`);
+        await axios.delete(`${API_BASE_URL}/api/tasks/${taskToDelete}`);
       }
-      setTasks(tasks.filter(task => task._id !== taskToDelete));
+      setTasks(tasks.filter((task) => task._id !== taskToDelete));
       setShowDeleteConfirmation(false);
       setTaskToDelete(null);
     } catch (error) {
-      console.error('Error deleting task:', error);
+      console.error("Error deleting task:", error);
     }
   };
 
   const handleDeleteSelectedTasks = async () => {
-    const selectedTasks = tasks.filter(task => task.selected).map(task => task._id);
+    const selectedTasks = tasks
+      .filter((task) => task.selected)
+      .map((task) => task._id);
     if (selectedTasks.length > 0) {
-      setTaskToDelete('selected');
+      setTaskToDelete("selected");
       setShowDeleteConfirmation(true);
     }
   };
-  
+
   const confirmDeleteSelectedTasks = async () => {
     try {
-      const selectedTaskIds = tasks.filter(task => task.selected).map(task => task._id);
-      const followTaskIds = selectedTaskIds.filter(id => tasks.find(task => task._id === id).category === 'Follow Task');
-      const regularTaskIds = selectedTaskIds.filter(id => !followTaskIds.includes(id));
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5001"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+      const selectedTaskIds = tasks
+        .filter((task) => task.selected)
+        .map((task) => task._id);
+      const followTaskIds = selectedTaskIds.filter(
+        (id) => tasks.find((task) => task._id === id).category === "Follow Task"
+      );
+      const regularTaskIds = selectedTaskIds.filter(
+        (id) => !followTaskIds.includes(id)
+      );
 
       if (followTaskIds.length > 0) {
-        await axios.post('http://localhost:5001/api/follow-tasks/bulk-delete', { taskIds: followTaskIds });
+        await axios.post(`${API_BASE_URL}/api/follow-tasks/bulk-delete`, {
+          taskIds: followTaskIds,
+        });
       }
       if (regularTaskIds.length > 0) {
-        await axios.post('http://localhost:5001/api/tasks/bulk-delete', { taskIds: regularTaskIds });
+        await axios.post(`${API_BASE_URL}/api/tasks/bulk-delete`, {
+          taskIds: regularTaskIds,
+        });
       }
 
-      setTasks(tasks.filter(task => !task.selected));
+      setTasks(tasks.filter((task) => !task.selected));
       setShowDeleteConfirmation(false);
       setTaskToDelete(null);
     } catch (error) {
-      console.error('Error deleting selected tasks:', error);
+      console.error("Error deleting selected tasks:", error);
     }
   };
 
   const handleSelectTask = (taskId) => {
-    setTasks(tasks.map(task => (task._id === taskId ? { ...task, selected: !task.selected } : task)));
+    setTasks(
+      tasks.map((task) =>
+        task._id === taskId ? { ...task, selected: !task.selected } : task
+      )
+    );
   };
 
-  const filteredTasks = tasks.filter(task => {
-    const categoryMatch = categoryFilter === 'All' || task.category === categoryFilter;
+  const filteredTasks = tasks.filter((task) => {
+    const categoryMatch =
+      categoryFilter === "All" || task.category === categoryFilter;
     const searchTerm = taskSearchTerm.toLowerCase();
-    const searchMatch = 
+    const searchMatch =
       (task.title && task.title.toLowerCase().includes(searchTerm)) ||
       (task.description && task.description.toLowerCase().includes(searchTerm));
-    return categoryMatch && (taskSearchTerm === '' || searchMatch);
+    return categoryMatch && (taskSearchTerm === "" || searchMatch);
   });
 
   const indexOfLastTask = currentPage * tasksPerPage;
@@ -174,20 +241,27 @@ function TaskManagement() {
 
   const getIconForPlatform = (platform) => {
     switch (platform.toLowerCase()) {
-      case 'twitter': return FaTwitter;
-      case 'linkedin': return FaLinkedin;
-      case 'telegram': return FaTelegram;
-      case 'youtube': return FaYoutube;
-      case 'instagram': return FaInstagram;
-      case 'tiktok': return FaTiktok;
-      default: return null;
+      case "twitter":
+        return FaTwitter;
+      case "linkedin":
+        return FaLinkedin;
+      case "telegram":
+        return FaTelegram;
+      case "youtube":
+        return FaYoutube;
+      case "instagram":
+        return FaInstagram;
+      case "tiktok":
+        return FaTiktok;
+      default:
+        return null;
     }
   };
 
   return (
     <div className="task-management">
       <h2>Task Management</h2>
-      
+
       <div className="filters">
         <div className="search-container">
           <input
@@ -199,10 +273,7 @@ function TaskManagement() {
           />
         </div>
         <div className="category-filter">
-          <select
-            value={categoryFilter}
-            onChange={handleCategoryChange}
-          >
+          <select value={categoryFilter} onChange={handleCategoryChange}>
             <option value="All">All Categories</option>
             <option value="Survey">Survey</option>
             <option value="Data Science">Data Science</option>
@@ -213,14 +284,28 @@ function TaskManagement() {
           </select>
         </div>
       </div>
-      
-      <button onClick={handleDeleteSelectedTasks} className="btn btn-danger">Delete Selected</button>
-      
+
+      <button onClick={handleDeleteSelectedTasks} className="btn btn-danger">
+        Delete Selected
+      </button>
+
       <div className="table-responsive">
         <table className="task-table">
           <thead>
             <tr>
-              <th><input type="checkbox" onChange={(e) => setTasks(tasks.map(task => ({ ...task, selected: e.target.checked })))} /></th>
+              <th>
+                <input
+                  type="checkbox"
+                  onChange={(e) =>
+                    setTasks(
+                      tasks.map((task) => ({
+                        ...task,
+                        selected: e.target.checked,
+                      }))
+                    )
+                  }
+                />
+              </th>
               <th>Task No</th>
               <th>Title</th>
               <th>Description</th>
@@ -234,17 +319,33 @@ function TaskManagement() {
           <tbody>
             {currentTasks.map((task) => (
               <tr key={task._id}>
-                <td><input type="checkbox" checked={task.selected || false} onChange={() => handleSelectTask(task._id)} /></td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={task.selected || false}
+                    onChange={() => handleSelectTask(task._id)}
+                  />
+                </td>
                 <td>{task._id}</td>
                 <td>{task.title}</td>
                 <td>{task.description}</td>
                 <td>{task.category}</td>
                 <td>{task.reward}</td>
-                <td>{task.platform || '-'}</td>
-                <td>{task.accountLink || '-'}</td>
+                <td>{task.platform || "-"}</td>
+                <td>{task.accountLink || "-"}</td>
                 <td>
-                  <button className="btn btn-primary" onClick={() => handleEditTask(task)}>Edit</button>
-                  <button className="btn btn-danger" onClick={() => handleDeleteTask(task._id)}>Delete</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleEditTask(task)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteTask(task._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -253,13 +354,29 @@ function TaskManagement() {
       </div>
 
       <div className="pagination">
-        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
-        {[...Array(Math.ceil(filteredTasks.length / tasksPerPage)).keys()].map(number => (
-          <button key={number + 1} onClick={() => paginate(number + 1)} className={currentPage === number + 1 ? 'active' : ''}>
-            {number + 1}
-          </button>
-        ))}
-        <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastTask >= filteredTasks.length}>Next</button>
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        {[...Array(Math.ceil(filteredTasks.length / tasksPerPage)).keys()].map(
+          (number) => (
+            <button
+              key={number + 1}
+              onClick={() => paginate(number + 1)}
+              className={currentPage === number + 1 ? "active" : ""}
+            >
+              {number + 1}
+            </button>
+          )
+        )}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={indexOfLastTask >= filteredTasks.length}
+        >
+          Next
+        </button>
       </div>
 
       <h3>Add New Task</h3>
@@ -309,7 +426,7 @@ function TaskManagement() {
             required
           />
         </div>
-        {newTask.category === 'Follow Task' && (
+        {newTask.category === "Follow Task" && (
           <>
             <div className="form-group">
               <select
@@ -339,7 +456,9 @@ function TaskManagement() {
             </div>
           </>
         )}
-        <button type="submit" className="btn btn-success">Add Task</button>
+        <button type="submit" className="btn btn-success">
+          Add Task
+        </button>
       </form>
 
       {editingTask && (
@@ -353,7 +472,9 @@ function TaskManagement() {
                   name="title"
                   placeholder="Task Title"
                   value={editingTask.title}
-                  onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
+                  onChange={(e) =>
+                    setEditingTask({ ...editingTask, title: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -362,7 +483,12 @@ function TaskManagement() {
                   name="description"
                   placeholder="Task Description"
                   value={editingTask.description}
-                  onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
+                  onChange={(e) =>
+                    setEditingTask({
+                      ...editingTask,
+                      description: e.target.value,
+                    })
+                  }
                   required
                 />
               </div>
@@ -370,7 +496,9 @@ function TaskManagement() {
                 <select
                   name="category"
                   value={editingTask.category}
-                  onChange={(e) => setEditingTask({ ...editingTask, category: e.target.value })}
+                  onChange={(e) =>
+                    setEditingTask({ ...editingTask, category: e.target.value })
+                  }
                   required
                 >
                   <option value="">Select Task Category</option>
@@ -378,7 +506,9 @@ function TaskManagement() {
                   <option value="Data Science">Data Science</option>
                   <option value="CAPTCHA">CAPTCHA</option>
                   <option value="Feedback">Feedback</option>
-                  <option value="Audio Transcription">Audio Transcription</option>
+                  <option value="Audio Transcription">
+                    Audio Transcription
+                  </option>
                   <option value="Follow Task">Follow Task</option>
                 </select>
               </div>
@@ -388,17 +518,24 @@ function TaskManagement() {
                   name="reward"
                   placeholder="Task Reward"
                   value={editingTask.reward}
-                  onChange={(e) => setEditingTask({ ...editingTask, reward: e.target.value })}
+                  onChange={(e) =>
+                    setEditingTask({ ...editingTask, reward: e.target.value })
+                  }
                   required
                 />
               </div>
-              {editingTask.category === 'Follow Task' && (
+              {editingTask.category === "Follow Task" && (
                 <>
                   <div className="form-group">
                     <select
                       name="platform"
                       value={editingTask.platform}
-                      onChange={(e) => setEditingTask({ ...editingTask, platform: e.target.value })}
+                      onChange={(e) =>
+                        setEditingTask({
+                          ...editingTask,
+                          platform: e.target.value,
+                        })
+                      }
                       required
                     >
                       <option value="">Select Platform</option>
@@ -416,15 +553,28 @@ function TaskManagement() {
                       name="accountLink"
                       placeholder="Account Link"
                       value={editingTask.accountLink}
-                      onChange={(e) => setEditingTask({ ...editingTask, accountLink: e.target.value })}
+                      onChange={(e) =>
+                        setEditingTask({
+                          ...editingTask,
+                          accountLink: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
                 </>
               )}
               <div className="button-group">
-                <button type="submit" className="btn btn-primary">Update Task</button>
-                <button type="button" className="btn btn-secondary" onClick={() => setEditingTask(null)}>Cancel</button>
+                <button type="submit" className="btn btn-primary">
+                  Update Task
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setEditingTask(null)}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
@@ -434,13 +584,33 @@ function TaskManagement() {
       {showDeleteConfirmation && (
         <div className="modal">
           <div className="modal-content">
-            <h3>{taskToDelete === 'selected' ? 'Confirm Bulk Deletion' : 'Confirm Deletion'}</h3>
+            <h3>
+              {taskToDelete === "selected"
+                ? "Confirm Bulk Deletion"
+                : "Confirm Deletion"}
+            </h3>
             <p>
-              {taskToDelete === 'selected' ? 'Are you sure you want to delete the selected tasks?' : 'Are you sure you want to delete this task?'}
+              {taskToDelete === "selected"
+                ? "Are you sure you want to delete the selected tasks?"
+                : "Are you sure you want to delete this task?"}
             </p>
             <div className="button-group">
-              <button onClick={taskToDelete === 'selected' ? confirmDeleteSelectedTasks : confirmDeleteTask} className="btn btn-danger">Confirm</button>
-              <button onClick={() => setShowDeleteConfirmation(false)} className="btn btn-secondary">Cancel</button>
+              <button
+                onClick={
+                  taskToDelete === "selected"
+                    ? confirmDeleteSelectedTasks
+                    : confirmDeleteTask
+                }
+                className="btn btn-danger"
+              >
+                Confirm
+              </button>
+              <button
+                onClick={() => setShowDeleteConfirmation(false)}
+                className="btn btn-secondary"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>

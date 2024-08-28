@@ -1,19 +1,42 @@
-import React, { useState } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler } from 'chart.js';
-import './CSS/Analytics.css';
+import React, { useState } from "react";
+import { Line, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import "./CSS/Analytics.css";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 function Analytics() {
-  const [timeRange, setTimeRange] = useState('week');
-  const [taskChartType, setTaskChartType] = useState('completed');
+  const [timeRange, setTimeRange] = useState("week");
+  const [taskChartType, setTaskChartType] = useState("completed");
 
   // Sample data (same as before)
   const taskCompletionData = {
     week: [100, 150, 120, 180, 200, 160, 190],
     month: [500, 600, 550, 700, 650, 800, 750, 900],
-    year: [5000, 5500, 6000, 5800, 6200, 6500, 7000, 6800, 7200, 7500, 7800, 8000],
+    year: [
+      5000, 5500, 6000, 5800, 6200, 6500, 7000, 6800, 7200, 7500, 7800, 8000,
+    ],
   };
 
   const newUserData = {
@@ -23,22 +46,44 @@ function Analytics() {
   };
 
   const topTasks = [
-    { name: 'Task 1', completed: 500, reward: 50 },
-    { name: 'Task 2', completed: 450, reward: 30 },
-    { name: 'Task 3', completed: 400, reward: 40 },
-    { name: 'Task 4', completed: 350, reward: 60 },
-    { name: 'Task 5', completed: 300, reward: 20 },
+    { name: "Task 1", completed: 500, reward: 50 },
+    { name: "Task 2", completed: 450, reward: 30 },
+    { name: "Task 3", completed: 400, reward: 40 },
+    { name: "Task 4", completed: 350, reward: 60 },
+    { name: "Task 5", completed: 300, reward: 20 },
   ];
 
   // Chart data and options (same as before)
   const getLabels = (range) => {
     switch (range) {
-      case 'week':
-        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      case 'month':
-        return ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'];
-      case 'year':
-        return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      case "week":
+        return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      case "month":
+        return [
+          "Week 1",
+          "Week 2",
+          "Week 3",
+          "Week 4",
+          "Week 5",
+          "Week 6",
+          "Week 7",
+          "Week 8",
+        ];
+      case "year":
+        return [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
       default:
         return [];
     }
@@ -48,11 +93,11 @@ function Analytics() {
     labels: getLabels(timeRange),
     datasets: [
       {
-        label: 'Tasks Completed',
+        label: "Tasks Completed",
         data: taskCompletionData[timeRange],
         fill: true,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
       },
     ],
   };
@@ -61,21 +106,24 @@ function Analytics() {
     labels: getLabels(timeRange),
     datasets: [
       {
-        label: 'New Users',
+        label: "New Users",
         data: newUserData[timeRange],
         fill: false,
-        borderColor: 'rgba(255,99,132,1)',
+        borderColor: "rgba(255,99,132,1)",
       },
     ],
   };
 
   const topTasksChartData = {
-    labels: topTasks.map(task => task.name),
+    labels: topTasks.map((task) => task.name),
     datasets: [
       {
-        label: taskChartType === 'completed' ? 'Tasks Completed' : 'Task Reward',
-        data: topTasks.map(task => taskChartType === 'completed' ? task.completed : task.reward),
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        label:
+          taskChartType === "completed" ? "Tasks Completed" : "Task Reward",
+        data: topTasks.map((task) =>
+          taskChartType === "completed" ? task.completed : task.reward
+        ),
+        backgroundColor: "rgba(54, 162, 235, 0.5)",
       },
     ],
   };
@@ -83,7 +131,7 @@ function Analytics() {
   return (
     <div className="analytics">
       <h2 className="mb-4">Analytics Dashboard</h2>
-      
+
       <div className="analytics-summary">
         <div className="summary-card">
           <h3>Total Tasks</h3>
@@ -104,7 +152,11 @@ function Analytics() {
       </div>
 
       <div className="mb-4">
-        <select className="form-control" value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>
+        <select
+          className="form-control"
+          value={timeRange}
+          onChange={(e) => setTimeRange(e.target.value)}
+        >
           <option value="week">Last Week</option>
           <option value="month">Last Month</option>
           <option value="year">Last Year</option>
@@ -122,7 +174,11 @@ function Analytics() {
         </div>
         <div className="col-lg-6 mb-4">
           <h3>Top 5 Tasks</h3>
-          <select className="form-control mb-2" value={taskChartType} onChange={(e) => setTaskChartType(e.target.value)}>
+          <select
+            className="form-control mb-2"
+            value={taskChartType}
+            onChange={(e) => setTaskChartType(e.target.value)}
+          >
             <option value="completed">Most Completed</option>
             <option value="reward">Highest Reward</option>
           </select>

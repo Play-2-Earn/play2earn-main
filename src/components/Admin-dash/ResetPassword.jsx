@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 
 function ResetPassword({ handleResetPassword, setIsResettingPassword }) {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,8 +33,14 @@ function ResetPassword({ handleResetPassword, setIsResettingPassword }) {
             required
           />
           <div className="button-group">
-            <button type="submit" className="btn btn-primary">Reset Password</button>
-            <button type="button" className="btn btn-secondary" onClick={() => setIsResettingPassword(false)}>
+            <button type="submit" className="btn btn-primary">
+              Reset Password
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setIsResettingPassword(false)}
+            >
               Cancel
             </button>
           </div>

@@ -1,7 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
-
-function UpdateAdminAccount({ adminAccount, handleUpdateAdminAccount, setIsEditingAdminAccount }) {
+function UpdateAdminAccount({
+  adminAccount,
+  handleUpdateAdminAccount,
+  setIsEditingAdminAccount,
+}) {
   const [previewImage, setPreviewImage] = useState(adminAccount.profilePic);
   const fileInputRef = useRef(null);
 
@@ -33,7 +36,7 @@ function UpdateAdminAccount({ adminAccount, handleUpdateAdminAccount, setIsEditi
         <form onSubmit={onSubmit} className="form">
           <div className="profile-pic-container">
             <img
-              src={previewImage || 'https://via.placeholder.com/150'}
+              src={previewImage || "https://via.placeholder.com/150"}
               alt="Profile"
               className="profile-pic"
               onClick={() => fileInputRef.current.click()}
@@ -43,14 +46,30 @@ function UpdateAdminAccount({ adminAccount, handleUpdateAdminAccount, setIsEditi
               ref={fileInputRef}
               onChange={handleImageUpload}
               accept="image/*"
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
             />
           </div>
-          <input type="text" name="username" defaultValue={adminAccount.username} required />
-          <input type="email" name="email" defaultValue={adminAccount.email} required />
+          <input
+            type="text"
+            name="username"
+            defaultValue={adminAccount.username}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            defaultValue={adminAccount.email}
+            required
+          />
           <div className="button-group">
-            <button type="submit" className="btn btn-primary">Update Account</button>
-            <button type="button" className="btn btn-secondary" onClick={() => setIsEditingAdminAccount(false)}>
+            <button type="submit" className="btn btn-primary">
+              Update Account
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setIsEditingAdminAccount(false)}
+            >
               Cancel
             </button>
           </div>
