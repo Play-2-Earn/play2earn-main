@@ -93,7 +93,6 @@ const spellingVariations = {
     "loudspeakers": "loudspeakers",
     "mannerism": "mannerism",
     "monologue": "monolog",
-    "organisation": "organization",
     "practise": "practice",
     "prioritise": "prioritize",
     "realise": "realize",

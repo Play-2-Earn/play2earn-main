@@ -1,5 +1,5 @@
 // const jwt = require('jsonwebtoken');
-const User = require('../models/user'); // Assuming your User model is defined here
+const User = require('../models/User'); // Assuming your User model is defined here
 // const JWT_SECRET = process.env.JWT_SECRET; // Replace with your actual JWT secret key
 const Admin = require('../models/admin');
 // Middleware function to authenticate JWT tokens
@@ -15,7 +15,7 @@ const authenticateJWT = (req, res, next) => {
     //         return res.status(403).json({ error: 'Forbidden: Invalid token' });
     //     }
     //     req.user = decoded;
-        next();
+    next();
     // });
 };
 

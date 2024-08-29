@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
@@ -8,26 +9,6 @@ const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-    },
-    type: {
-        type: String,
-        required: true,
-        enum: ['game', 'participating'],
-    },
-    status: {
-        type: String,
-        enum: ['pending', 'in-progress', 'completed'], 
-        default: 'pending' 
-    },
-    difficulty_level: {
-        type: Number,
-        required: true,
-        min: 1,
-        max: 10
-    },
-    points: {
-        type: Number,
-        required: true
     },
     reward: {
         type: Number,

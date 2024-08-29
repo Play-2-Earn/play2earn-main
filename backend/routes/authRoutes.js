@@ -11,4 +11,3 @@ router.post('/login/admin', loginAdmin);
 router.get('/logout', logout);
 
 module.exports = router;
-
