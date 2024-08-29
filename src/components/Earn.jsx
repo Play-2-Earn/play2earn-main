@@ -165,9 +165,12 @@ const Earn = () => {
   const handleTaskAccept = (task) => {
     if (task.category === "Survey") {
       navigate("/survey");
-    }
-    if (task.category === "Wordify") {
+    } else if (task.category === "Wordify") {
       navigate("/Wordify");
+    } else if (task.category === "Follow Task") {
+      navigate("/FollowTask");
+    } else if (task.category === "Audio Transcription") {
+      navigate("/AudioTranscription");
     }
     setSelectedTask(null);
   };

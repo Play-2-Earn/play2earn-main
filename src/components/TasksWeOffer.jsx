@@ -220,9 +220,8 @@ const TasksWeOffer = () => {
       navigate("/survey");
     } else if (task.category === "Wordify") {
       navigate("/wordify");
-    } else {
-      // Handle other task types here
-      console.log(`Task accepted: ${task.category}`);
+    } else if (task.category === "Audio Transcription") {
+      navigate("/AudioTranscription");
     }
     setSelectedTask(null);
   };

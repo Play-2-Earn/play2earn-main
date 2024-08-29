@@ -16,6 +16,8 @@ import AdminDashboard from "./components/Admin-dash/AdminDashboard";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
+import FollowTask from "./components/FollowTask/FollowTask";
+import AudioTranscription from "./components/AudioTranscript/AudioTranscription";
 
 const App = () => {
   return (
@@ -30,6 +32,8 @@ const App = () => {
           <Route path="/Wordify" element={<Wordify />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/FollowTask" element={<FollowTask />} />
+          <Route path="/AudioTranscription" element={<AudioTranscription />} />
           {/* Add other routes here */}
 
           {/* foorter routes */}
