@@ -73,7 +73,7 @@ function AdminDashboard() {
           currentPage={currentPage}
           ref={sidebarRef}
         />
-        <main className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+        <main className={`admin-content ${sidebarOpen ? "sidebar-open" : ""}`}>
           {currentPage === "analytics" && <Analytics />}
           {currentPage === "task-management" && <TaskManagement />}
           {currentPage === "user-management" && <UserManagement />}

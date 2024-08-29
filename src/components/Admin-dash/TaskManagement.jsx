@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  FaTwitter,
-  FaLinkedin,
-  FaTelegram,
-  FaYoutube,
-  FaInstagram,
-  FaTiktok,
-} from "react-icons/fa";
 import "./CSS/TaskManagement.css";
 
 function TaskManagement() {
@@ -18,116 +10,94 @@ function TaskManagement() {
   const [editingTask, setEditingTask] = useState(null);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
-  const [categoryFilter, setCategoryFilter] = useState("All");
   const [newTask, setNewTask] = useState({
-    title: "",
+    title: "", // Added title here
     description: "",
     category: "",
-    reward: 0,
-    isFollowTask: false,
-    platform: "",
-    accountLink: "",
+    reward: "",
+    difficulty: "",
   });
+  const [filterFilledTasks, setFilterFilledTasks] = useState(false);
+
+  // Determine the API base URL based on the environment
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
   useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/tasks`);
+        setTasks(response.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
     fetchTasks();
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleNewTaskChange = (e) => {
     const { name, value } = e.target;
     setNewTask({ ...newTask, [name]: value });
   };
 
+  const isMainTask = (task) => {
+    return (
+      task.title && // Check for title
+      task.description &&
+      task.category &&
+      task.reward !== undefined &&
+      task.difficulty !== undefined
+    );
+  };
+
   const handleAddNewTask = async (e) => {
     e.preventDefault();
     try {
-      const taskData = { ...newTask };
-      let response;
+      const response = await axios.post(
+        `${API_BASE_URL}/api/tasks/create`, // Fixed URL construction
+        newTask,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const addedTask = response.data;
+      console.log("New Task Added:", addedTask); // Logging the added task
 
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+      // Add the new task to the list and check if it qualifies as a main task
+      setTasks((prevTasks) => [...prevTasks, addedTask]);
 
-      if (taskData.category === "Follow Task") {
-        response = await axios.post(
-          `${API_BASE_URL}/api/follow-tasks`,
-          taskData
-        );
-        // Ensure the new follow task has the correct category
-        response.data.task.category = "Follow Task";
-      } else {
-        response = await axios.post(`${API_BASE_URL}/api/tasks`, taskData);
-      }
-      setTasks([...tasks, response.data.task]);
+      // Clear the form after adding the task
       setNewTask({
-        title: "",
+        title: "", // Clear title field
         description: "",
         category: "",
-        reward: 0,
-        platform: "",
-        accountLink: "",
+        reward: "",
+        difficulty: "",
       });
     } catch (error) {
-      console.error("Error adding task:", error);
-    }
-  };
-
-  const fetchTasks = async () => {
-    try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-      const [tasksResponse, followTasksResponse] = await Promise.all([
-        axios.get(`${API_BASE_URL}/api/tasks`),
-        axios.get(`${API_BASE_URL}/api/follow-tasks`),
-      ]);
-      const regularTasks = tasksResponse.data.map((task) => ({
-        ...task,
-        category: task.category || "Other",
-      }));
-      const followTasks = followTasksResponse.data.map((task) => ({
-        ...task,
-        category: "Follow Task",
-      }));
-      const allTasks = [...regularTasks, ...followTasks];
-      // Remove duplicate tasks based on _id
-      const uniqueTasks = allTasks.filter(
-        (task, index, self) =>
-          index === self.findIndex((t) => t._id === task._id)
+      console.error(
+        "Error adding task:",
+        error.response ? error.response.data : error.message
       );
-      setTasks(uniqueTasks);
-    } catch (error) {
-      console.error("Error fetching tasks:", error);
     }
   };
 
   const handleEditTask = (task) => {
-    setEditingTask(task);
+    setEditingTask({ ...task });
   };
 
   const handleUpdateTask = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-      let response;
-      if (editingTask.category === "Follow Task") {
-        response = await axios.patch(
-          `${API_BASE_URL}/api/follow-ttasks/${editingTask._id}`,
-          editingTask
-        );
-      } else {
-        response = await axios.patch(
-          `${API_BASE_URL}/api/tasks/${editingTask._id}`,
-          editingTask
-        );
-      }
+      const response = await axios.patch(
+        `${API_BASE_URL}/api/tasks/${editingTask._id}`,
+        editingTask
+      );
       setTasks(
         tasks.map((task) =>
           task._id === editingTask._id ? response.data : task
@@ -135,7 +105,10 @@ function TaskManagement() {
       );
       setEditingTask(null);
     } catch (error) {
-      console.error("Error updating task:", error);
+      console.error(
+        "Error updating task:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -146,17 +119,7 @@ function TaskManagement() {
 
   const confirmDeleteTask = async () => {
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-      const taskToDeleteData = tasks.find((task) => task._id === taskToDelete);
-      if (taskToDeleteData.category === "Follow Task") {
-        await axios.delete(`${API_BASE_URL}/api/follow-tasks/${taskToDelete}`);
-      } else {
-        await axios.delete(`${API_BASE_URL}/api/tasks/${taskToDelete}`);
-      }
+      await axios.delete(`${API_BASE_URL}/api/tasks/${taskToDelete}`);
       setTasks(tasks.filter((task) => task._id !== taskToDelete));
       setShowDeleteConfirmation(false);
       setTaskToDelete(null);
@@ -177,31 +140,9 @@ function TaskManagement() {
 
   const confirmDeleteSelectedTasks = async () => {
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-      const selectedTaskIds = tasks
-        .filter((task) => task.selected)
-        .map((task) => task._id);
-      const followTaskIds = selectedTaskIds.filter(
-        (id) => tasks.find((task) => task._id === id).category === "Follow Task"
-      );
-      const regularTaskIds = selectedTaskIds.filter(
-        (id) => !followTaskIds.includes(id)
-      );
-
-      if (followTaskIds.length > 0) {
-        await axios.post(`${API_BASE_URL}/api/follow-tasks/bulk-delete`, {
-          taskIds: followTaskIds,
-        });
-      }
-      if (regularTaskIds.length > 0) {
-        await axios.post(`${API_BASE_URL}/api/tasks/bulk-delete`, {
-          taskIds: regularTaskIds,
-        });
-      }
-
+      await axios.post(`${API_BASE_URL}/api/tasks/bulk-delete`, {
+        taskIds: tasks.filter((task) => task.selected).map((task) => task._id),
+      });
       setTasks(tasks.filter((task) => !task.selected));
       setShowDeleteConfirmation(false);
       setTaskToDelete(null);
@@ -218,72 +159,42 @@ function TaskManagement() {
     );
   };
 
-  const filteredTasks = tasks.filter((task) => {
-    const categoryMatch =
-      categoryFilter === "All" || task.category === categoryFilter;
-    const searchTerm = taskSearchTerm.toLowerCase();
-    const searchMatch =
-      (task.title && task.title.toLowerCase().includes(searchTerm)) ||
-      (task.description && task.description.toLowerCase().includes(searchTerm));
-    return categoryMatch && (taskSearchTerm === "" || searchMatch);
-  });
+  const filteredTasks = tasks.filter(
+    (task) =>
+      (!filterFilledTasks || isMainTask(task)) &&
+      (task.description || "")
+        .toLowerCase()
+        .includes(taskSearchTerm.toLowerCase())
+  );
 
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
   const currentTasks = filteredTasks.slice(indexOfFirstTask, indexOfLastTask);
 
-  const handleCategoryChange = (e) => {
-    setCategoryFilter(e.target.value);
-    setCurrentPage(1); // Reset to first page when changing category
-  };
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const getIconForPlatform = (platform) => {
-    switch (platform.toLowerCase()) {
-      case "twitter":
-        return FaTwitter;
-      case "linkedin":
-        return FaLinkedin;
-      case "telegram":
-        return FaTelegram;
-      case "youtube":
-        return FaYoutube;
-      case "instagram":
-        return FaInstagram;
-      case "tiktok":
-        return FaTiktok;
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="task-management">
       <h2>Task Management</h2>
 
-      <div className="filters">
-        <div className="search-container">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search tasks..."
-            value={taskSearchTerm}
-            onChange={(e) => setTaskSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className="category-filter">
-          <select value={categoryFilter} onChange={handleCategoryChange}>
-            <option value="All">All Categories</option>
-            <option value="Survey">Survey</option>
-            <option value="Data Science">Data Science</option>
-            <option value="CAPTCHA">CAPTCHA</option>
-            <option value="Feedback">Feedback</option>
-            <option value="Audio Transcription">Audio Transcription</option>
-            <option value="Follow Task">Follow Task</option>
-          </select>
-        </div>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search tasks..."
+          value={taskSearchTerm}
+          onChange={(e) => setTaskSearchTerm(e.target.value)}
+        />
       </div>
+
+      <button
+        onClick={() => setFilterFilledTasks(!filterFilledTasks)}
+        className="btn-main"
+        aria-label={
+          filterFilledTasks ? "Show all tasks" : "Show main tasks container"
+        }
+      >
+        {filterFilledTasks ? "Show All Tasks" : "Show main tasks container"}
+      </button>
 
       <button onClick={handleDeleteSelectedTasks} className="btn btn-danger">
         Delete Selected
@@ -307,12 +218,11 @@ function TaskManagement() {
                 />
               </th>
               <th>Task No</th>
-              <th>Title</th>
+              <th>Title</th> {/* Added Title column */}
               <th>Description</th>
               <th>Category</th>
               <th>Reward</th>
-              <th>Platform</th>
-              <th>Account Link</th>
+              {filterFilledTasks && <th>Difficulty</th>}
               <th>Actions</th>
             </tr>
           </thead>
@@ -327,12 +237,11 @@ function TaskManagement() {
                   />
                 </td>
                 <td>{task._id}</td>
-                <td>{task.title}</td>
+                <td>{task.title}</td> {/* Display title */}
                 <td>{task.description}</td>
                 <td>{task.category}</td>
                 <td>{task.reward}</td>
-                <td>{task.platform || "-"}</td>
-                <td>{task.accountLink || "-"}</td>
+                {filterFilledTasks && <td>{task.difficulty} Minutes</td>}
                 <td>
                   <button
                     className="btn btn-primary"
@@ -379,15 +288,23 @@ function TaskManagement() {
         </button>
       </div>
 
-      <h3>Add New Task</h3>
-      <form onSubmit={handleAddNewTask} className="add-task-form">
+      <h3>{editingTask ? "Edit Task" : "Add New Task"}</h3>
+      <form
+        onSubmit={editingTask ? handleUpdateTask : handleAddNewTask}
+        className="add-task-form"
+      >
         <div className="form-group">
           <input
             type="text"
             name="title"
-            placeholder="Task Title"
-            value={newTask.title}
-            onChange={handleNewTaskChange}
+            placeholder="Task Title" // Added Title input field
+            value={editingTask ? editingTask.title : newTask.title}
+            onChange={
+              editingTask
+                ? (e) =>
+                    setEditingTask({ ...editingTask, title: e.target.value })
+                : handleNewTaskChange
+            }
             required
           />
         </div>
@@ -395,223 +312,97 @@ function TaskManagement() {
           <textarea
             name="description"
             placeholder="Task Description"
-            value={newTask.description}
-            onChange={handleNewTaskChange}
+            value={editingTask ? editingTask.description : newTask.description}
+            onChange={
+              editingTask
+                ? (e) =>
+                    setEditingTask({
+                      ...editingTask,
+                      description: e.target.value,
+                    })
+                : handleNewTaskChange
+            }
             required
           />
         </div>
         <div className="form-group">
-          <select
+          <input
+            type="text"
             name="category"
-            value={newTask.category}
-            onChange={handleNewTaskChange}
+            placeholder="Task Category"
+            value={editingTask ? editingTask.category : newTask.category}
+            onChange={
+              editingTask
+                ? (e) =>
+                    setEditingTask({ ...editingTask, category: e.target.value })
+                : handleNewTaskChange
+            }
             required
-          >
-            <option value="">Select Task Category</option>
-            <option value="Survey">Survey</option>
-            <option value="Data Science">Data Science</option>
-            <option value="CAPTCHA">CAPTCHA</option>
-            <option value="Feedback">Feedback</option>
-            <option value="Audio Transcription">Audio Transcription</option>
-            <option value="Follow Task">Follow Task</option>
-          </select>
+          />
         </div>
         <div className="form-group">
           <input
             type="number"
             name="reward"
             placeholder="Task Reward"
-            value={newTask.reward}
-            onChange={handleNewTaskChange}
+            value={editingTask ? editingTask.reward : newTask.reward}
+            onChange={
+              editingTask
+                ? (e) =>
+                    setEditingTask({ ...editingTask, reward: e.target.value })
+                : handleNewTaskChange
+            }
             required
           />
         </div>
-        {newTask.category === "Follow Task" && (
-          <>
-            <div className="form-group">
-              <select
-                name="platform"
-                value={newTask.platform}
-                onChange={handleNewTaskChange}
-                required
-              >
-                <option value="">Select Platform</option>
-                <option value="Twitter">Twitter</option>
-                <option value="LinkedIn">LinkedIn</option>
-                <option value="Telegram">Telegram</option>
-                <option value="YouTube">YouTube</option>
-                <option value="Instagram">Instagram</option>
-                <option value="TikTok">TikTok</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="accountLink"
-                placeholder="Account Link"
-                value={newTask.accountLink}
-                onChange={handleNewTaskChange}
-                required
-              />
-            </div>
-          </>
-        )}
-        <button type="submit" className="btn btn-success">
-          Add Task
-        </button>
-      </form>
-
-      {editingTask && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Edit Task</h3>
-            <form onSubmit={handleUpdateTask}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Task Title"
-                  value={editingTask.title}
-                  onChange={(e) =>
-                    setEditingTask({ ...editingTask, title: e.target.value })
-                  }
-                  required
-                />
-              </div>
-              <div className="form-group full-width">
-                <textarea
-                  name="description"
-                  placeholder="Task Description"
-                  value={editingTask.description}
-                  onChange={(e) =>
+        <div className="form-group">
+          <input
+            type="number"
+            name="difficulty"
+            placeholder="Task Difficulty (Minutes)"
+            value={editingTask ? editingTask.difficulty : newTask.difficulty}
+            onChange={
+              editingTask
+                ? (e) =>
                     setEditingTask({
                       ...editingTask,
-                      description: e.target.value,
+                      difficulty: e.target.value,
                     })
-                  }
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <select
-                  name="category"
-                  value={editingTask.category}
-                  onChange={(e) =>
-                    setEditingTask({ ...editingTask, category: e.target.value })
-                  }
-                  required
-                >
-                  <option value="">Select Task Category</option>
-                  <option value="Survey">Survey</option>
-                  <option value="Data Science">Data Science</option>
-                  <option value="CAPTCHA">CAPTCHA</option>
-                  <option value="Feedback">Feedback</option>
-                  <option value="Audio Transcription">
-                    Audio Transcription
-                  </option>
-                  <option value="Follow Task">Follow Task</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <input
-                  type="number"
-                  name="reward"
-                  placeholder="Task Reward"
-                  value={editingTask.reward}
-                  onChange={(e) =>
-                    setEditingTask({ ...editingTask, reward: e.target.value })
-                  }
-                  required
-                />
-              </div>
-              {editingTask.category === "Follow Task" && (
-                <>
-                  <div className="form-group">
-                    <select
-                      name="platform"
-                      value={editingTask.platform}
-                      onChange={(e) =>
-                        setEditingTask({
-                          ...editingTask,
-                          platform: e.target.value,
-                        })
-                      }
-                      required
-                    >
-                      <option value="">Select Platform</option>
-                      <option value="Twitter">Twitter</option>
-                      <option value="LinkedIn">LinkedIn</option>
-                      <option value="Telegram">Telegram</option>
-                      <option value="YouTube">YouTube</option>
-                      <option value="Instagram">Instagram</option>
-                      <option value="TikTok">TikTok</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name="accountLink"
-                      placeholder="Account Link"
-                      value={editingTask.accountLink}
-                      onChange={(e) =>
-                        setEditingTask({
-                          ...editingTask,
-                          accountLink: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </div>
-                </>
-              )}
-              <div className="button-group">
-                <button type="submit" className="btn btn-primary">
-                  Update Task
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setEditingTask(null)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+                : handleNewTaskChange
+            }
+            required
+          />
         </div>
-      )}
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary">
+            {editingTask ? "Update Task" : "Add Task"}
+          </button>
+        </div>
+      </form>
 
       {showDeleteConfirmation && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>
-              {taskToDelete === "selected"
-                ? "Confirm Bulk Deletion"
-                : "Confirm Deletion"}
-            </h3>
-            <p>
-              {taskToDelete === "selected"
-                ? "Are you sure you want to delete the selected tasks?"
-                : "Are you sure you want to delete this task?"}
-            </p>
-            <div className="button-group">
-              <button
-                onClick={
-                  taskToDelete === "selected"
-                    ? confirmDeleteSelectedTasks
-                    : confirmDeleteTask
-                }
-                className="btn btn-danger"
-              >
-                Confirm
-              </button>
-              <button
-                onClick={() => setShowDeleteConfirmation(false)}
-                className="btn btn-secondary"
-              >
-                Cancel
-              </button>
-            </div>
+        <div className="delete-confirmation">
+          <p>
+            Are you sure you want to delete{" "}
+            {taskToDelete === "selected" ? "selected tasks" : "this task"}?
+          </p>
+          <div className="button-group">
+            <button
+              className="btn btn-danger"
+              onClick={
+                taskToDelete === "selected"
+                  ? confirmDeleteSelectedTasks
+                  : confirmDeleteTask
+              }
+            >
+              Yes
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setShowDeleteConfirmation(false)}
+            >
+              No
+            </button>
           </div>
         </div>
       )}

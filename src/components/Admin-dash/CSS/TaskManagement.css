@@ -54,8 +54,22 @@
 }
 
 .btn-primary {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
+}
+
+.btn-main {
+  background-color: #2196f3;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 8px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .btn-danger {
@@ -127,13 +141,23 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
-  from { transform: translateY(-50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .button-group {
@@ -175,4 +199,125 @@
     width: 95%;
     padding: 20px;
   }
+}
+
+/* CSS for Task Management Component */
+.task-management {
+  padding: 20px;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.task-table th,
+.task-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.task-table th {
+  background-color: #f2f2f2;
+}
+
+.btn-main {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-main:hover {
+  background-color: #45a049;
+}
+
+.table-responsive {
+  margin-bottom: 20px;
+}
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form .form-group {
+  margin-bottom: 15px;
+}
+
+.add-task-form .form-group.full-width {
+  width: 100%;
+}
+
+.add-task-form input,
+.add-task-form select,
+.add-task-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-task-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-task-form button:hover {
+  background-color: #45a049;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-confirmation {
+  position: flex;
+  padding-right: 12px;
+  color: white;
+}
+
+.task-table {
+  position: relative;
+  z-index: 2; /* Ensure this table is above other content */
+}
+
+/* Add space below the table if pagination or other elements are causing issues */
+.task-table tbody tr:last-child td {
+  padding-bottom: 20px; /* Adjust this value if necessary */
+}
+
+/* Example to fix pagination overlapping */
+.pagination {
+  position: relative;
+  z-index: 1; /* Ensure pagination is below the table */
+}
+
+/* Modal or other popups should have a higher z-index */
+.delete-confirmation-modal {
+  position: absolute;
+  z-index: 999; /* Ensure modals appear above other content */
 }

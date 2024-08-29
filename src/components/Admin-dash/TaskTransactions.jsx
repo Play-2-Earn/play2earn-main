@@ -12,16 +12,16 @@ function TaskTransactions() {
   const [showEditPopup, setShowEditPopup] = useState(false);
   const transactionsPerPage = 6;
 
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const API_BASE_URL =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5001"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
-        const response = await axios.get(`${API_BASE_URL}/api/transactions`);
-        console.log("Fetched Transactions:", response.data); // Debug log
+        const response = await axios.get(`${API_BASE_URL}/api/transactions`); // Corrected template literal
+        console.log("Fetched Transactions:", response.data);
         setTransactions(response.data);
       } catch (error) {
         console.error("Error fetching transactions:", error);
@@ -29,10 +29,10 @@ function TaskTransactions() {
     };
 
     fetchTransactions();
-  }, []);
+  }, [API_BASE_URL]);
 
   useEffect(() => {
-    console.log("Current Transactions State:", transactions); // Debug log
+    console.log("Current Transactions State:", transactions);
   }, [transactions]);
 
   const handleSearch = (e) => {
@@ -47,11 +47,6 @@ function TaskTransactions() {
 
   const handleSaveEdit = async () => {
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
       await axios.put(
         `${API_BASE_URL}/api/transactions/${editingTransaction.id}`,
         editingTransaction
@@ -80,11 +75,6 @@ function TaskTransactions() {
 
   const confirmDelete = async () => {
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
       await axios.delete(
         `${API_BASE_URL}/api/transactions/${deleteConfirmation}`
       );
@@ -114,11 +104,6 @@ function TaskTransactions() {
 
   const confirmDeleteSelected = async () => {
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5001"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
       await Promise.all(
         selectedTransactions.map((id) =>
           axios.delete(`${API_BASE_URL}/api/transactions/${id}`)
@@ -217,18 +202,20 @@ function TaskTransactions() {
                 />
               </th>
               <th>Interaction_id</th>
-              <th>user_id</th>
-              <th>user_name</th>
-              <th>task_id</th>
-              <th>interaction_type</th>
-              <th>rating</th>
-              <th>timestamp</th>
+              <th>User_id</th>
+              <th>User_name</th>
+              <th>Task_id</th>
+              <th>Interaction_type</th>
+              <th>Rating</th>
+              <th>Timestamp</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {currentTransactions.map((transaction) => (
               <tr key={transaction.id}>
+                {" "}
+                {/* Ensure unique key */}
                 <td>
                   <input
                     type="checkbox"
