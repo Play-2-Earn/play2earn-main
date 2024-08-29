@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../css/Wordify.css";
 import jsonData from "./Wordify_words.json"; // Adjust the path as necessary
+import { Helmet } from 'react-helmet';
 import {
   FaLock,
   FaUnlock,
@@ -360,21 +361,19 @@ function Wordify() {
   };
 
   return (
+    <>
+    <Helmet>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
+    </Helmet>
+      
     <div className="wordify-app">
       {!hasStarted && !onLevelsPage && !onEndPage && (
         <>
-          <header className="wordify-app-header">
+          <header className="wordify-app-header" style={{ fontFamily: "Press Start 2P" }}>
             <h1>Wordify - Word Creation Game</h1>
           </header>
           <div className="wordify-content"></div>
-          <div className="ai-words-container">
-            <h2>AI Generated Words:</h2>
-            <ul>
-              {aiWords.map((word, index) => (
-                <li key={index}>{word}</li>
-              ))}
-            </ul>
-          </div>
+          
           <div className="wordify-info">
             <h2 className="wordify-title">
               AI-Powered Word Creation and Matching Game
@@ -399,6 +398,7 @@ function Wordify() {
             </button>
           </div>
         </>
+        
       )}
       {onEndPage ? (
         <>
@@ -510,7 +510,7 @@ function Wordify() {
                             onClick={handleNextLevel}
                             className="wordify-next-button"
                           >
-                            Next <FaArrowRight size={16} />
+                            Next<FaArrowRight size={14} />
                           </button>
                           <button
                             onClick={handleSaveAndExit}
@@ -559,6 +559,7 @@ function Wordify() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
