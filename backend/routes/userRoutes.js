@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const { request } = require("http");
 require("dotenv").config();
 const crypto = require("crypto");
+const jwt = require('jsonwebtoken');
 
 
 const { getUserProfile, updateUserProfile, deleteUser, getAllUsers, sign_up, log_in, requestUserPasswordReset, passwordSet } = require('../controllers/userController');
@@ -58,15 +59,19 @@ router.post("/sign_up", (request, response) => {
         });
 });
 
-// else {
-//     const userRefNum = generateReferralCode(firstName, lastName)
-//     // console.log(userRefNum)
 
-//     UserModel.create({firstName, lastName, email, password, userRefNum, refBy})
-//         .then(users => response.json(users))
-//         .catch(err => response.json(err));
-// }
-// });
+// jwt token generator for log in 
+
+const tokenGenerator = (payload) => {
+    const key = 'PlayToEarn001122'
+
+    const exp = {
+        expiresIn: '1h',
+    };
+
+    const token = jwt.sign(payload, key, exp)
+    return token
+}
 
 router.post("/log_in", (request, response) => {
     const { email, password } = request.body;
@@ -74,7 +79,12 @@ router.post("/log_in", (request, response) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    response.json("success");
+                    const payload = { id: UserModel.username }
+                    const uniqueToken = tokenGenerator(payload)
+                    user.token = uniqueToken
+                    user.save();
+                    response.json("success")
+
                 } else {
                     response.json("The credentials are incorrect");
                 }
@@ -94,8 +104,8 @@ router.post("/requestUserPasswordReset", (request, response) => {
                 const otp = crypto.randomInt(100000, 999999);
                 user.otp = otp;
                 user.otpExpires = Date.now() + 3600000; // 1 hour
-
                 user.save();
+
                 const transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
@@ -114,7 +124,7 @@ router.post("/requestUserPasswordReset", (request, response) => {
                     If you did not request this, please ignore this email and your password will remain unchanged.\n`
                 };
 
-                transporter.sendMail(mailOptions, (err, res) => {
+                transporter.sendMail(mailOptions, (err) => {
                     if (err) {
                         console.error("There was an error: ", err);
                         return response.status(500).json({ error: "Failed to send email" });
@@ -137,7 +147,6 @@ router.post("/passwordSet", (request, response) => {
                 user.password = newPassword;
                 user.save()
                 response.json("correct");
-                response.json(user.password)
             }
             else {
                 response.json("OTP is incorrect. Try again!")
@@ -146,6 +155,14 @@ router.post("/passwordSet", (request, response) => {
         .catch(err => {
             response.status(500).json({ message: "Error finding user.", error: err });
         });
+})
+
+// logout
+
+router.post("/logout", (request, response) => {
+    const key = UserModel.token
+    UserModel.deleteOne(key)
+    response.json("success")
 })
 
 module.exports = router;
