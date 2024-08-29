@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./css/Wordify.css";
+import "../css/Wordify.css";
 import jsonData from "./Wordify_words.json"; // Adjust the path as necessary
 import {
   FaLock,
