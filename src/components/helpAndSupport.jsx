@@ -9,6 +9,8 @@ import {
   SquareCheckBig,
   SquareUser,
 } from "lucide-react";
+import Header from "./header";
+import Footer from "./footer";
 
 const HelpAndSupport = () => {
   const [activeSection, setActiveSection] = useState("faq");
@@ -58,66 +60,69 @@ const HelpAndSupport = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-extrabold text-blue-500 mb-12 text-center">
-          Help & Support
-        </h1>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100 p-8">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-5xl font-extrabold text-blue-500 mb-12 text-center">
+            Help & Support
+          </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div
-            className="md:col-span-1 space-y-4"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setActiveSection(section.id)}
-                className={`w-full p-4 rounded-lg flex items-center space-x-4 transition duration-300 ${
-                  activeSection === section.id
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              className="md:col-span-1 space-y-4"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`w-full p-4 rounded-lg flex items-center space-x-4 transition duration-300 ${activeSection === section.id
                     ? "bg-blue-500 text-white shadow-lg"
                     : "bg-white hover:bg-blue-50 text-blue-800"
-                }`}
-              >
-                <section.icon className="w-6 h-6" />
-                <span className="font-medium">{section.name}</span>
-              </button>
-            ))}
-          </motion.div>
+                    }`}
+                >
+                  <section.icon className="w-6 h-6" />
+                  <span className="font-medium">{section.name}</span>
+                </button>
+              ))}
+            </motion.div>
 
-          <motion.div
-            className="md:col-span-2 bg-white rounded-2xl p-8 shadow-xl"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            {activeSection === "faq" && <FAQSection />}
-            {activeSection === "account" && <AccountSection />}
-            {activeSection === "tasks" && <TasksSection />}
-            {activeSection === "support" && <SupportSection />}
-            {activeSection === "policies" && <PoliciesSection />}
-            {activeSection === "tutorials" && <TutorialsSection />}
+            <motion.div
+              className="md:col-span-2 bg-white rounded-2xl p-8 shadow-xl"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {activeSection === "faq" && <FAQSection />}
+              {activeSection === "account" && <AccountSection />}
+              {activeSection === "tasks" && <TasksSection />}
+              {activeSection === "support" && <SupportSection />}
+              {activeSection === "policies" && <PoliciesSection />}
+              {activeSection === "tutorials" && <TutorialsSection />}
 
-            {activeSection === "contact" && (
-              <ContactForm
-                formData={formData}
-                formSubmitted={formSubmitted}
-                handleInputChange={handleInputChange}
-                handleSubmit={handleSubmit}
-              />
-            )}
-          </motion.div>
+              {activeSection === "contact" && (
+                <ContactForm
+                  formData={formData}
+                  formSubmitted={formSubmitted}
+                  handleInputChange={handleInputChange}
+                  handleSubmit={handleSubmit}
+                />
+              )}
+            </motion.div>
+          </div>
+        </div>
+        <div className="mt-8 pt-8 border-t border-blue-400 text-center text-sm md:text-base">
+          <p>&copy; 2024 Play2Earn. All rights reserved.</p>
+          <a className="text-blue-500" href="#">
+            Report Bug
+          </a>
         </div>
       </div>
-      <div className="mt-8 pt-8 border-t border-blue-400 text-center text-sm md:text-base">
-        <p>&copy; 2024 Play2Earn. All rights reserved.</p>
-        <a className="text-blue-500" href="#">
-          Report Bug
-        </a>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

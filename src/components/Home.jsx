@@ -21,64 +21,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../App.css";
 import { CustomPrevArrow, CustomNextArrow } from "./ui/CustomArrows";
-import LoginPopup from "./Login";
-import SignUpPopup from "./Signup";
-import ForgetPassPopup from "./Forgetpassword";
-import PasswordReset from "./PassReset";
 import Leaderboard from "./leaderboard";
 import TasksWeOffer from "./TasksWeOffer";
+import Header from "./header";
+import Footer from "./footer";
 
 const Home = () => {
   const navigate = useNavigate();
-
-  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
-  const [isSignUpPopupOpen, setSignUpPopupOpen] = useState(false);
-  const [isForgetPasswordOpen, setForgetPasswordOpen] = useState(false);
-  const [isPassResetOpen, setPassResetOpen] = useState(false);
-
-  const handleLoginClick = () => {
-    setLoginPopupOpen(true);
-  };
-
-  const closeLoginPopup = () => {
-    setLoginPopupOpen(false);
-  };
-
-  const innSignUpLink = () => {
-    setSignUpPopupOpen(true);
-    setLoginPopupOpen(false);
-  };
-
-  const closeSignUpPopup = () => {
-    setSignUpPopupOpen(false);
-  };
-
-  const handleSignUpClick = () => {
-    setSignUpPopupOpen(true);
-  };
-
-  const innLogInlink = () => {
-    setSignUpPopupOpen(false);
-    setLoginPopupOpen(true);
-  };
-
-  const innForgetPasswordLink = () => {
-    setLoginPopupOpen(false);
-    setForgetPasswordOpen(true);
-  };
-
-  const closeForgetPasswordLink = () => {
-    setForgetPasswordOpen(false);
-  };
-
-  const innResetPasswordLink = () => {
-    setForgetPasswordOpen(false);
-    setPassResetOpen(true);
-  };
-
-  const closeResetPasswordLink = () => {
-    setPassResetOpen(false);
-  };
 
   const taskTypes = useMemo(
     () => [
@@ -226,54 +175,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-blue-500 to-blue-300 text-white p-4">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10">
-          <div className="flex items-center mb-4 md:mb-0">
-            <img
-              src="assets/logo.png"
-              alt="Play2Earn Logo"
-              className="h-12 w-12 md:h-16 md:w-16 mr-2"
-            />
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
-              Play2Earn.ai
-            </h1>
-          </div>
-          <nav className="flex flex-wrap justify-center md:justify-end items-center">
-            <Link to="#" className="text-white hover:text-blue-200 mx-2 my-1">
-              Home
-            </Link>
-            <Link
-              to="/earn"
-              className="text-white hover:text-blue-200 mx-2 my-1"
-            >
-              Earn
-            </Link>
-            <Link to="#" className="text-white hover:text-blue-200 mx-2 my-1">
-              Leaderboard
-            </Link>
-            <Link
-              to="/referrals"
-              className="text-white hover:text-blue-200 mx-2 my-1"
-            >
-              Referrals
-            </Link>
-            <Button
-              variant="outline"
-              className="bg-transparent hover:bg-blue-400 text-white border-white hover:border-transparent mx-2 my-1"
-              onClick={() => handleLoginClick()}
-            >
-              Login
-            </Button>
-            <Button
-              variant="default"
-              className="bg-white hover:bg-blue-100 text-blue-500 mx-2 my-1"
-              onClick={() => handleSignUpClick()}
-            >
-              Sign Up
-            </Button>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-10 md:py-20">
@@ -512,91 +414,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-blue-300 to-blue-500 text-white py-8 md:py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h4 className="text-xl md:text-2xl font-bold mb-4">
-                Play2Earn.ai
-              </h4>
-              <p className="text-sm md:text-base">
-                Empowering individuals to earn through AI-powered gaming.
-              </p>
-            </div>
-            <div>
-              <h5 className="text-lg md:text-xl font-semibold mb-4">
-                Quick Links
-              </h5>
-              <ul className="text-sm md:text-base">
-                <li>
-                  <Link to="/about" className="hover:text-blue-200">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/privacy" className="hover:text-blue-200">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/terms" className="hover:text-blue-200">
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/help-and-support" className="hover:text-blue-200">
-                    Help and Support
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-lg md:text-xl font-semibold mb-4">
-                Connect With Us
-              </h5>
-              <div className="flex space-x-4">
-                <a href="#" className="hover:text-blue-200">
-                  <FaTwitter size={24} />
-                </a>
-                <a href="#" className="hover:text-blue-200">
-                  <FaInstagram size={24} />
-                </a>
-                <a
-                  href="https://github.com/Play-2-Earn"
-                  className="hover:text-blue-200"
-                >
-                  <FaGithub size={24} />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-blue-400 text-center text-sm md:text-base">
-            <p>&copy; 2024 Play2Earn.ai. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-
-      {/* Login and Sign Up Popups */}
-      <LoginPopup
-        isOpen={isLoginPopupOpen}
-        onClose={closeLoginPopup}
-        innSignUpLink={innSignUpLink}
-        innForgetPasswordLink={innForgetPasswordLink}
-      />
-      <SignUpPopup
-        isOpen={isSignUpPopupOpen}
-        onClose={closeSignUpPopup}
-        innLogInlink={innLogInlink}
-      />
-      <ForgetPassPopup
-        isOpen={isForgetPasswordOpen}
-        onClose={closeForgetPasswordLink}
-        innResetPasswordLink={innResetPasswordLink}
-      />
-      <PasswordReset
-        isOpen={isPassResetOpen}
-        onClose={closeResetPasswordLink}
-      />
+      <Footer />    
     </div>
   );
 };
