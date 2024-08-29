@@ -117,7 +117,7 @@ const Earn = () => {
       try {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
-            ? "http://localhost:5002"
+            ? "http://localhost:5001"
             : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}/api/tasks`;
@@ -165,6 +165,12 @@ const Earn = () => {
   const handleTaskAccept = (task) => {
     if (task.category === "Survey") {
       navigate("/survey");
+    } else if (task.category === "Wordify") {
+      navigate("/Wordify");
+    } else if (task.category === "Follow Task") {
+      navigate("/FollowTask");
+    } else if (task.category === "Audio Transcription") {
+      navigate("/AudioTranscription");
     }
     setSelectedTask(null);
   };

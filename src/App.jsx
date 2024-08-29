@@ -15,6 +15,9 @@ import Leaderboard from "./components/leaderboard";
 import AdminDashboard from "./components/Admin-dash/AdminDashboard";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Survey from "./components/surveyTasks/survey";
+import Wordify from "./components/Wordify"; 
+import FollowTask from "./components/FollowTask"; 
+import AudioTranscription from "./components/AudioTranscript/AudioTranscription";
 
 const App = () => {
   return (
@@ -26,9 +29,11 @@ const App = () => {
           <Route path="/referrals" element={<ReferralsPage />} />
           <Route path="/earn" element={<Earn />} />
           <Route path="/survey" element={<Survey />} />
-          {/* by mit prajapati 14-08-2024 */}
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/Wordify" element={<Wordify />} /> 
+          <Route path="/FollowTask" element={<FollowTask />} /> 
+          <Route path="/AudioTranscription" element={<AudioTranscription />} /> 
           {/* Add other routes here */}
 
           {/* foorter routes */}

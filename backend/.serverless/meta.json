@@ -6565,5 +6565,83 @@
         "ExportName": "sls-serverless-aws-api-dev-ServerlessDeploymentBucketName"
       }
     ]
+  },
+  "C:\\Users\\yoges\\Desktop\\Play2Earn Main\\play2earn-main8\\backend": {
+    "versionSfCore": null,
+    "versionFramework": "4.2.4",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "servicePath": "C:\\Users\\yoges\\Desktop\\Play2Earn Main\\play2earn-main8\\backend",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "org": "play2earn",
+      "app": "aws-api",
+      "service": "serverless-aws-api",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "stage": "dev",
+        "region": "eu-north-1",
+        "memorySize": 512,
+        "timeout": 90,
+        "environment": {
+          "MONGO_URI": "${env:MONGO_URI}"
+        }
+      },
+      "package": {
+        "individually": true,
+        "exclude": [
+          "node_modules/.cache/**",
+          ".git/**",
+          ".serverless/**",
+          ".vscode/**",
+          "README.md",
+          "package-lock.json",
+          "test/**"
+        ]
+      },
+      "plugins": [
+        "serverless-dotenv-plugin",
+        "serverless-offline",
+        "serverless-plugin-include-dependencies",
+        "serverless-prune-plugin"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "httpPort": 5002
+        }
+      },
+      "functions": {
+        "app": {
+          "handler": "handler.handler",
+          "events": [
+            {
+              "http": {
+                "path": "/{proxy+}",
+                "method": "ANY",
+                "cors": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: play2earn\r\n# \"app\" enables Serverless Framework Dashboard features and sharing them with other Services.\r\napp: aws-api\r\n# \"service\" is the name of this project. This will also be added to your AWS resource names.\r\nservice: serverless-aws-api\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  stage: ${opt:stage, 'dev'}\r\n  region: eu-north-1\r\n  memorySize: 512 # Increase if necessary\r\n  timeout: 90\r\n  environment:\r\n    MONGO_URI: ${env:MONGO_URI}\r\n\r\npackage:\r\n  individually: true\r\n\r\n  exclude:\r\n    - node_modules/.cache/**\r\n    - .git/**\r\n    - .serverless/**\r\n    - .vscode/**\r\n    - README.md\r\n    - package-lock.json\r\n    - test/**\r\n\r\nplugins:\r\n  - serverless-dotenv-plugin\r\n  - serverless-offline\r\n  - serverless-plugin-include-dependencies\r\n  - serverless-prune-plugin\r\n\r\ncustom:\r\n  serverless-offline:\r\n    httpPort: 5002\r\n\r\nfunctions:\r\n  app:\r\n    handler: handler.handler\r\n    events:\r\n      - http:\r\n          path: /{proxy+}\r\n          method: ANY\r\n          cors: true\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "error": {
+      "message": "You are not a member of the Org \"play2earn\". Verify the \"org\" in your Service configuration (e.g. serverless.yml) or that you're providing manually is one your User Account or License Key has access to. Lastly, check the .serverlessrc file in the home directory of your machine to better understand what user account or License Key you are currently using. You can run \"serverless login\" to change the user account or License Key you are using.",
+      "stack": "Error: You are not a member of the Org \"play2earn\". Verify the \"org\" in your Service configuration (e.g. serverless.yml) or that you're providing manually is one your User Account or License Key has access to. Lastly, check the .serverlessrc file in the home directory of your machine to better understand what user account or License Key you are currently using. You can run \"serverless login\" to change the user account or License Key you are using.\n    at Authentication.getAuthenticatedData (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:942:3152)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Authentication.resolverAuthenticate (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:942:20540)\n    at async _Meta.authenticateAndResolve (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:950:11261)\n    at async route (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:950:16849)\n    at async Object.run2 [as run] (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:950:17334)\n    at async run3 (file:///C:/Users/yoges/.serverless/releases/4.2.4/package/dist/sf-core.js:950:18594)"
+    },
+    "machineId": "d2cc436dbd50f6d709df3bd5a60fa524",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
   }
 }
