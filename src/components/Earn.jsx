@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/Earn.css";
+import Header from "./header";
+import Footer from "./footer";
 
 // TaskCard Component
 const TaskCard = ({ task, onSelect }) => (
@@ -179,57 +181,60 @@ const Earn = () => {
     "All",
     "Survey",
     "CAPTCHA",
-    "Feedback",
     "Audio Transcription",
     "Follow task",
     "Text Tagging ",
-    "Image captcha task",
+    "Image captcha ",
     "Translation challenge",
     "Wordify",
   ];
 
   return (
-    <div className="earn-container">
-      <h1>Task Marketplace</h1>
-      <div className="search-filter-container">
-        <input
-          type="text"
-          placeholder="Search tasks..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="search-input"
-        />
-        <div className="category-filters">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`category-btn ${
-                selectedCategory === category ? "active" : ""
-              }`}
-              onClick={() => handleCategoryChange(category)}
-            >
-              {category}
-            </button>
-          ))}
+    <>
+      <Header />
+      <div className="earn-container">
+        <h1>Task Marketplace</h1>
+        <div className="search-filter-container">
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+          />
+          <div className="category-filters">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-btn ${
+                  selectedCategory === category ? "active" : ""
+                }`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
+        {error ? (
+          <p className="error-message">{error}</p>
+        ) : (
+          <div className="task-grid">
+            {filteredTasks.map((task) => (
+              <TaskCard key={task.id} task={task} onSelect={setSelectedTask} />
+            ))}
+          </div>
+        )}
+        {selectedTask && (
+          <TaskModal
+            task={selectedTask}
+            onClose={() => setSelectedTask(null)}
+            onAccept={handleTaskAccept}
+          />
+        )}
       </div>
-      {error ? (
-        <p className="error-message">{error}</p>
-      ) : (
-        <div className="task-grid">
-          {filteredTasks.map((task) => (
-            <TaskCard key={task.id} task={task} onSelect={setSelectedTask} />
-          ))}
-        </div>
-      )}
-      {selectedTask && (
-        <TaskModal
-          task={selectedTask}
-          onClose={() => setSelectedTask(null)}
-          onAccept={handleTaskAccept}
-        />
-      )}
-    </div>
+      <Footer />
+    </>
   );
 };
 

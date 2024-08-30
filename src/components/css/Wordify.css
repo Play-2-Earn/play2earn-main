@@ -10,10 +10,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow-y: hidden; /* Prevent body scroll */
   height: 100vh; /* Take the full height of the viewport */
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;
 }
 
 body {
@@ -440,6 +438,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 .wordify-popup {

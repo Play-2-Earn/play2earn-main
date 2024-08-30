@@ -2,6 +2,8 @@ import React from "react";
 import SectionSvg from "../components/ui/SectionSvg";
 import PlusSvg from "../components/ui/PlusSvg";
 import brackets from "../components/ui/Brackets";
+import Header from "./header";
+import Footer from "./footer";
 
 // Integrated TagLine component
 const TagLine = ({ className, children }) => {
@@ -43,7 +45,7 @@ const Section = ({
       relative 
       ${
         customPaddings ||
-        `py-10 lg:py-16 xl:py-20 ${crosses ? "lg:py-32 xl:py-40" : ""}`
+        `py-10 lg:py-0 xl:py-0 ${crosses ? "lg:py-0 xl:py-0" : ""}`
       } 
       ${className || ""}`}
     >
@@ -70,7 +72,8 @@ const Section = ({
 const About = () => {
   return (
     <Section className="bg-white">
-      <div className="container text-gray-800">
+      <Header />
+      <div className="container text-gray-800 mt-4">
         <Heading title="About Us" />
         <p className="text-gray-800 mb-14 text-justify">
           At Play2earn, we are dedicated to transforming the micro-engagement
@@ -218,7 +221,7 @@ const About = () => {
         </div>
 
         {/* Roadmap Section */}
-        <div className="relative bg-white pt-5">
+        <div className="relative bg-white pt-5 mb-5">
           <div className="container mx-auto">
             <div className="relative bg-sky-200 flex flex-col items-center py-16 px-8 border border-n-1/10 rounded-3xl overflow-hidden">
               <h2 className="text-3xl font-bold text-gray-800 mb-8">
@@ -289,6 +292,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <Footer className="mt-4" />
     </Section>
   );
 };
