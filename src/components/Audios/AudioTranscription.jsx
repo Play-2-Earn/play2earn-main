@@ -10,25 +10,25 @@ import {
   FaTimes,
   FaLock,
   FaUnlock,
-  FaTrophy,
+  FaStar,
   FaTwitter,
   FaWhatsapp,
   FaTelegram,
 } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
-import Confetti from "react-confetti";
+import { Helmet } from "react-helmet";
+
 import "react-toastify/dist/ReactToastify.css";
-import backgroundImage from "./audiopic.jpg";
-import audio1 from "./audio1.wav";
-import audio2 from "./audio2.wav";
-import audio3 from "./audio3.wav";
-import audio4 from "./audio4.wav";
-import audio5 from "./audio5.wav";
-import audio6 from "./audio6.wav";
-import audio7 from "./audio7.wav";
-import audio8 from "./audio8.wav";
-import audio9 from "./audio9.wav";
-import audio10 from "./audio10.wav";
+import audio1 from "../Audios/audio1.wav";
+import audio2 from "../Audios/audio2.wav";
+import audio3 from "../Audios/audio3.wav";
+import audio4 from "../Audios/audio4.wav";
+import audio5 from "../Audios/audio5.wav";
+import audio6 from "../Audios/audio6.wav";
+import audio7 from "../Audios/audio7.wav";
+import audio8 from "../Audios/audio8.wav";
+import audio9 from "../Audios/audio9.wav";
+import audio10 from "../Audios/audio10.wav";
 
 const tasks = [
   {
@@ -93,149 +93,129 @@ const tasks = [
   },
 ];
 
-const AudioTranscription = () => {
-  const [currentLevel, setCurrentLevel] = useState(1);
-  const [userTranscription, setUserTranscription] = useState("");
-  const [score, setScore] = useState(0);
+const App = () => {
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+  const [transcription, setTranscription] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [points, setPoints] = useState(0);
   const [lives, setLives] = useState(3);
-  const [gameState, setGameState] = useState("initial");
-  const [feedbackVisible, setFeedbackVisible] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [completedLevels, setCompletedLevels] = useState([]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameEnded, setEndGame] = useState(false);
+  const [levelSelectVisible, setLevelSelectVisible] = useState(false);
+  const [currentLevel, setCurrentLevel] = useState(1); // Track the current level
 
-  useEffect(() => {
-    if (showConfetti) {
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showConfetti]);
-
-  const handleStart = () => {
-    setGameState("playing");
-    setFeedbackVisible(false); // Reset feedback when starting the game
-  };
-
-  const handleExit = () => {
-    setGameState("initial");
-    setCurrentLevel(1);
-    setScore(0);
-    setLives(3);
-    setUserTranscription("");
-    setFeedbackVisible(false); // Reset feedback when exiting the game
-  };
-
-  const handleLevelSelect = (level) => {
-    if (level <= Math.min(currentLevel, tasks.length)) {
-      setCurrentLevel(level);
-      setGameState("playing");
-      setFeedbackVisible(false); // Reset feedback when selecting a level
-    }
-  };
-
-  const handleSubmit = () => {
-    const currentTask = tasks[currentLevel - 1];
-    const correctWords = currentTask.correctTranscription
+  const normalizeText = (text) => {
+    let normalizedText = text
       .toLowerCase()
-      .split(" ");
-    const userWords = userTranscription.toLowerCase().split(" ");
-
-    let correctCount = 0;
-    let totalWords = correctWords.length;
-
-    correctWords.forEach((word, index) => {
-      if (spellingVariations[word]) {
-        if (spellingVariations[word].includes(userWords[index])) {
-          correctCount++;
-        }
-      } else if (word === userWords[index]) {
-        correctCount++;
-      }
+      .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "")
+      .trim();
+    Object.keys(spellingVariations).forEach((ukSpelling) => {
+      const usSpelling = spellingVariations[ukSpelling];
+      const regex = new RegExp(ukSpelling, "g");
+      normalizedText = normalizedText.replace(regex, usSpelling);
     });
+    return normalizedText;
+  };
 
-    const accuracy = (correctCount / totalWords) * 100;
-    let pointsEarned = 0;
+  const checkTranscription = () => {
+    const currentTask = tasks[currentTaskIndex];
+    if (
+      normalizeText(transcription) ===
+      normalizeText(currentTask.correctTranscription)
+    ) {
+      setIsError(false);
+      setPoints(points + 10);
+      setTranscription("");
+      setLives(Math.min(lives + 1, 3)); // Limit lives to a maximum of 3
+      toast.success("Great job! You got it right!", { autoClose: 3000 });
 
-    if (accuracy >= 95) {
-      pointsEarned = 3;
-      setFeedbackMessage(
-        "Excellent job! Your transcription is highly accurate."
-      );
-    } else if (accuracy >= 85) {
-      pointsEarned = 2;
-      setFeedbackMessage("Great work! Your transcription is very good.");
-    } else if (accuracy >= 75) {
-      pointsEarned = 1;
-      setFeedbackMessage("Good effort! Your transcription is fairly accurate.");
+      if (currentTaskIndex < tasks.length - 1) {
+        setCurrentTaskIndex(currentTaskIndex + 1);
+        setCurrentLevel(currentLevel + 1); // Move to the next level
+      } else {
+        toast.success("Congratulations! You've completed all levels!", {
+          autoClose: 3000,
+        });
+        setGameStarted(false);
+        setEndGame(true);
+      }
     } else {
+      setIsError(true);
       setLives(lives - 1);
-      setFeedbackMessage(
-        "Keep practicing! Your transcription needs improvement."
-      );
-    }
+      toast.error("Oops! That's not quite right. Try again!", {
+        autoClose: 3000,
+      });
 
-    setScore(score + pointsEarned);
-    setFeedbackVisible(true);
-
-    if (lives === 1 && pointsEarned === 0) {
-      setGameState("gameOver");
-      toast.error("Game Over! You've run out of lives.");
-    } else if (currentLevel === tasks.length) {
-      setGameState("completed");
-      setShowConfetti(true);
-      toast.success("Congratulations! You've completed all levels!");
-    } else if (pointsEarned > 0) {
-      setCompletedLevels([...completedLevels, currentLevel]);
-      if (currentLevel < tasks.length) {
-        setIsTransitioning(true);
-        setTimeout(() => {
-          setCurrentLevel(currentLevel + 1);
-          setUserTranscription("");
-          setIsTransitioning(false);
-          setFeedbackVisible(false); // Reset feedback when moving to the next level
-        }, 500);
+      if (lives - 1 === 0) {
+        setFeedback("You've lost all your lives! Try again tomorrow.");
       }
     }
-    setUserTranscription("");
   };
 
-  const handleFeedbackClose = () => {
-    setFeedbackVisible(false);
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const renderHearts = () => {
+    const hearts = [];
+    for (let i = 0; i < lives; i++) {
+      hearts.push(<FaHeart key={i} className="heart full" />);
+    }
+    for (let i = lives; i < 3; i++) {
+      hearts.push(<FaHeart key={i} className="heart empty" />);
+    }
+    return hearts;
   };
 
-  const renderLevelButtons = () => {
-    return tasks.map((task, index) => (
-      <button
-        key={index}
-        className={`level-button ${
-          index + 1 > currentLevel
-            ? "locked"
-            : index + 1 <= completedLevels.length
-            ? "completed"
-            : ""
-        }`}
-        onClick={() => handleLevelSelect(index + 1)}
-        disabled={index + 1 > currentLevel}
-      >
-        {index + 1 <= completedLevels.length ? (
-          <FaTrophy className="icon" />
-        ) : index + 1 > currentLevel ? (
-          <FaLock className="icon" />
-        ) : (
-          <FaUnlock className="icon" />
-        )}
-        Level {index + 1}
-      </button>
-    ));
+  const handleLevelSelect = (index) => {
+    setCurrentTaskIndex(index);
+    setGameStarted(true);
+    setLevelSelectVisible(false);
   };
 
+  const renderLevelsPage = () => {
+    const levels = [];
+    for (let i = 1; i <= tasks.length; i++) {
+      const isLocked = i > currentLevel;
+      const isCompleted = i < currentLevel;
+      const isCurrentLevel = i === currentLevel;
+
+      levels.push(
+        <button
+          key={i}
+          className={`level-button ${isCompleted ? "completed" : ""} ${
+            isLocked ? "locked" : ""
+          } ${!isLocked && !isCompleted ? "current" : ""}`}
+          onClick={() => !isLocked && handleLevelSelect(i - 1)}
+          disabled={isLocked || isCompleted}
+        >
+          {isLocked || isCompleted ? (
+            <FaLock className="icon" size={10} />
+          ) : (
+            <FaUnlock className="icon" size={10} />
+          )}
+          {(!isLocked || isCompleted) && (
+            <span className="level-number">{i}</span>
+          )}
+        </button>
+      );
+    }
+    return (
+      <div className="levels-page">
+        <header className="app-header">
+          <h1>Select a Level</h1>
+        </header>
+        <div className="level-buttons-container">{levels}</div>
+      </div>
+    );
+  };
   const handleShare = (platform) => {
     const shareText = encodeURIComponent(
       `I just completed all levels in the Audio Transcription task! Join now: [http://www.play2earn.ai/]`
     );
     let shareUrl;
-
     switch (platform) {
       case "twitter":
         shareUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
@@ -249,7 +229,6 @@ const AudioTranscription = () => {
       default:
         shareUrl = null;
     }
-
     if (shareUrl) {
       window.open(shareUrl, "_blank", "width=600,height=400");
     }
@@ -257,98 +236,123 @@ const AudioTranscription = () => {
 
   return (
     <div className="audio-transcription-game">
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
       <div
-        className={`app ${gameState !== "initial" ? "expanded" : "initial"} ${
-          isTransitioning ? "transitioning" : ""
+        className={`app ${
+          gameStarted || levelSelectVisible ? "expanded" : "initial"
         }`}
       >
-        {showConfetti && <Confetti />}
-        <ToastContainer />
-        {gameState === "initial" && (
-          <>
-            <h1>Audio Transcription Game</h1>
-            <button className="start-button" onClick={handleStart}>
-              Start Game
+        {!gameStarted && !levelSelectVisible && !gameEnded ? (
+          <div className="start-page">
+            <h1 className="title-head">Audio Transcription Game</h1>
+            <hr />
+            <p className="intro">
+              Prepare yourself for a unique challenge that blends listening
+              precision with typing skills. In this game, you'll be tasked with
+              transcribing audio clips into text. Pay close attention to every
+              word, because accuracy is key! so stay alert, and let your fingers
+              do the talking. Ready to showcase your transcription talents?
+              Let's get started!
+            </p>
+            <button
+              className="start-button"
+              onClick={() => setLevelSelectVisible(true)}
+            >
+              Start
             </button>
-            <div className="level-buttons">{renderLevelButtons()}</div>
+          </div>
+        ) : levelSelectVisible ? (
+          renderLevelsPage()
+        ) : gameEnded ? (
+          <>
+            <div>
+              <button
+                className="exit-button"
+                onClick={() => setLevelSelectVisible(true)}
+              >
+                <FaArrowLeft />
+              </button>
+              <h2 className="end-header">Game Completed!</h2>
+              <FaStar size={50} color="orange" />
+              <FaStar size={100} color="orange" />
+              <FaStar size={50} color="orange" />
+              <p className="end-para">You completed all the levels </p>
+              <div>
+                <h2>Your total points: {points}</h2>
+              </div>
+              <div className="share-achievement">
+                <h3>Share your achievement:</h3>
+                <div className="share-buttons">
+                  <button onClick={() => handleShare("twitter")}>
+                    <FaTwitter /> Twitter
+                  </button>
+                  <button onClick={() => handleShare("whatsapp")}>
+                    <FaWhatsapp /> WhatsApp
+                  </button>
+                  <button onClick={() => handleShare("telegram")}>
+                    <FaTelegram /> Telegram
+                  </button>
+                </div>
+              </div>
+            </div>
           </>
-        )}
-        {gameState === "playing" && (
+        ) : (
           <>
             <div className="top-buttons">
-              <button className="back-button" onClick={handleExit}>
-                <FaArrowLeft /> Back
+              <button
+                className="exit-button"
+                onClick={() => setLevelSelectVisible(true)}
+              >
+                <FaArrowLeft /> Level Select
               </button>
-              <button className="exit-button" onClick={handleExit}>
-                <FaTimes />
+              <button
+                className="exit-button"
+                onClick={() => setGameStarted(false)}
+              >
+                <FaTimes /> Exit
               </button>
             </div>
-            <h2>Level {currentLevel}</h2>
-            <AudioPlayer audioSrc={tasks[currentLevel - 1].audioClip} />
-            <textarea
-              value={userTranscription}
-              onChange={(e) => setUserTranscription(e.target.value)}
-              placeholder="Type your transcription here..."
-              className={isTransitioning ? "fade-out" : ""}
-            />
-            <button className="submit-button" onClick={handleSubmit}>
-              Submit
-            </button>
+            <h1>
+              {gameStarted
+                ? `Level ${currentTaskIndex + 1}`
+                : "Audio Transcription Task"}
+            </h1>
+            <hr />
+            {lives > 0 ? (
+              <>
+                <AudioPlayer audioSrc={tasks[currentLevel - 1].audioClip} />
+                <textarea
+                  value={transcription}
+                  onChange={(e) => setTranscription(e.target.value)}
+                />
+                <button className="submit-button" onClick={checkTranscription}>
+                  Submit
+                </button>
+              </>
+            ) : (
+              <p>{feedback}</p>
+            )}
+            <Feedback message={feedback} isError={isError} />
             <div className="point-lives">
               <div className="points">
-                <FaGem /> Points: {score}
+                <FaGem /> Points: {points}
               </div>
               <div className="lives">
-                Lives:{" "}
-                {[...Array(3)].map((_, index) => (
-                  <FaHeart
-                    key={index}
-                    className={index < lives ? "heart" : "heart empty"}
-                  />
-                ))}
+                <span>Lives: </span>
+                {renderHearts()}
               </div>
             </div>
           </>
         )}
-        {gameState === "completed" && (
-          <>
-            <h1>Congratulations!</h1>
-            <p>You've completed all levels!</p>
-            <p>Final Score: {score}</p>
-            <button className="start-button" onClick={handleExit}>
-              Play Again
-            </button>
-            <div className="share-achievement">
-              <h3>Share your achievement:</h3>
-              <div className="share-buttons">
-                <button onClick={() => handleShare("twitter")}>
-                  <FaTwitter /> Twitter
-                </button>
-                <button onClick={() => handleShare("whatsapp")}>
-                  <FaWhatsapp /> WhatsApp
-                </button>
-                <button onClick={() => handleShare("telegram")}>
-                  <FaTelegram /> Telegram
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-        {gameState === "gameOver" && (
-          <>
-            <h1>Game Over</h1>
-            <p>Final Score: {score}</p>
-            <button className="start-button" onClick={handleExit}>
-              Try Again
-            </button>
-          </>
-        )}
-        {feedbackVisible && gameState === "playing" && (
-          <Feedback message={feedbackMessage} onClose={handleFeedbackClose} />
-        )}
+        <ToastContainer />
       </div>
     </div>
   );
 };
 
-export default AudioTranscription;
+export default App;

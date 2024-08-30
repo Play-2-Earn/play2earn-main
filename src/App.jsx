@@ -17,7 +17,7 @@ import ScrollToTop from "./components/ui/ScrollToTop";
 import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
 import FollowTask from "./components/FollowTask/FollowTask";
-import AudioTranscription from "./components/AudioTranscript/AudioTranscription";
+import AudioTranscription from "./components/Audios/AudioTranscription";
 import { AuthProvider } from "./components/globalStateForAuth";
 
 const App = () => {

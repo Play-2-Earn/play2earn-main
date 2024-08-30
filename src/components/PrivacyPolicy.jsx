@@ -7,7 +7,7 @@ import Footer from "./footer";
 const PrivacyPolicy = () => {
   return (
     <>
-    <Header />
+      <Header />
       <div className="flex items-center justify-center min-h-screen bg-blue-200 p-4 text-justify rounded-lg">
         <div className="bg-white text-gray-800 p-6 shadow-lg max-w-3xl w-full mx-auto ">
           <h1 className="text-4xl font-bold text-blue-800 mb-6 text-center">
@@ -21,15 +21,16 @@ const PrivacyPolicy = () => {
             privacy is of utmost importance. This Privacy Policy ("Policy")
             outlines our practices regarding the collection, use, and protection
             of your personal data when you visit our website, contact us, or use
-            our services. By visiting our website, accessing, installing, or using
-            our services, and by providing your personal data to us in any manner
-            (e.g., contacting us), you confirm your explicit agreement to be
-            legally bound by this Policy. If you do not agree to this Policy,
-            please refrain from using our website and services. We may update this
-            Policy periodically to reflect changes in our personal data practices
-            or relevant laws. We will notify you of any significant changes, and
-            your continued use of our website or services after such updates will
-            constitute your acknowledgment and acceptance of the revised Policy.
+            our services. By visiting our website, accessing, installing, or
+            using our services, and by providing your personal data to us in any
+            manner (e.g., contacting us), you confirm your explicit agreement to
+            be legally bound by this Policy. If you do not agree to this Policy,
+            please refrain from using our website and services. We may update
+            this Policy periodically to reflect changes in our personal data
+            practices or relevant laws. We will notify you of any significant
+            changes, and your continued use of our website or services after
+            such updates will constitute your acknowledgment and acceptance of
+            the revised Policy.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -38,8 +39,8 @@ const PrivacyPolicy = () => {
           <p className="mb-4">
             Play2Earn provides a platform where users can complete tasks to earn
             rewards and process payouts. To enable these functionalities and
-            ensure the smooth operation of our website, we must collect and access
-            certain personal data.
+            ensure the smooth operation of our website, we must collect and
+            access certain personal data.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -50,10 +51,10 @@ const PrivacyPolicy = () => {
           </h3>
           <ul className="list-disc list-inside ml-4 mb-4">
             <li>
-              <strong>Access Logs:</strong> Like many websites, we collect access
-              log information when you visit our website. This information helps
-              us operate our website efficiently and protect it against cyber
-              threats.
+              <strong>Access Logs:</strong> Like many websites, we collect
+              access log information when you visit our website. This
+              information helps us operate our website efficiently and protect
+              it against cyber threats.
             </li>
             <li>
               <strong>Cookies:</strong> We use cookies to process your data when
@@ -67,14 +68,14 @@ const PrivacyPolicy = () => {
           <ul className="list-disc list-inside ml-4 mb-4">
             <li>
               <strong>Access Logs:</strong> We collect information such as IP
-              address and browser type to prevent potential cyber threats against
-              our services.
+              address and browser type to prevent potential cyber threats
+              against our services.
             </li>
             <li>
               <strong>Device Information:</strong> We gather device-specific
-              information (e.g., device type, IP address, browser type) in case of
-              errors while using our application to correct and prevent them in
-              the future.
+              information (e.g., device type, IP address, browser type) in case
+              of errors while using our application to correct and prevent them
+              in the future.
             </li>
             <li>
               <strong>Log-in Information:</strong> We collect your crypto wallet
@@ -100,45 +101,47 @@ const PrivacyPolicy = () => {
               </ul>
             </li>
             <li>
-              <strong>Customer Support Inquiries:</strong> We process information
-              provided to our customer support team to resolve queries. This
-              information may include your country name, OS information, email
-              address, and crypto wallet address.
+              <strong>Customer Support Inquiries:</strong> We process
+              information provided to our customer support team to resolve
+              queries. This information may include your country name, OS
+              information, email address, and crypto wallet address.
             </li>
             <li>
               <strong>Communication Optimization Data:</strong> We use tools to
-              optimize our emailing campaigns. These tools may track actions such
-              as opening an email or unsubscribing from further communication. We
-              may also track the user device’s operating system and country to
-              optimize notifications and set the language automatically.
+              optimize our emailing campaigns. These tools may track actions
+              such as opening an email or unsubscribing from further
+              communication. We may also track the user device’s operating
+              system and country to optimize notifications and set the language
+              automatically.
             </li>
             <li>
-              <strong>Chatbot:</strong> If you contact us via our website chatbot,
-              we collect your device information and IP address.
+              <strong>Chatbot:</strong> If you contact us via our website
+              chatbot, we collect your device information and IP address.
             </li>
             <li>
-              <strong>Live Chat Bot:</strong> When you contact us via live chat on
-              Discord or Telegram, we process your contact information, device
-              information (OS and browser type), and IP address. This information
-              helps us determine the user’s country, prevent abuse, and process
-              queries faster.
+              <strong>Live Chat Bot:</strong> When you contact us via live chat
+              on Discord or Telegram, we process your contact information,
+              device information (OS and browser type), and IP address. This
+              information helps us determine the user’s country, prevent abuse,
+              and process queries faster.
             </li>
           </ul>
           <h3 className="font-semibold text-blue-500 mt-4 mb-2">
             2.4 Referrals Data
           </h3>
           <p className="mb-4">
-            <strong>Referral Program Participation:</strong> Participation in our
-            referral programs requires referrers to submit personal data (e.g.,
-            full name, email address, relationship with the referred party) about
-            themselves and the referred party. This data allows us to reach out to
-            the referred party and contact referrers regarding their participation
-            in the program and provision of rewards. Referrers must comply with
-            applicable privacy laws when disclosing third-party personal data to
-            Play2Earn, including informing third parties about the disclosure and
-            its purpose. Referred parties can unsubscribe from any future
-            communication at any time. If you believe your personal data has been
-            provided to us and you want it removed, please contact us at{" "}
+            <strong>Referral Program Participation:</strong> Participation in
+            our referral programs requires referrers to submit personal data
+            (e.g., full name, email address, relationship with the referred
+            party) about themselves and the referred party. This data allows us
+            to reach out to the referred party and contact referrers regarding
+            their participation in the program and provision of rewards.
+            Referrers must comply with applicable privacy laws when disclosing
+            third-party personal data to Play2Earn, including informing third
+            parties about the disclosure and its purpose. Referred parties can
+            unsubscribe from any future communication at any time. If you
+            believe your personal data has been provided to us and you want it
+            removed, please contact us at{" "}
             <a
               href="mailto:privacy@play2earn.io"
               className="text-blue-600 underline"
@@ -172,7 +175,8 @@ const PrivacyPolicy = () => {
             profiles on social networks (e.g., Facebook, Instagram, Twitter,
             LinkedIn, YouTube, Telegram, Discord), we may collect and process
             publicly accessible personal data (e.g., full name, social network
-            profile name, pictures, and public comments) you voluntarily provide.
+            profile name, pictures, and public comments) you voluntarily
+            provide.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -194,8 +198,8 @@ const PrivacyPolicy = () => {
             <li>Live Chat and Support Service Platform</li>
             <li>Emailing Service Providers</li>
             <li>
-              Marketing, Application Analytics, and Diagnostics: Google Analytics,
-              Firebase Analytics (provided by Google)
+              Marketing, Application Analytics, and Diagnostics: Google
+              Analytics, Firebase Analytics (provided by Google)
             </li>
             <li>Browser Push Notifications System</li>
           </ul>
@@ -204,13 +208,13 @@ const PrivacyPolicy = () => {
           </h3>
           <ul className="list-disc list-inside ml-4 mb-4">
             <li>
-              <strong>Partners:</strong> Where necessary to provide our services,
-              such as completing a task within our application.
+              <strong>Partners:</strong> Where necessary to provide our
+              services, such as completing a task within our application.
             </li>
             <li>
               <strong>Legal Compliance:</strong> To competent authorities when
-              required by law, court order, or to enforce any of our rights under
-              an agreement or otherwise protect our rights.
+              required by law, court order, or to enforce any of our rights
+              under an agreement or otherwise protect our rights.
             </li>
             <li>
               <strong>Your Authorization:</strong> When we receive your prior
@@ -221,13 +225,14 @@ const PrivacyPolicy = () => {
             3.3 Advertising Partners
           </h3>
           <p className="mb-4">
-            We may share your personal data with third-party advertising partners
-            to provide you with personalized advertisements. These partners may
-            use cookies, web beacons, and similar technologies to collect
-            information about your activities on our website and other sites to
-            provide you with targeted advertising based on your interests. The
-            data shared with these partners is limited to the information
-            necessary to serve personalized ads and measure their effectiveness.
+            We may share your personal data with third-party advertising
+            partners to provide you with personalized advertisements. These
+            partners may use cookies, web beacons, and similar technologies to
+            collect information about your activities on our website and other
+            sites to provide you with targeted advertising based on your
+            interests. The data shared with these partners is limited to the
+            information necessary to serve personalized ads and measure their
+            effectiveness.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -240,21 +245,22 @@ const PrivacyPolicy = () => {
             data to:
             <ul className="list-disc list-inside ml-4 mb-4">
               <li>
-                <strong>Fulfill Purposes:</strong> Carry out the specific purposes
-                for which the data was collected, such as providing our services,
-                processing transactions, or improving our platform.
+                <strong>Fulfill Purposes:</strong> Carry out the specific
+                purposes for which the data was collected, such as providing our
+                services, processing transactions, or improving our platform.
               </li>
               <li>
-                <strong>Compliance with Legal Obligations:</strong> Meet any legal
-                or regulatory requirements, including those related to data
-                retention under applicable laws.
+                <strong>Compliance with Legal Obligations:</strong> Meet any
+                legal or regulatory requirements, including those related to
+                data retention under applicable laws.
               </li>
             </ul>
             We will not retain your personal data for longer than necessary or
-            beyond the timeframes specified by relevant laws and regulations. Once
-            the retention period expires or the data is no longer needed, we will
-            securely delete or anonymize your personal data in accordance with our
-            data retention policies and industry best practices.
+            beyond the timeframes specified by relevant laws and regulations.
+            Once the retention period expires or the data is no longer needed,
+            we will securely delete or anonymize your personal data in
+            accordance with our data retention policies and industry best
+            practices.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -262,7 +268,8 @@ const PrivacyPolicy = () => {
           </h2>
           <p className="mb-4">
             You have several important rights concerning your personal data that
-            we collect and process. You may exercise any of the following rights:
+            we collect and process. You may exercise any of the following
+            rights:
             <ul className="list-disc list-inside ml-4 mb-4">
               <li>
                 <strong>Access:</strong> You have the right to request a copy of
@@ -276,8 +283,8 @@ const PrivacyPolicy = () => {
               <li>
                 <strong>Delete:</strong> You have the right to request the
                 deletion of your personal data. We will delete your data when it
-                is no longer necessary for the purposes for which it was collected
-                or if you withdraw your consent where applicable.
+                is no longer necessary for the purposes for which it was
+                collected or if you withdraw your consent where applicable.
               </li>
               <li>
                 <strong>Information:</strong> You have the right to be informed
@@ -292,13 +299,14 @@ const PrivacyPolicy = () => {
               </li>
               <li>
                 <strong>Object to Processing:</strong> You have the right to
-                object to the processing of your personal data based on legitimate
-                interests, unless we can demonstrate compelling legitimate grounds
-                for processing or if it is necessary for legal claims.
+                object to the processing of your personal data based on
+                legitimate interests, unless we can demonstrate compelling
+                legitimate grounds for processing or if it is necessary for
+                legal claims.
               </li>
               <li>
-                <strong>Lodge a Complaint:</strong> You have the right to lodge a
-                complaint with a supervisory authority if you believe your
+                <strong>Lodge a Complaint:</strong> You have the right to lodge
+                a complaint with a supervisory authority if you believe your
                 personal data is being processed in a manner that infringes upon
                 your rights and interests.
               </li>
@@ -309,9 +317,10 @@ const PrivacyPolicy = () => {
                 processing based on consent before its withdrawal.
               </li>
               <li>
-                <strong>Opt-Out:</strong> To unsubscribe from our communications,
-                you can opt out at any time by clicking the “unsubscribe” link in
-                any of our emails or by contacting us directly at{" "}
+                <strong>Opt-Out:</strong> To unsubscribe from our
+                communications, you can opt out at any time by clicking the
+                “unsubscribe” link in any of our emails or by contacting us
+                directly at{" "}
                 <a
                   href="mailto:privacy@play2earn.io"
                   className="text-blue-600 underline"
@@ -339,9 +348,10 @@ const PrivacyPolicy = () => {
                 our security measures to address new threats.
               </li>
               <li>
-                <strong>Restricted Access:</strong> Only authorized employees and
-                partners who need access to your data to provide our services are
-                allowed to do so, under strict confidentiality agreements.
+                <strong>Restricted Access:</strong> Only authorized employees
+                and partners who need access to your data to provide our
+                services are allowed to do so, under strict confidentiality
+                agreements.
               </li>
             </ul>
           </p>
@@ -363,12 +373,13 @@ const PrivacyPolicy = () => {
               <li>
                 <strong>Limited Responsibility:</strong> Play2Earn is not
                 responsible for how your information is handled by these third
-                parties. Your use of their applications or surveys is at your own
-                risk.
+                parties. Your use of their applications or surveys is at your
+                own risk.
               </li>
             </ul>
-            We recommend reviewing the privacy policies and security practices of
-            any third-party applications or surveys before engaging with them.
+            We recommend reviewing the privacy policies and security practices
+            of any third-party applications or surveys before engaging with
+            them.
           </p>
 
           <h2 className="text-2xl font-semibold text-blue-600 mt-6 mb-4">
@@ -376,10 +387,10 @@ const PrivacyPolicy = () => {
           </h2>
           <p className="mb-4">
             Play2Earn does not knowingly collect or store personal information
-            from individuals under the age that requires parental consent for data
-            processing. If you are a parent or guardian and believe that your
-            child has provided us with personal data, please contact us. If we
-            discover that we have inadvertently collected personal data from
+            from individuals under the age that requires parental consent for
+            data processing. If you are a parent or guardian and believe that
+            your child has provided us with personal data, please contact us. If
+            we discover that we have inadvertently collected personal data from
             children without proper consent, we will take immediate action to
             remove that information from our records.
           </p>
