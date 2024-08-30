@@ -16,6 +16,8 @@ import AdminDashboard from "./components/Admin-dash/AdminDashboard";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
+import ImageCaption from './components/ImageCaption/imagecaption'
+import Test from './components/ImageCaption/test'
 
 const App = () => {
   return (
@@ -28,6 +30,9 @@ const App = () => {
           <Route path="/earn" element={<Earn />} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/Wordify" element={<Wordify />} />
+          <Route path="/imagecaption" element={<ImageCaption />} />  
+          {/* <Route path="/game" element={<Game />} />   */}
+          <Route path="/test" element={<Test />} />  
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           {/* Add other routes here */}
