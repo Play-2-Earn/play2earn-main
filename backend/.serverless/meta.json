@@ -193,7 +193,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -349,7 +349,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1725021503440": {
+                  "ApiGatewayDeployment1725032956428": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -545,7 +545,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -7334,7 +7334,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -7490,7 +7490,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1725021503440": {
+                  "ApiGatewayDeployment1725032956428": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -7686,7 +7686,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -14477,7 +14477,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z/app.zip"
+                  "S3Key": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z/app.zip"
                 },
                 "Handler": "handler.handler",
                 "Runtime": "nodejs18.x",
@@ -14633,7 +14633,7 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1725021503440": {
+            "ApiGatewayDeployment1725032956428": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -14829,7 +14829,7 @@
         "patterns": [
           "!node_modules/**"
         ],
-        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725021519840-2024-08-30T12:38:39.840Z"
+        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z"
       },
       "plugins": [
         "serverless-dotenv-plugin",
@@ -21426,10 +21426,7 @@
       "deploy"
     ],
     "options": {},
-    "error": {
-      "message": "AWS credentials missing or invalid. Original error from AWS: Could not load credentials from any providers",
-      "code": "AWS_CREDENTIALS_MISSING"
-    },
+    "error": null,
     "params": {},
     "machineId": "9f57cdf8fd25d9bbd6b2887cfcdbd7db",
     "accessKeyV2": "<REDACTED>",
@@ -21458,13 +21455,34 @@
     "userName": "play2earn",
     "subscription": null,
     "userEmail": "p2etokens@gmail.com",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "311141544549",
     "projectType": "framework",
     "versionSf": "4.2.4",
     "serviceProviderAwsCfStackName": "serverless-aws-api-dev",
-    "serviceProviderAwsCfStackId": null,
-    "serviceProviderAwsCfStackCreated": null,
-    "serviceProviderAwsCfStackUpdated": null,
-    "serviceProviderAwsCfStackStatus": null,
-    "serviceProviderAwsCfStackOutputs": null
+    "integrations": {},
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:311141544549:stack/serverless-aws-api-dev/38f2a8d0-63a7-11ef-b26d-0a458e817779",
+    "serviceProviderAwsCfStackCreated": "2024-08-26T12:32:13.858Z",
+    "serviceProviderAwsCfStackUpdated": "2024-08-30T15:49:55.943Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "AppLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:311141544549:function:serverless-aws-api-dev-app:8",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-serverless-aws-api-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-aws-api-dev-serverlessdeploymentbucket-fsif1bn8kc1a",
+        "ExportName": "sls-serverless-aws-api-dev-ServerlessDeploymentBucketName"
+      }
+    ]
   }
 }
