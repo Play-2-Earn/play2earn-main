@@ -169,6 +169,9 @@ const Earn = () => {
     if (task.category === "Wordify") {
       navigate("/Wordify");
     }
+    if (task.category === "Follow Task") {
+    }
+        navigate("/FollowTask");
     setSelectedTask(null);
   };
 

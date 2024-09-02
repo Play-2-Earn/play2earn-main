@@ -16,6 +16,7 @@ import AdminDashboard from "./components/Admin-dash/AdminDashboard";
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
+import FollowTask from "./components/FollowTask";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/Wordify" element={<Wordify />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/FollowTask" element={<FollowTask />} /> 
           {/* Add other routes here */}
 
           {/* foorter routes */}
