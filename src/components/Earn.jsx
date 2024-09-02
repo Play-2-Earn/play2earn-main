@@ -169,6 +169,9 @@ const Earn = () => {
     if (task.category === "Wordify") {
       navigate("/Wordify");
     }
+    if (task.category === "Image Caption") {
+      navigate("/imagecaption");
+    }
     setSelectedTask(null);
   };
 
@@ -181,6 +184,7 @@ const Earn = () => {
     "Follow task",
     "Text Tagging ",
     "Image captcha task",
+    "Image caption",
     "Translation challenge",
     "Wordify",
   ];
