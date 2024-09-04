@@ -1,12 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-const taskRoutes = require('./routes/taskRoutes');
-const adminRoutes = require('./routes/adminRoutes'); 
-const userRoutes = require('./routes/userRoutes'); 
-const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const userRoutes = require("./routes/userRoutes");
+const followTaskRouter = require("./routes/FollowTaskRouter");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 
@@ -17,21 +18,23 @@ server.use(cors());
 server.use(express.json());
 
 // Routes
-server.use('/api/auth', authRoutes);
-server.use('/api/tasks', taskRoutes);
-server.use('/api/admin', adminRoutes);
-server.use('/api/users', userRoutes); 
+server.use("/api/auth", authRoutes);
+server.use("/api/tasks", taskRoutes);
+server.use("/api/admin", adminRoutes);
+server.use("/api/users", userRoutes);
+server.use("/api/follow-task", followTaskRouter);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true, 
-})
-.then(() => {
-    console.log('Connected to MongoDB');
-})
-.catch(err => {
-    console.error('Error connecting to MongoDB', err);
-});
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB", err);
+  });
 
 // Server setup
 const PORT = process.env.PORT || 5002;

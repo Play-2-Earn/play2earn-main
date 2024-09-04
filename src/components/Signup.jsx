@@ -6,19 +6,23 @@ const SignUpPopup = ({ isOpen, onClose, innLogInlink }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [refBy, setRef_num] = useState("");
   // const navigate = useNavigate()
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const API_BASE_URL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:5002"
-        : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/users/sign_up`, {
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5002"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+      const apiUrl = `${API_BASE_URL}`;
+
+      const response = await axios.post(`${apiUrl}/api/users/sign_up`, {
         firstName,
         lastName,
         email,
@@ -115,6 +119,29 @@ const SignUpPopup = ({ isOpen, onClose, innLogInlink }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              style={{
+                width: "calc(100% - 0.5rem)",
+                backgroundColor: "#d5dbdb30",
+                borderBottom: "1px solid rgba(193, 199, 205, 1)",
+              }}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-black text-sm font mb-2"
+              htmlFor="email"
+            >
+              Username
+            </label>
+            <input
+              placeholder="example@gmail.com"
+              id="usernme"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
               style={{

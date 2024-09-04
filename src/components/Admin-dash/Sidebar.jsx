@@ -39,7 +39,7 @@ const Sidebar = React.forwardRef(
               User Management
             </button>
           </li>
-          <li className={currentPage === "task-transactions" ? "active" : ""}>
+          {/*<li className={currentPage === "task-transactions" ? "active" : ""}>
             <button
               onClick={() => {
                 setCurrentPage("task-transactions");
@@ -48,7 +48,7 @@ const Sidebar = React.forwardRef(
             >
               Task Transactions
             </button>
-          </li>
+          </li>*/}
         </ul>
       </nav>
     );

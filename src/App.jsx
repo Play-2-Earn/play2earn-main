@@ -33,17 +33,42 @@ const App = () => {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           {/* Add other routes here */}
+import FollowTask from "./components/FollowTask/FollowTask";
+import AudioTranscription from "./components/Audios/AudioTranscription";
+import { AuthProvider } from "./components/globalStateForAuth";
 
-          {/* foorter routes */}
-          <Route path="/about" element={<About />} />
-          <Route path="/help-and-support" element={<HelpAndSupport />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsAndConditions />} />
-        </Routes>
-        <Chatbox />
-        <ScrollToTop />
-      </div>
-    </Router>
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/referrals" element={<ReferralsPage />} />
+            <Route path="/earn" element={<Earn />} />
+            <Route path="/survey" element={<Survey />} />
+            <Route path="/Wordify" element={<Wordify />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
+            <Route path="/FollowTask" element={<FollowTask />} />
+            <Route
+              path="/AudioTranscription"
+              element={<AudioTranscription />}
+            />
+            {/* Add other routes here */}
+
+            {/* foorter routes */}
+            <Route path="/about" element={<About />} />
+            <Route path="/help-and-support" element={<HelpAndSupport />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
+          </Routes>
+          {/*<Chatbox />*/}
+          <ScrollToTop />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 

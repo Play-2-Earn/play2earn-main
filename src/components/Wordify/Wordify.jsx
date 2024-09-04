@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../css/Wordify.css";
 import jsonData from "./Wordify_words.json"; // Adjust the path as necessary
+import { Helmet } from "react-helmet";
 import {
   FaLock,
   FaUnlock,
@@ -360,205 +361,211 @@ function Wordify() {
   };
 
   return (
-    <div className="wordify-app">
-      {!hasStarted && !onLevelsPage && !onEndPage && (
-        <>
-          <header className="wordify-app-header">
-            <h1>Wordify - Word Creation Game</h1>
-          </header>
-          <div className="wordify-content"></div>
-          <div className="ai-words-container">
-            <h2>AI Generated Words:</h2>
-            <ul>
-              {aiWords.map((word, index) => (
-                <li key={index}>{word}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="wordify-info">
-            <h2 className="wordify-title">
-              AI-Powered Word Creation and Matching Game
-            </h2>
-            <p>
-              Welcome to the AI-Powered Word Creation and Matching Game! In this
-              game, you'll harness the power of artificial intelligence to
-              create and match words. It's a fun and educational way to enhance
-              your vocabulary and cognitive abilities.
-            </p>
-            <h3 className="wordify-obj">Objective: </h3>
-            <p>
-              The goal is to create as many words as possible using the given
-              letters within a time limit. Match the words with the AI-generated
-              words to earn points. Challenge yourself and see how many words
-              you can create and match!
-            </p>
-          </div>
-          <div className="wordify-start-container">
-            <button className="wordify-start-button" onClick={goToLevelsPage}>
-              START
-            </button>
-          </div>
-        </>
-      )}
-      {onEndPage ? (
-        <>
-          <header className="wordify-app-header">
-            <h1>Wordify - Word Creation Game</h1>
-          </header>
-          <div>
-            <h2 className="wordify-end-header">Game Completed!</h2>
-            <p className="wordify-end-para">You completed all the levels. </p>
+    <>
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
+
+      <div className="wordify-app">
+        {!hasStarted && !onLevelsPage && !onEndPage && (
+          <>
+            <header
+              className="wordify-app-header"
+              style={{ fontFamily: "Press Start 2P" }}
+            >
+              <h1>Wordify - Word Creation Game</h1>
+            </header>
+            <div className="wordify-content"></div>
+
+            <div className="wordify-info">
+              <h2 className="wordify-title">
+                AI-Powered Word Creation and Matching Game
+              </h2>
+              <p>
+                Welcome to the AI-Powered Word Creation and Matching Game! In
+                this game, you'll harness the power of artificial intelligence
+                to create and match words. It's a fun and educational way to
+                enhance your vocabulary and cognitive abilities.
+              </p>
+              <h3 className="wordify-obj">Objective: </h3>
+              <p>
+                The goal is to create as many words as possible using the given
+                letters within a time limit. Match the words with the
+                AI-generated words to earn points. Challenge yourself and see
+                how many words you can create and match!
+              </p>
+            </div>
+            <div className="wordify-start-container">
+              <button className="wordify-start-button" onClick={goToLevelsPage}>
+                START
+              </button>
+            </div>
+          </>
+        )}
+        {onEndPage ? (
+          <>
+            <header className="wordify-app-header">
+              <h1>Wordify - Word Creation Game</h1>
+            </header>
             <div>
-              <h2>Your total points: {totalPoints}</h2>
-            </div>
-            <div className="wordify-winner">
-              <FaTrophy />
-            </div>
-            <Confetti width={dimensions.width} height={dimensions.height} />
-            <ShareAchievement
-              totalPoints={totalPoints}
-              currentLevel={currentLevel}
-            />
-          </div>
-        </>
-      ) : (
-        <>
-          {onLevelsPage && renderLevelsPage()}
-          {hasStarted && (
-            <>
-              <div className="wordify-button-container">
-                <button className="wordify-exit-button" onClick={handleExit}>
-                  <FaTimes />
-                </button>
-                <button
-                  className="wordify-back-button"
-                  onClick={handleSaveAndExit}
-                >
-                  <FaArrowLeft />
-                </button>
+              <h2 className="wordify-end-header">Game Completed!</h2>
+              <p className="wordify-end-para">You completed all the levels. </p>
+              <div>
+                <h2>Your total points: {totalPoints}</h2>
               </div>
-              <header className="wordify-app-header">
-                <h1>Wordify - Word Creation Game</h1>
-              </header>
-              <div className="wordify-main">
-                <div className="wordify-hourglass"></div>
-                <div className="wordify-timer-container">
-                  <h4 className="wordify-timerheader">
-                    Time Remaining: {Math.floor(timeRemaining / 60)}:
-                    {String(timeRemaining % 60).padStart(2, "0")}
-                  </h4>
-                </div>
-                <h4>Points: {points}</h4>
-                <h2>
-                  <span>Level {currentLevel}</span>
-                </h2>
-                <span> {getLevelText()}</span>
-                <div className="wordify-letter-container">
-                  {randomLetters.map((letter, index) => (
-                    <div
-                      key={index}
-                      className={`wordify-letter ${
-                        index <= currentLetterIndex
-                          ? "wordify-visible"
-                          : "wordify-hidden"
-                      }`}
-                    >
-                      {letter}
-                    </div>
-                  ))}
-                </div>
-                <div className="wordify-input-container">
-                  <input
-                    type="text"
-                    value={inputWord}
-                    onChange={handleInputChange}
-                    placeholder="Enter your word here..."
-                    disabled={timerExpired}
-                  />
+              <div className="wordify-winner">
+                <FaTrophy />
+              </div>
+              <Confetti width={dimensions.width} height={dimensions.height} />
+              <ShareAchievement
+                totalPoints={totalPoints}
+                currentLevel={currentLevel}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            {onLevelsPage && renderLevelsPage()}
+            {hasStarted && (
+              <>
+                <div className="wordify-button-container">
+                  <button className="wordify-exit-button" onClick={handleExit}>
+                    <FaTimes />
+                  </button>
                   <button
-                    className="wordify-submit-button"
-                    onClick={handleSubmit}
-                    disabled={timerExpired}
+                    className="wordify-back-button"
+                    onClick={handleSaveAndExit}
                   >
-                    <FaArrowRight size={24} color="white" />
+                    <FaArrowLeft />
                   </button>
                 </div>
-                <div className="wordify-parent-container">
-                  <div>
-                    <h3>Your Words</h3>
-                    <div className="wordify-words-container">
-                      <div className="wordify-words-list">
-                        {userWords.map((word, index) => (
-                          <div key={index}>{word}</div>
-                        ))}
-                      </div>
-                    </div>
+                <header className="wordify-app-header">
+                  <h1>Wordify - Word Creation Game</h1>
+                </header>
+                <div className="wordify-main">
+                  <div className="wordify-hourglass"></div>
+                  <div className="wordify-timer-container">
+                    <h4 className="wordify-timerheader">
+                      Time Remaining: {Math.floor(timeRemaining / 60)}:
+                      {String(timeRemaining % 60).padStart(2, "0")}
+                    </h4>
                   </div>
-                  {timerExpired && (
+                  <h4>Points: {points}</h4>
+                  <h2>
+                    <span>Level {currentLevel}</span>
+                  </h2>
+                  <span> {getLevelText()}</span>
+                  <div className="wordify-letter-container">
+                    {randomLetters.map((letter, index) => (
+                      <div
+                        key={index}
+                        className={`wordify-letter ${
+                          index <= currentLetterIndex
+                            ? "wordify-visible"
+                            : "wordify-hidden"
+                        }`}
+                      >
+                        {letter}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="wordify-input-container">
+                    <input
+                      type="text"
+                      value={inputWord}
+                      onChange={handleInputChange}
+                      placeholder="Enter your word here..."
+                      disabled={timerExpired}
+                    />
+                    <button
+                      className="wordify-submit-button"
+                      onClick={handleSubmit}
+                      disabled={timerExpired}
+                    >
+                      <FaArrowRight size={24} color="white" />
+                    </button>
+                  </div>
+                  <div className="wordify-parent-container">
                     <div>
-                      <h3>AI-Generated Words</h3>
+                      <h3>Your Words</h3>
                       <div className="wordify-words-container">
                         <div className="wordify-words-list">
-                          {aiWords.map((word, index) => (
+                          {userWords.map((word, index) => (
                             <div key={index}>{word}</div>
                           ))}
                         </div>
                       </div>
-                      {currentLevel < 10 && (
-                        <>
-                          <button
-                            onClick={handleNextLevel}
-                            className="wordify-next-button"
-                          >
-                            Next <FaArrowRight size={16} />
-                          </button>
-                          <button
-                            onClick={handleSaveAndExit}
-                            className="wordify-next-button"
-                          >
-                            Save and Exit
-                          </button>
-                        </>
-                      )}
-                      {currentLevel === 10 && (
-                        <button
-                          onClick={() => setOnEndPage(true)}
-                          className="wordify-finish-button"
-                        >
-                          Finish
-                        </button>
-                      )}
                     </div>
-                  )}
+                    {timerExpired && (
+                      <div>
+                        <h3>AI-Generated Words</h3>
+                        <div className="wordify-words-container">
+                          <div className="wordify-words-list">
+                            {aiWords.map((word, index) => (
+                              <div key={index}>{word}</div>
+                            ))}
+                          </div>
+                        </div>
+                        {currentLevel < 10 && (
+                          <>
+                            <button
+                              onClick={handleNextLevel}
+                              className="wordify-next-button"
+                            >
+                              Next
+                              <FaArrowRight size={14} />
+                            </button>
+                            <button
+                              onClick={handleSaveAndExit}
+                              className="wordify-next-button"
+                            >
+                              Save and Exit
+                            </button>
+                          </>
+                        )}
+                        {currentLevel === 10 && (
+                          <button
+                            onClick={() => setOnEndPage(true)}
+                            className="wordify-finish-button"
+                          >
+                            Finish
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
-        </>
-      )}
-      {showSaveExitPopup && (
-        <div className="wordify-popup-overlay">
-          <div className="wordify-popup">
-            <h3>Game Saved!</h3>
-            <p>You will start at the current level when you return.</p>
-            <ShareAchievement
-              totalPoints={totalPoints}
-              currentLevel={currentLevel}
-            />
-            <button
-              onClick={() => {
-                setShowSaveExitPopup(false);
-                setHasStarted(false);
-                setOnLevelsPage(true);
-              }}
-              className="wordify-popup-close"
-            >
-              Close
-            </button>
+              </>
+            )}
+          </>
+        )}
+        {showSaveExitPopup && (
+          <div className="wordify-popup-overlay">
+            <div className="wordify-popup">
+              <h3>Game Saved!</h3>
+              <p>You will start at the current level when you return.</p>
+              <ShareAchievement
+                totalPoints={totalPoints}
+                currentLevel={currentLevel}
+              />
+              <button
+                onClick={() => {
+                  setShowSaveExitPopup(false);
+                  setHasStarted(false);
+                  setOnLevelsPage(true);
+                }}
+                className="wordify-popup-close"
+              >
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthProvider } from "./globalStateForAuth";
 
 const LoginPopup = ({
   isOpen,
   onClose,
   innSignUpLink,
   innForgetPasswordLink,
+  userLoginStatusDone,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,23 +17,28 @@ const LoginPopup = ({
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const API_BASE_URL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:5002"
-        : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev"; // Replace with your production URL
-
     const endpoint =
       role === "Admin" ? "/api/admin/log_in" : "/api/users/log_in";
-
     try {
-      const response = await axios.post(`${API_BASE_URL}${endpoint}`, {
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5002"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+      const apiUrl = `${API_BASE_URL}${endpoint}`;
+
+      const response = await axios.post(apiUrl, {
         email,
         password,
       });
+
       console.log(response.data);
-      if (response.data.message === "success") {
-        // Redirect based on role
-        if (role === "Admin") {
+      if (response.data === "success") {
+        if (role === "User") {
+          userLoginStatusDone();
+          onClose();
+          alert("Welcome to play2earn");
+        } else if (role === "Admin") {
           navigate("/dashboard");
         }
       } else {

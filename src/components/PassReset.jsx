@@ -9,24 +9,27 @@ const PasswordReset = ({ isOpen, onClose }) => {
 
   const handlePassReset = async (e) => {
     e.preventDefault();
-    const API_BASE_URL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:5002"
-        : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/users/passwordSet`,
-        { otp, newPassword }
-      );
+      const API_BASE_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5002"
+          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+      const apiUrl = `${API_BASE_URL}`;
+
+      const response = await axios.post(`${apiUrl}/api/users/passwordSet`, {
+        otp,
+        newPassword,
+      });
       console.log("response", response.data);
-      if (response.data === "correct") {
+      console.log(response.data);
+      if (response.data == "correct") {
         alert("The password has changed!");
       } else {
-        alert("The OTP is incorrect! Try again");
+        alert("The otp is incorrect! Try again");
       }
     } catch (error) {
-      console.error("Error resetting password:", error);
+      console.error(error);
     }
     onClose();
   };
