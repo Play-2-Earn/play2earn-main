@@ -57,7 +57,7 @@ function AdminDashboard() {
   }, [sidebarOpen]);
 
   return (
-    <div className={`dashboard ${sidebarOpen ? "sidebar-open" : ""}`}>
+    <div className={`dashboard flex flex-col md:flex-row h-screen ${sidebarOpen ? "sidebar-open" : ""}`}>
       <TopBar
         adminAccount={adminAccount}
         setIsEditingAdminAccount={setIsEditingAdminAccount}
@@ -65,15 +65,16 @@ function AdminDashboard() {
         handleLogout={handleLogout}
         toggleSidebar={toggleSidebar}
       />
-      <div className="dashboard-content">
+      <div className="flex flex-col md:flex-row flex-grow">
         <Sidebar
           setCurrentPage={setCurrentPage}
           isOpen={sidebarOpen}
           toggleSidebar={toggleSidebar}
           currentPage={currentPage}
           ref={sidebarRef}
+          className="w-full md:w-1/4 lg:w-1/5 bg-gray-800"
         />
-        <main className={`admin-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+        <main className={`admin-content flex-grow p-4 ${sidebarOpen ? "sidebar-open" : ""}`}>
           {currentPage === "analytics" && <Analytics />}
           {currentPage === "task-management" && <TaskManagement />}
           {currentPage === "user-management" && <UserManagement />}
