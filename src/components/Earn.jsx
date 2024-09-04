@@ -165,15 +165,27 @@ const Earn = () => {
   };
 
   const handleTaskAccept = (task) => {
-    if (task.category === "Survey") {
+    if (task.category === "Survey") 
+      {
       navigate("/survey");
-    } else if (task.category === "Wordify") {
+      } 
+    else if (task.category === "Wordify") 
+    {
       navigate("/Wordify");
-    } else if (task.category === "Follow Task") {
+    } 
+    else if (task.category === "Follow Task") 
+    {
       navigate("/FollowTask");
-    } else if (task.category === "Audio Transcription") {
+    } 
+    else if (task.category === "Audio Transcription")
+    {
       navigate("/AudioTranscription");
     }
+    else if (task.category === "Translation Challenge")
+    {
+      navigate("/translation");
+    }
+      
     setSelectedTask(null);
   };
 
@@ -206,9 +218,8 @@ const Earn = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                className={`category-btn ${
-                  selectedCategory === category ? "active" : ""
-                }`}
+                className={`category-btn ${selectedCategory === category ? "active" : ""
+                  }`}
                 onClick={() => handleCategoryChange(category)}
               >
                 {category}
