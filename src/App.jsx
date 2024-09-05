@@ -19,7 +19,7 @@ import FollowTask from "./components/FollowTask/FollowTask";
 import AudioTranscription from "./components/Audios/AudioTranscription";
 import Translation from './components/Translation/translation'
 import ImageCaption from './components/ImageCaption/imagecaption'
-import Captcha from './components/Captcha/Captcha'
+import Captcha from './components/captcha/Captcha'
 import { AuthProvider } from "./components/globalStateForAuth";
 
 const App = () => {
