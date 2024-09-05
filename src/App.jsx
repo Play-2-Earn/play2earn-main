@@ -19,6 +19,7 @@ import FollowTask from "./components/FollowTask/FollowTask";
 import AudioTranscription from "./components/Audios/AudioTranscription";
 import Translation from './components/Translation/translation'
 import ImageCaption from './components/ImageCaption/imagecaption'
+import Captcha from './components/Captcha/Captcha'
 import { AuthProvider } from "./components/globalStateForAuth";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/survey" element={<Survey />} />
             <Route path="/translation" element={<Translation />} />
             <Route path="/imagecaption" element={<ImageCaption />} />
+            <Route path="/captcha" element={<Captcha />} />
             <Route path="/Wordify" element={<Wordify />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
