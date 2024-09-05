@@ -105,34 +105,34 @@ const PopupComponent = ({ level, type, setTotalScore, completedLevels, setComple
 
   const audioCaptchas = {
     level1: [
-      { audioSrc: 'src/components/Captcha/audioAssets/jeep (2).mp3', answer: 'jeep' },
+      { audioSrc: 'src/components/captcha/audioAssets/jeep (2).mp3', answer: 'jeep' },
     ],
     level2: [
-      { audioSrc: 'src/components/Captcha/audioAssets/perfect (2).mp3', answer: 'perfect' },
+      { audioSrc: 'src/components/captcha/audioAssets/perfect (2).mp3', answer: 'perfect' },
     ],
     level3: [
-      { audioSrc: 'src/components/Captcha/audioAssets/flower (2).mp3', answer: 'flower' },
+      { audioSrc: 'src/components/captcha/audioAssets/flower (2).mp3', answer: 'flower' },
          ],
     level4: [
-      { audioSrc: 'src/components/Captcha/audioAssets/cup of tea.mp3', answer: 'cup of tea' },
+      { audioSrc: 'src/components/captcha/audioAssets/cup of tea.mp3', answer: 'cup of tea' },
          ],
     level5: [
-      { audioSrc: 'src/components/Captcha/audioAssets/this is a car.mp3', answer: 'this is a car' },
+      { audioSrc: 'src/components/captcha/audioAssets/this is a car.mp3', answer: 'this is a car' },
       ],
     level6: [
-      { audioSrc: 'src/components/Captcha/audioAssets/i love swimming  .mp3', answer: 'i love swimming' },
+      { audioSrc: 'src/components/captcha/audioAssets/i love swimming  .mp3', answer: 'i love swimming' },
    ],
     level7: [
-      { audioSrc: 'src/components/Captcha/audioAssets/the quiet library wa.mp3', answer: 'the quiet library was filled with the faint rustling of pages as students immersed themselves in their studies.' },
+      { audioSrc: 'src/components/captcha/audioAssets/the quiet library wa.mp3', answer: 'the quiet library was filled with the faint rustling of pages as students immersed themselves in their studies.' },
           ],
     level8: [
-      { audioSrc: 'src/components/Captcha/audioAssets/as the first snowfla.mp3', answer: 'as the first snowflakes of winter fell children eagerly rushed outside to build snowmen' },
+      { audioSrc: 'src/components/captcha/audioAssets/as the first snowfla.mp3', answer: 'as the first snowflakes of winter fell children eagerly rushed outside to build snowmen' },
           ],
     level9: [
-         { audioSrc: 'src/components/Captcha/audioAssets/the aroma of freshly.mp3', answer: 'the aroma of freshly brewed coffee filled the cafe creating a cozy atmosphere' },
+         { audioSrc: 'src/components/captcha/audioAssets/the aroma of freshly.mp3', answer: 'the aroma of freshly brewed coffee filled the cafe creating a cozy atmosphere' },
         ],
     level10: [
-           { audioSrc: 'src/components/Captcha/audioAssets/the old tree in the .mp3', answer: 'the old tree in the park had witnessed countless seasons standing as a silent guardian over the years' },
+           { audioSrc: 'src/components/captcha/audioAssets/the old tree in the .mp3', answer: 'the old tree in the park had witnessed countless seasons standing as a silent guardian over the years' },
          ],
 
 
@@ -434,8 +434,8 @@ const PopupComponent = ({ level, type, setTotalScore, completedLevels, setComple
   
   const captchaImages = {
     Text: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Message-icon-blue-symbol-double.png', // Replace with actual image URL
-    Audio: 'src/components/Captcha/assets/audio.png', // Replace with actual image URL
-    Image: 'src/components/Captcha/assets/image.png' // Example image URL for Image CAPTCHA
+    Audio: 'src/components/captcha/assets/audio.png', // Replace with actual image URL
+    Image: 'src/components/captcha/assets/image.png' // Example image URL for Image CAPTCHA
   };
   
   return (
