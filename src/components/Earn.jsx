@@ -193,6 +193,10 @@ const Earn = () => {
     {
       navigate("/captcha");
     }
+    else if (task.category === "Text tagging")
+    {
+      navigate("/texttagging");
+    }
       
     setSelectedTask(null);
   };
@@ -203,7 +207,7 @@ const Earn = () => {
     "CAPTCHA",
     "Audio Transcription",
     "Follow task",
-    "Text Tagging ",
+    "Text Tagging",
     "Image captcha task",
     "Image caption",
     "Translation challenge",

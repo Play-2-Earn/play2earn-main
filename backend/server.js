@@ -5,6 +5,7 @@ const taskRoutes = require('./routes/taskRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoutes');
 const followTaskRouter = require('./routes/FollowTaskRouter');
+const textTagRoutes = require('./routes/TextTagRouter');
 
 require('dotenv').config();
 const express = require('express');
@@ -25,6 +26,7 @@ server.use('/api/tasks', taskRoutes);
 server.use('/api/admin', adminRoutes);
 server.use('/api/users', userRoutes);
 server.use('/api/follow-task', followTaskRouter);
+server.use('/api/texttag', textTagRoutes);
 
 
 // Function to generate a paragraph
