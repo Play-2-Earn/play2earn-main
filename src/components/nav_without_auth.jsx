@@ -6,6 +6,7 @@ import "./css/without_auth.css";
 // the component will be included in the drop down menu
 import ConnectWalletButton from "./ConnectWalletButton";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const WithoutAuth = ({ userLogOut }) => {
   const handleLogout = async (e) => {
@@ -55,7 +56,7 @@ const WithoutAuth = ({ userLogOut }) => {
                 {" "}
                 <ConnectWalletButton />
               </li>
-              <li className="dropitms"> Userdashbord</li>
+              <li className="dropitms"> <Link to="/userdash" >Userdashbord</Link></li>
               <li className="dropitms" onClick={() => handleLogout()}>
                 Logout
               </li>

@@ -19,6 +19,7 @@ import Wordify from "./components/Wordify/Wordify";
 import FollowTask from "./components/FollowTask/FollowTask";
 import AudioTranscription from "./components/Audios/AudioTranscription";
 import { AuthProvider } from "./components/globalStateForAuth";
+import UserDash from "./components/user_dash/userdash";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
               path="/AudioTranscription"
               element={<AudioTranscription />}
             />
+            <Route path="/userdash" element={<UserDash />} />
             {/* Add other routes here */}
 
             {/* foorter routes */}
