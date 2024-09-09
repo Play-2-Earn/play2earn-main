@@ -76,13 +76,14 @@ const About = () => {
       <div className="container text-gray-800 mt-4">
         <Heading title="About Us" />
         <p className="text-gray-800 mb-14 text-justify">
-          At Play2earn, we are dedicated to transforming the micro-engagement
-          landscape through our extensive expertise and broad user base. Our
-          goal is to build a dynamic, decentralized network where people from
-          around the world, regardless of their crypto knowledge, can engage in
-          meaningful interactions to support business growth. We aspire to
-          create a globally connected community, where every interaction fuels
-          the expansion of a thriving digital economy.
+        Play2Earn.ai is a next-generation platform that enables users 
+        to participate in fun, interactive games while earning PlayCredits, 
+        a unique in-game currency that holds real-world value. 
+        By integrating artificial intelligence into the gaming experience, 
+        we allow players to perform tasks that feed valuable data into AI models. 
+        This symbiotic relationship between players and AI enables businesses, researchers, and AI developers 
+        to access high-quality data and insights from real-world interactions,
+        all while rewarding players for their contributions.
         </p>
 
         <div className="relative bg-white">
@@ -98,14 +99,12 @@ const About = () => {
             <div className="relative z-1 max-w-[17rem] ml-auto">
               <h4 className="h4 mb-4 text-gray-800 text-2xl">Our Mission</h4>
               <p className="body-2 text-gray-800 ">
-                At Play2Earn.ai, our mission is to create a platform where
-                gaming and AI development work hand in hand, rewarding players
-                for their time, skill, and contributions to AI advancements.
-                We’re building an ecosystem where gameplay fuels AI evolution,
-                ensuring that everyone benefits from the intersection of play
-                and purpose. Through this innovative approach, we’re empowering
-                players to actively shape the future of technology while earning
-                rewards in a mutually beneficial environment.
+              At Play2Earn.ai, we are pioneering a new frontier where gaming meets the world of artificial intelligence, 
+              creating an ecosystem that rewards players for their engagement
+              while providing invaluable data and insights to AI-driven industries. 
+              Our platform bridges the gap between entertainment and economics 
+              by offering players the opportunity to earn real rewards through their gameplay, 
+              while simultaneously contributing to the development and optimization of cutting-edge AI models.
               </p>
             </div>
           </div>
@@ -133,14 +132,12 @@ const About = () => {
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <h4 className="h4 mb-4 text-gray-800 text-2xl">Our Vision</h4>
                   <p className="body-2 text-gray-800 text-justify">
-                    At Play2Earn.ai, we envision a world where gaming goes
-                    beyond entertainment to become a catalyst for technological
-                    advancement and personal growth. Our goal is to make gaming
-                    a meaningful experience that contributes to AI and digital
-                    innovation while providing real-world rewards. By blending
-                    immersive gameplay with cutting-edge technology, we aim to
-                    build a global community that shapes the future of
-                    technology and fosters collaboration through play.
+                  We envision a future where games are not only entertaining 
+                  but also serve as valuable tools for AI development. 
+                  Play2Earn.ai is transforming the play-to-earn gaming model 
+                  by aligning the interests of gamers, businesses, and AI developers. 
+                  We aim to create an ecosystem where every action a player takes 
+                  within the game contributes to the broader goal of advancing AI technology.
                   </p>
                 </div>
               </div>
