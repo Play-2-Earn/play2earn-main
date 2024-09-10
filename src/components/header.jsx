@@ -125,10 +125,12 @@ const Header = () => {
                 closeDropdownMenu={closDropdownMenuLink}
               />
             ) : (
+              <div className="w-full flex justify-center md:w-auto md:justify-end"> 
               <WithAuth
                 handleLoginClick={handleLoginClick}
                 handleSignUpClick={handleSignUpClick}
               />
+            </div>
             )}
           </nav>
         </div>

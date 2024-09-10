@@ -379,7 +379,8 @@ const Home = () => {
             Trusted by Brands You Know
           </h3>
 
-          
+
+        
           {/*fixed bug for icons*/}
           <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8 justify-items-center">
             {partnerLogos.map((logo, index) => (
