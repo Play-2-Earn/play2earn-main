@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// App.jsx
-=======
->>>>>>> 1270daa (cv + recent  games integration)
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
@@ -21,8 +17,6 @@ import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
 import FollowTask from "./components/FollowTask/FollowTask";
 import AudioTranscription from "./components/Audios/AudioTranscription";
-<<<<<<< HEAD
-=======
 import Translation from './components/Translation/translation'
 import ImageCaption from './components/ImageCaption/imagecaption'
 import Captcha from './components/captcha/Captcha'
@@ -31,7 +25,6 @@ import CVUploadingPage from "./components/CvAnalysis/CVUploadingPage";
 import ProjectDescriptionForm from "./components/CvAnalysis/ProjectDescriptionFrom";
 import TalentsFound from "./components/CvAnalysis/TalentsFound/TalentsFound";
 import CVLandingPage from "./components/CvAnalysis/LandingPage/LandingPage";
->>>>>>> 1270daa (cv + recent  games integration)
 import { AuthProvider } from "./components/globalStateForAuth";
 
 const App = () => {
@@ -45,13 +38,10 @@ const App = () => {
             <Route path="/referrals" element={<ReferralsPage />} />
             <Route path="/earn" element={<Earn />} />
             <Route path="/survey" element={<Survey />} />
-<<<<<<< HEAD
-=======
             <Route path="/translation" element={<Translation />} />
             <Route path="/imagecaption" element={<ImageCaption />} />
             <Route path="/captcha" element={<Captcha />} />
             <Route path="/texttagging" element={<TextTagging />} />
->>>>>>> 1270daa (cv + recent  games integration)
             <Route path="/Wordify" element={<Wordify />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
@@ -60,8 +50,6 @@ const App = () => {
               path="/AudioTranscription"
               element={<AudioTranscription />}
             />
-<<<<<<< HEAD
-=======
 
 <Route path="/cv-home" element={<CVLandingPage />} />
             <Route
@@ -76,7 +64,6 @@ const App = () => {
               path="/talents-found"
               element={<TalentsFound />}
             />
->>>>>>> 1270daa (cv + recent  games integration)
             {/* Add other routes here */}
 
             {/* foorter routes */}
