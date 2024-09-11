@@ -11,6 +11,7 @@ const DropdownAfterAuth = ({ isOpen, onClose }) => {
     <>
       <DropdownButton className="dropdown" title="User">
         <ConnectWalletButton />
+        
         <Dropdown.Item className="dropdown-item" href="#/action-1">
           User Dashboard
         </Dropdown.Item>

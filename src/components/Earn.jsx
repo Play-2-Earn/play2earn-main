@@ -165,6 +165,7 @@ const Earn = () => {
   };
 
   const handleTaskAccept = (task) => {
+<<<<<<< HEAD
     if (task.category === "Survey") {
       navigate("/survey");
     } else if (task.category === "Wordify") {
@@ -174,6 +175,41 @@ const Earn = () => {
     } else if (task.category === "Audio Transcription") {
       navigate("/AudioTranscription");
     }
+=======
+    if (task.category === "Survey") 
+      {
+      navigate("/survey");
+      } 
+    else if (task.category === "Wordify") 
+    {
+      navigate("/Wordify");
+    } 
+    else if (task.category === "Follow Task") 
+    {
+      navigate("/FollowTask");
+    } 
+    else if (task.category === "Audio Transcription")
+    {
+      navigate("/AudioTranscription");
+    }
+    else if (task.category === "Translation Challenge")
+    {
+      navigate("/translation");
+    }
+    else if (task.category === "Image Caption")
+    {
+      navigate("/imagecaption");
+    }
+    else if (task.category === "Image Captcha Task")
+    {
+      navigate("/captcha");
+    }
+    else if (task.category === "Text tagging")
+    {
+      navigate("/texttagging");
+    }
+      
+>>>>>>> 1270daa (cv + recent  games integration)
     setSelectedTask(null);
   };
 
@@ -183,8 +219,14 @@ const Earn = () => {
     "CAPTCHA",
     "Audio Transcription",
     "Follow task",
+<<<<<<< HEAD
     "Text Tagging ",
     "Image captcha ",
+=======
+    "Text Tagging",
+    "Image captcha task",
+    "Image caption",
+>>>>>>> 1270daa (cv + recent  games integration)
     "Translation challenge",
     "Wordify",
   ];
@@ -206,9 +248,14 @@ const Earn = () => {
             {categories.map((category) => (
               <button
                 key={category}
+<<<<<<< HEAD
                 className={`category-btn ${
                   selectedCategory === category ? "active" : ""
                 }`}
+=======
+                className={`category-btn ${selectedCategory === category ? "active" : ""
+                  }`}
+>>>>>>> 1270daa (cv + recent  games integration)
                 onClick={() => handleCategoryChange(category)}
               >
                 {category}
