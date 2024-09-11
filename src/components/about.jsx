@@ -144,7 +144,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="relative z-1 grid gap-4 lg:grid-cols-2">
+          <div className="relative z-1 grid gap-4 lg:grid-cols-2 margin-top: -4rem">
             <div className="relative min-h-[39rem] border border-n-1/10 rounded-3xl overflow-hidden bg-sky-300">
               <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-b from-sky-200 to-sky-300 lg:p-15">
                 <h4 className="h4 mb-4 text-gray-800 text-2xl">
