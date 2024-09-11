@@ -1,0 +1,280 @@
+body {
+  background-image: url("https://img.freepik.com/free-vector/modern-business-background-with-digital-technology-design_1361-3299.jpg?semt=ais_hybrid");
+  
+  background-size: cover;
+  background-position: center;
+  font-family:Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+h1 
+{ 
+  color: #000000;
+}
+p { 
+  color: #000000;
+
+  font-size: larger;
+
+}
+
+.captcha-container {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 20px;
+  padding: 50px;
+  border-radius: 10px;
+  align-self: center;
+  color: #fefdfd;
+  
+}
+
+h1 {
+  color: #fefdfd;
+
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 100px 60px;
+  font-size:larger;
+  font-weight: bold;
+  background-color:#C2E6F7; /* Changed to light blue */
+  color: #615d5d;
+  border: none;
+  cursor: pointer;
+  margin-right: 1cm;
+  align-items: center;
+  border-radius: 25px;
+
+}
+
+
+/* General button styling for 3D effect */
+.level-button1, .level-button2, .level-button3, .level-button4, .level-button5, .level-button6, .level-button7, .level-button8, .level-button9, .level-button10 {
+  padding: 10px 40px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: larger;
+  margin: 10px; /* Space around buttons */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 3D shadow effect */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+}
+
+/* Button colors */
+.level-button1, .level-button2, .level-button3 {
+  background-color: #80C9FF;
+}
+
+.level-button4, .level-button5, .level-button6 {
+  background-color: #0073E6;
+}
+
+.level-button7, .level-button8, .level-button9 {
+  background-color: #004494;
+}
+
+.level-button10 {
+  background-color: #004494;
+  padding: 10px 36px; /* Slightly different padding for level 10 */
+}
+
+/* Hover effect for 3D look */
+.level-button1:hover, .level-button2:hover, .level-button3:hover, 
+.level-button4:hover, .level-button5:hover, .level-button6:hover, 
+.level-button7:hover, .level-button8:hover, .level-button9:hover, 
+.level-button10:hover {
+  transform: translateY(-4px); /* Lift effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Button container styling */
+.level-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center align buttons */
+  gap: 10px; /* Space between buttons */
+}
+
+/* Button row styling */
+.level-button-row {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Full width for rows */
+}
+
+/* Level 10 button centering */
+.level-button-row.level-4 {
+  justify-content: center; /* Center the level 10 button */
+}
+
+/* Layout */
+.level-button-container {
+  margin: 0 auto;
+  max-width: 600px; /* Adjust width to fit content */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .level-button1, .level-button2, .level-button3, .level-button4, .level-button5, .level-button6, .level-button7, .level-button8, .level-button9, .level-button10 {
+    padding: 8px 20px;
+    font-size: medium;
+  }
+}
+
+.completed-level {
+  background-color: green;
+  color: white;
+}
+
+
+
+.submit-button, .back-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin above submit and back buttons */
+  margin-right: 10px; /* Add margin between buttons */
+}
+
+.close-modal {
+color: #000000;
+  background-color: white;
+}
+
+.modal {
+  background: rgba(173, 216, 230, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.download-button:hover {
+  background-color: #0056b3; /* Darker shade of primary color on hover */
+  border-color: #0056b3;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+text-align: center;
+
+}
+
+.content {
+  text-align: center;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+}
+
+.captcha-image {
+  width: 100px; /* Set the width to 10px */
+  height: 100px; /* Automatically adjust height to maintain aspect ratio */
+  max-width: 100%; /* Ensure the image does not exceed its container width */
+  max-height: 100%; /* Ensure the image does not exceed its container height */
+}
+
+.feedback-message {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #B0E0E6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  background-color: #008CBA; /* Changed to light blue */
+  height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  color: rgb(15, 46, 108);
+  font-weight: bold;
+  transition: width 0.5s ease;
+}
+
+.final-score {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.final-progress-bar {
+  background-color: #008CBA; /* Changed to light blue */
+  height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  transition: width 0.5s ease;
+}
+
+.submit-button:hover,
+.back-button:hover,
+.button:hover,
+.level-button:hover {
+  opacity: 0.8;
+}
+.learn-button {
+    display: inline-block;
+    padding: 15px 30px; /* Makes the button bigger */
+    background-color: #add8e6; /* Light blue color */
+    color: #ffffff; /* White text color */
+    font-size: 16px; /* Adjust the font size */
+    text-align: center;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: all 0.3s ease; /* Smooth transition for effects */
+    cursor: pointer;
+    margin: 20px auto; /* Center the button */
+    display: block;
+}
+
+.learn-button:hover {
+    background-color: #87ceeb; /* Slightly darker blue on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.learn-button:active {
+    background-color: #6495ed; /* Even darker blue on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+    transform: translateY(1px); /* Slight press effect on click */
+}
+.text-display {
+    display: none; /* Hide text by default */
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+}
+React Component
+.button img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  margin-right: 8px; /* Space between image and text */
+}
