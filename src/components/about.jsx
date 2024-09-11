@@ -111,7 +111,7 @@ const About = () => {
 
           {/* what we do and Vision Section */}
           <div className="relative bg-white mb-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="relative border border-n-1/10 rounded-3xl p-8 bg-sky-100">
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <h4 className="h4 mb-4 text-gray-800 text-2xl">What we do</h4>
