@@ -107,6 +107,25 @@ function Survey() {
     toast.success(`Shared achievement on ${socialPlatform}!`);
   };
 
+  useEffect(() => {
+    // 使用 useEffect 在组件加载时修改样式
+    const updateStyles = () => {
+      const description = document.querySelector('.ff-description');
+      if (description) {
+        description.style.fontSize = '16px';
+        description.style.color = '#333';
+      }
+    };
+
+    // 绑定 load 事件
+    window.addEventListener('load', updateStyles);
+
+    // 清理副作用
+    return () => {
+      window.removeEventListener('load', updateStyles);
+    };
+  }, []); // 空依赖数组表示只在组件挂载时运行一次
+
   return (
     <div className="survey">
       <ToastContainer />

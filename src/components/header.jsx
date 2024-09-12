@@ -108,7 +108,7 @@ const Header = () => {
             >
               Earn
             </Link>
-            <Link to="#" className="text-white hover:text-blue-200 mx-2 my-1">
+            <Link to="/leaderboard" className="text-white hover:text-blue-200 mx-2 my-1">
               Leaderboard
             </Link>
             <Link
