@@ -1,21 +1,19 @@
 body {
-  background-image: url("https://img.freepik.com/free-vector/modern-business-background-with-digital-technology-design_1361-3299.jpg?semt=ais_hybrid");
-  
+  background-image: url("");
+
   background-size: cover;
   background-position: center;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: black;
 }
 
-h1 
-{ 
+h1 {
   color: #000000;
 }
-p { 
+p {
   color: #000000;
 
   font-size: larger;
-
 }
 
 .captcha-container {
@@ -27,7 +25,6 @@ p {
   border-radius: 10px;
   align-self: center;
   color: #fefdfd;
-  
 }
 
 h1 {
@@ -39,21 +36,28 @@ h1 {
 
 .button {
   padding: 100px 60px;
-  font-size:larger;
+  font-size: larger;
   font-weight: bold;
-  background-color:#C2E6F7; /* Changed to light blue */
+  background-color: #c2e6f7; /* Changed to light blue */
   color: #615d5d;
   border: none;
   cursor: pointer;
   margin-right: 1cm;
   align-items: center;
   border-radius: 25px;
-
 }
 
-
 /* General button styling for 3D effect */
-.level-button1, .level-button2, .level-button3, .level-button4, .level-button5, .level-button6, .level-button7, .level-button8, .level-button9, .level-button10 {
+.level-button1,
+.level-button2,
+.level-button3,
+.level-button4,
+.level-button5,
+.level-button6,
+.level-button7,
+.level-button8,
+.level-button9,
+.level-button10 {
   padding: 10px 40px;
   color: white;
   border: none;
@@ -66,15 +70,21 @@ h1 {
 }
 
 /* Button colors */
-.level-button1, .level-button2, .level-button3 {
-  background-color: #80C9FF;
+.level-button1,
+.level-button2,
+.level-button3 {
+  background-color: #80c9ff;
 }
 
-.level-button4, .level-button5, .level-button6 {
-  background-color: #0073E6;
+.level-button4,
+.level-button5,
+.level-button6 {
+  background-color: #0073e6;
 }
 
-.level-button7, .level-button8, .level-button9 {
+.level-button7,
+.level-button8,
+.level-button9 {
   background-color: #004494;
 }
 
@@ -84,9 +94,15 @@ h1 {
 }
 
 /* Hover effect for 3D look */
-.level-button1:hover, .level-button2:hover, .level-button3:hover, 
-.level-button4:hover, .level-button5:hover, .level-button6:hover, 
-.level-button7:hover, .level-button8:hover, .level-button9:hover, 
+.level-button1:hover,
+.level-button2:hover,
+.level-button3:hover,
+.level-button4:hover,
+.level-button5:hover,
+.level-button6:hover,
+.level-button7:hover,
+.level-button8:hover,
+.level-button9:hover,
 .level-button10:hover {
   transform: translateY(-4px); /* Lift effect */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
@@ -120,7 +136,16 @@ h1 {
 
 /* Media query for responsiveness */
 @media (max-width: 600px) {
-  .level-button1, .level-button2, .level-button3, .level-button4, .level-button5, .level-button6, .level-button7, .level-button8, .level-button9, .level-button10 {
+  .level-button1,
+  .level-button2,
+  .level-button3,
+  .level-button4,
+  .level-button5,
+  .level-button6,
+  .level-button7,
+  .level-button8,
+  .level-button9,
+  .level-button10 {
     padding: 8px 20px;
     font-size: medium;
   }
@@ -131,9 +156,8 @@ h1 {
   color: white;
 }
 
-
-
-.submit-button, .back-button {
+.submit-button,
+.back-button {
   padding: 10px 20px;
   background-color: #f44336;
   color: white;
@@ -144,7 +168,7 @@ h1 {
 }
 
 .close-modal {
-color: #000000;
+  color: #000000;
   background-color: white;
 }
 
@@ -153,7 +177,6 @@ color: #000000;
   padding: 20px;
   border-radius: 10px;
 }
-
 
 .download-button:hover {
   background-color: #0056b3; /* Darker shade of primary color on hover */
@@ -164,8 +187,7 @@ color: #000000;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-text-align: center;
-
+  text-align: center;
 }
 
 .content {
@@ -202,13 +224,13 @@ text-align: center;
 
 .progress-bar-container {
   width: 100%;
-  background-color: #B0E0E6;
+  background-color: #b0e0e6;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
 .progress-bar {
-  background-color: #008CBA; /* Changed to light blue */
+  background-color: #008cba; /* Changed to light blue */
   height: 20px;
   border-radius: 5px;
   text-align: center;
@@ -223,7 +245,7 @@ text-align: center;
 }
 
 .final-progress-bar {
-  background-color: #008CBA; /* Changed to light blue */
+  background-color: #008cba; /* Changed to light blue */
   height: 20px;
   border-radius: 5px;
   text-align: center;
@@ -239,41 +261,40 @@ text-align: center;
   opacity: 0.8;
 }
 .learn-button {
-    display: inline-block;
-    padding: 15px 30px; /* Makes the button bigger */
-    background-color: #add8e6; /* Light blue color */
-    color: #ffffff; /* White text color */
-    font-size: 16px; /* Adjust the font size */
-    text-align: center;
-    border: none;
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-    transition: all 0.3s ease; /* Smooth transition for effects */
-    cursor: pointer;
-    margin: 20px auto; /* Center the button */
-    display: block;
+  display: inline-block;
+  padding: 15px 30px; /* Makes the button bigger */
+  background-color: #add8e6; /* Light blue color */
+  color: #ffffff; /* White text color */
+  font-size: 16px; /* Adjust the font size */
+  text-align: center;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  transition: all 0.3s ease; /* Smooth transition for effects */
+  cursor: pointer;
+  margin: 20px auto; /* Center the button */
+  display: block;
 }
 
 .learn-button:hover {
-    background-color: #87ceeb; /* Slightly darker blue on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
-    transform: translateY(-2px); /* Slight lift effect on hover */
+  background-color: #87ceeb; /* Slightly darker blue on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .learn-button:active {
-    background-color: #6495ed; /* Even darker blue on click */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
-    transform: translateY(1px); /* Slight press effect on click */
+  background-color: #6495ed; /* Even darker blue on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on click */
+  transform: translateY(1px); /* Slight press effect on click */
 }
 .text-display {
-    display: none; /* Hide text by default */
-    margin-top: 20px;
-    font-size: 16px;
-    color: #ffffff;
-    text-align: center;
+  display: none; /* Hide text by default */
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
 }
-React Component
-.button img {
+React Component .button img {
   width: 24px; /* Adjust size as needed */
   height: 24px;
   margin-right: 8px; /* Space between image and text */

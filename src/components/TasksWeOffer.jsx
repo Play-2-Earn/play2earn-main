@@ -222,6 +222,8 @@ const TasksWeOffer = () => {
       navigate("/Wordify");
     } else if (task.category === "Audio Transcription") {
       navigate("/AudioTranscription");
+    } else if (task.category === "Translation Challenge") {
+      navigate("/translation");
     }
     setSelectedTask(null);
   };

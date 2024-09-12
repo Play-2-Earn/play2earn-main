@@ -1,10 +1,9 @@
 // TranslationTask.jsx
-import React, { useState, useEffect, useCallback } from 'react';
-import styled, { keyframes, css } from 'styled-components';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import React, { useState, useEffect, useCallback } from "react";
+import styled, { keyframes, css } from "styled-components";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Heart animation
 const heartBeat = keyframes`
@@ -70,17 +69,16 @@ const FrenchLabel = styled.span`
   color: #9c9cfe;
   text-shadow: 1px 1px 2px #000000, 0 0 25px #9c9cfe, 0 0 5px #9c9cfe;
   margin-right: 10px;
-  white-space: nowrap; 
+  white-space: nowrap;
 `;
 
 const FrenchText = styled.span`
   font-weight: bold;
   font-size: 2rem;
-  color: #E5B80B;
-  text-shadow: 1px 1px 2px #000000, 0 0 5px #E5B80B;
+  color: #e5b80b;
+  text-shadow: 1px 1px 2px #000000, 0 0 5px #e5b80b;
   white-space: pre-wrap;
   flex-shrink: 1;
-
 `;
 
 const TextArea = styled.textarea`
@@ -135,7 +133,7 @@ const StarContainer = styled.div`
 const Star = styled.span`
   font-size: 1.5rem;
   margin: 0 3px;
-  color: ${props => props.filled ? '#E5B80B' : '#555'}; 
+  color: ${(props) => (props.filled ? "#E5B80B" : "#555")};
   transition: color 0.3s ease;
 `;
 
@@ -158,11 +156,14 @@ const HeartContainer = styled.div`
 const Heart = styled.span`
   font-size: 2rem;
   margin: 0 5px;
-  color: ${props => props.filled ? 'red' : '#555'};
+  color: ${(props) => (props.filled ? "red" : "#555")};
   transition: color 0.3s ease, transform 0.3s ease;
-  ${props => props.filled && props.animate && css`
-    animation: ${heartBeat} 0.6s ease infinite;
-  `}
+  ${(props) =>
+    props.filled &&
+    props.animate &&
+    css`
+      animation: ${heartBeat} 0.6s ease infinite;
+    `}
   transform-origin: center;
 `;
 
@@ -175,45 +176,48 @@ const Timer = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: ${props => props.expired ? '#ff0000' : '#9c9cfe'};
-  animation: ${props => props.expired ? timerAnimation : 'none'} 1s infinite;
+  color: ${(props) => (props.expired ? "#ff0000" : "#9c9cfe")};
+  animation: ${(props) => (props.expired ? timerAnimation : "none")} 1s infinite;
 `;
 
 const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
-  const [frenchText, setFrenchText] = useState('');
-  const [aiTranslation, setAiTranslation] = useState('');
-  const [userTranslation, setUserTranslation] = useState('');
+  const [frenchText, setFrenchText] = useState("");
+  const [aiTranslation, setAiTranslation] = useState("");
+  const [userTranslation, setUserTranslation] = useState("");
   const [questionNumber, setQuestionNumber] = useState(0);
   const [levelCompleted, setLevelCompleted] = useState(false);
   const [hearts, setHearts] = useState(5);
   const [animateHeart, setAnimateHeart] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(180); 
+  const [timeLeft, setTimeLeft] = useState(180);
   const [timerExpired, setTimerExpired] = useState(false);
   const [starsEarned, setStarsEarned] = useState(stars);
-  
+
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:5002/generate_paragraph', {
-        params: { level, user_id: 'user123' }
+      const response = await axios.get(`${API_BASE_URL}/generate_paragraph`, {
+        params: { level, user_id: "user123" },
       });
       const data = response.data;
-  
+
       if (data.error) {
         toast.error(data.error);
         return;
       }
-  
+
       setFrenchText(data.french);
       setAiTranslation(data.english);
-      setUserTranslation('');
+      setUserTranslation("");
       setHearts(5);
     } catch (error) {
-      console.error('Error fetching data:', error);
-      toast.error('Error fetching data.');
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching data.");
     }
   }, [level]);
-  
 
   useEffect(() => {
     fetchData();
@@ -222,13 +226,13 @@ const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
   useEffect(() => {
     if (timeLeft === 0) {
       setTimerExpired(true);
-      setHearts(prevHearts => prevHearts - 1);
+      setHearts((prevHearts) => prevHearts - 1);
       if (hearts > 1) {
-        toast.error('Time is up! You lost a heart. Try again!');
+        toast.error("Time is up! You lost a heart. Try again!");
         setTimeLeft(180);
         fetchData();
       } else {
-        toast.error('No hearts left! Redirecting to level selection.');
+        toast.error("No hearts left! Redirecting to level selection.");
         setTimeout(() => {
           handleLevelCompletion(level, 0, starsEarned);
         }, 2000);
@@ -237,7 +241,7 @@ const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
     }
 
     const timerInterval = setInterval(() => {
-      setTimeLeft(prevTime => prevTime - 1);
+      setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
 
     return () => clearInterval(timerInterval);
@@ -245,37 +249,39 @@ const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
 
   const handleSubmit = async () => {
     if (hearts === 0) {
-      toast.error('No hearts left! Please wait for them to recharge.');
+      toast.error("No hearts left! Please wait for them to recharge.");
       return;
     }
-  
+
     try {
-      const response = await axios.post('http://localhost:5002/verify', {
+      const response = await axios.post(`${API_BASE_URL}/verify`, {
         user_translation: userTranslation.trim().toLowerCase(),
         correct_translation: aiTranslation.trim().toLowerCase(),
-        user_id: 'user123',
-        level
+        user_id: "user123",
+        level,
       });
       const data = response.data;
-  
+
       if (data.error) {
         toast.error(data.error);
         return;
       }
-  
+
       if (data.is_correct) {
-        setStarsEarned(prevStars => Math.min(prevStars + 1, 3));
-        toast.success('Correct! Great job!');
+        setStarsEarned((prevStars) => Math.min(prevStars + 1, 3));
+        toast.success("Correct! Great job!");
         if (questionNumber < 2) {
-          setQuestionNumber(prev => prev + 1);
+          setQuestionNumber((prev) => prev + 1);
           setTimeLeft(180);
           fetchData();
         } else {
           setLevelCompleted(true);
-          toast.success(`Great job! You completed level ${level} successfully!`);
+          toast.success(
+            `Great job! You completed level ${level} successfully!`
+          );
         }
       } else {
-        setHearts(prevHearts => {
+        setHearts((prevHearts) => {
           const newHearts = prevHearts - 1;
           if (newHearts >= 0) {
             setAnimateHeart(true);
@@ -283,30 +289,29 @@ const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
           }
           return newHearts;
         });
-        toast.error('Incorrect. You lost a heart!');
+        toast.error("Incorrect. You lost a heart!");
       }
     } catch (error) {
-      console.error('Error verifying translation:', error);
-      toast.error('An error occurred while verifying the translation.');
+      console.error("Error verifying translation:", error);
+      toast.error("An error occurred while verifying the translation.");
     }
   };
-  
 
-  
-  
   const handleNextLevel = () => {
-    handleLevelCompletion(level, 10, starsEarned); 
-    setLevelCompleted(false); 
-    setQuestionNumber(0); 
-    setTimeLeft(180); 
-    setTimerExpired(false); 
+    handleLevelCompletion(level, 10, starsEarned);
+    setLevelCompleted(false);
+    setQuestionNumber(0);
+    setTimeLeft(180);
+    setTimerExpired(false);
   };
-
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
+      2,
+      "0"
+    )}`;
   };
 
   return (
@@ -315,13 +320,19 @@ const TranslationTask = ({ level, handleLevelCompletion, stars }) => {
       <Timer expired={timerExpired}>{formatTime(timeLeft)}</Timer>
       <HeartContainer>
         {[...Array(5)].map((_, index) => (
-          <Heart key={index} filled={index < hearts} animate={animateHeart && index === hearts - 1}>
+          <Heart
+            key={index}
+            filled={index < hearts}
+            animate={animateHeart && index === hearts - 1}
+          >
             ♥
           </Heart>
         ))}
       </HeartContainer>
       <Paragraph>
-        <FrenchLabel><strong>French:</strong></FrenchLabel>
+        <FrenchLabel>
+          <strong>French:</strong>
+        </FrenchLabel>
         <FrenchText>{frenchText}</FrenchText>
       </Paragraph>
       <TextArea

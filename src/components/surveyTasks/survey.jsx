@@ -144,6 +144,7 @@ function Survey() {
               {showForm[index] && (
                 <div className="form-container">
                   <FormfacadeEmbed
+                    className="font-12"
                     formFacadeURL={task.formURL}
                     onSubmitForm={() => completeSurvey(index)}
                   />

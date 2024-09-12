@@ -94,9 +94,6 @@ const Header = () => {
               alt="Play2Earn Logo"
               className="h-12 w-12 md:h-16 md:w-16 mr-2"
             />
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
-              Play2Earn.ai
-            </h1>
           </div>
           <nav className="flex flex-wrap justify-center md:justify-end items-center">
             <Link to="/" className="text-white hover:text-blue-200 mx-2 my-1">

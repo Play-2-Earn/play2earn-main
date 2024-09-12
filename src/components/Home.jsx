@@ -188,10 +188,10 @@ const Home = () => {
                   style={{ backgroundImage: `url(${card.image})` }}
                 />
                 <div className="relative h-full flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-4 md:p-8">
-                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4 text-white">
                     {card.title}
                   </h2>
-                  <p className="text-base md:text-xl mb-4 md:mb-8">
+                  <p className="text-base md:text-xl mb-4 md:mb-8 text-white">
                     {card.description}
                   </p>
                   <Button

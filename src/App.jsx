@@ -17,10 +17,11 @@ import Survey from "./components/surveyTasks/survey";
 import Wordify from "./components/Wordify/Wordify";
 import FollowTask from "./components/FollowTask/FollowTask";
 import AudioTranscription from "./components/Audios/AudioTranscription";
-import Translation from './components/Translation/translation'
-import ImageCaption from './components/ImageCaption/imagecaption'
-import Captcha from './components/captcha/Captcha'
-import TextTagging from './components/TextTagging/TextTaggingGame'
+import Translation from "./components/Translation/translation";
+import ImageCaption from "./components/ImageCaption/imagecaption";
+import Captcha from "./components/captcha/Captcha";
+import TextTagging from "./components/TextTagging/TextTaggingGame";
+import Wizard from "./components/wizardTask/wordCountChallenge";
 import CVUploadingPage from "./components/CvAnalysis/CVUploadingPage";
 import ProjectDescriptionForm from "./components/CvAnalysis/ProjectDescriptionFrom";
 import TalentsFound from "./components/CvAnalysis/TalentsFound/TalentsFound";
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/captcha" element={<Captcha />} />
             <Route path="/texttagging" element={<TextTagging />} />
             <Route path="/Wordify" element={<Wordify />} />
+            <Route path="/wizard" element={<Wizard />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/FollowTask" element={<FollowTask />} />
@@ -51,19 +53,10 @@ const App = () => {
               element={<AudioTranscription />}
             />
 
-<Route path="/cv-home" element={<CVLandingPage />} />
-            <Route
-              path="/uploadCV"
-              element={<CVUploadingPage />}
-            />
-            <Route
-              path="/recruit"
-              element={<ProjectDescriptionForm />}
-            />
-            <Route
-              path="/talents-found"
-              element={<TalentsFound />}
-            />
+            <Route path="/cv-home" element={<CVLandingPage />} />
+            <Route path="/uploadCV" element={<CVUploadingPage />} />
+            <Route path="/recruit" element={<ProjectDescriptionForm />} />
+            <Route path="/talents-found" element={<TalentsFound />} />
             {/* Add other routes here */}
 
             {/* foorter routes */}
