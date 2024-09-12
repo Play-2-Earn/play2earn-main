@@ -11,10 +11,9 @@ const Leaderboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersData, setUsersData] = useState([]);
   const usersPerPage = 15;
-
   useEffect(() => {
     const fetchData = () => {
-      fetch("http://localhost:5001/api/leaderboard")
+      fetch("http://localhost:5002/api/leaderboard")
         .then((response) => response.json())
         .then((data) => setUsersData(data))
         .catch((error) => console.error("Error fetching data:", error));
@@ -22,7 +21,7 @@ const Leaderboard = () => {
 
     // Fetch data initially
     fetchData();
-
+    //  setUsersData(leaderboardData)
     // Set interval to fetch data periodically
     const intervalId = setInterval(fetchData, 30000); // Fetch data every 30 seconds
 

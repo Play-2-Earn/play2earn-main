@@ -8,6 +8,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes");
 const followTaskRouter = require("./routes/FollowTaskRouter");
 const bodyParser = require("body-parser");
+const leaderboardRouter=require("./routes/leaderboardRouter")
 
 dotenv.config();
 
@@ -23,10 +24,10 @@ server.use("/api/tasks", taskRoutes);
 server.use("/api/admin", adminRoutes);
 server.use("/api/users", userRoutes);
 server.use("/api/follow-task", followTaskRouter);
-
+server.use("/api/leaderboard", leaderboardRouter);
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect("mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
   })
   .then(() => {
