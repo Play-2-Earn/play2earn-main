@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     const rankedData = data.map((entry, index) => ({
       rank: index + 1,
       username: entry.username,
-      points: entry.total_rewards, // Map total_rewards to points
+      points: entry.total_rewards, 
     }));
 
     return res.json(rankedData);
