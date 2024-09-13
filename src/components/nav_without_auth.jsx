@@ -7,6 +7,7 @@ import "./css/without_auth.css";
 import ConnectWalletButton from "./ConnectWalletButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const WithoutAuth = ({ userLogOut }) => {
 
@@ -21,11 +22,14 @@ const WithoutAuth = ({ userLogOut }) => {
           ? "http://localhost:5002"
           : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
-      const apiUrl = `${API_BASE_URL}`;
+      const apiUrl = `${API_BASE_URL}/api/users/logout`;
 
-      const logoutReq = await axios.post(`${apiUrl}/api/users/logout`);
+      const logoutReq = await axios.post(`${apiUrl}`, {}, {
+        withCredentials: true,  // Ensure cookies are included in the request
+      });
+
       console.log(logoutReq.data);
-      if (logoutReq.data == "success") {
+      if (logoutReq.status == 200) {
         alert("You are successfully logged out");
         userLogOut();
       }
@@ -64,7 +68,7 @@ const WithoutAuth = ({ userLogOut }) => {
                 <ConnectWalletButton />
               </li>
               <li className="dropitms" onClick={() => handleProPlayerClick()}>Pro Player</li>
-              <li className="dropitms"> User dashboard</li>
+              <Link className="dropitms" to="/userdash" >Userdashbord</Link>
               <li className="dropitms" onClick={() => handleLogout()}>
                 Logout
               </li>

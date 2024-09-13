@@ -5,7 +5,10 @@ const nodemailer = require("nodemailer");
 const { request } = require("http");
 require("dotenv").config();
 const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+// const cookieParser = require('cookie-parser');
+
 
 const {
   getUserProfile,
@@ -77,28 +80,32 @@ router.post("/sign_up", (request, response) => {
 // jwt token generator for log in
 
 const tokenGenerator = (payload) => {
-  const key = process.env.JWT_SECRET || "PlayToEarn001122";
 
-  const options = {
-    algorithm: 'HS256', // Specify the algorithm here
-    expiresIn: '1h' // Token expiration
+  const exp = {
+    expiresIn: "1h",
   };
-  
 
-  const token = jwt.sign(payload, key, options);
+  const token = jwt.sign(payload, process.env.JWT_SECRET, exp);
   return token;
 };
+
+// router.use(cookieParser());
 
 router.post("/log_in", (request, response) => {
   const { email, password } = request.body;
   UserModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        const payload = { username: user.username };
+        const payload = { id: UserModel.username };
         const uniqueToken = tokenGenerator(payload);
-        user.token = uniqueToken;
-        user.save();
-        response.json({ token: uniqueToken, message: "success" });
+
+        response.cookie('token', uniqueToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+        })
+        response.json({ message: 'success' });
+
       } else {
         response.json("The credentials are incorrect");
       }
@@ -172,10 +179,48 @@ router.post("/passwordSet", (request, response) => {
 
 // logout
 
-router.post("/logout", (request, response) => {
-  const key = UserModel.token;
-  UserModel.deleteOne(key);
-  response.json("success");
+router.post("/logout", (req, res) => {
+  try {
+    // Clear the token cookie by setting it to an empty value with an expired date
+    res.clearCookie('token', {
+      httpOnly: true,   // Make sure it's the same settings as when the cookie was set
+      secure: true,     // Secure flag (if using HTTPS)
+      sameSite: 'strict'// sameSite (must match the settings used when setting the cookie)
+    });
+
+    // Send a success response after clearing the cookie
+    res.status(200).json({ message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ message: 'Error during logout', error: error.message });
+  }
 });
+
+
+// for each referesh the token will gonna be checked
+
+
+router.get('/check', (req, res) => {
+  // console.log('Request received at /check');
+  // console.log('Cookies:', req.cookies);
+
+  const token = req.cookies.token;
+  try {
+
+    if (!token) {
+      return res.status(401).json({ message: 'No token, authentication failed' });
+    }
+
+    const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+    return res.status(200).json({ message: 'Authenticated', user: verifiedUser });
+  } catch (err) {
+    console.error('Server error:', err);
+    if (err instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ message: 'Invalid or expired token' });
+    }
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 module.exports = router;

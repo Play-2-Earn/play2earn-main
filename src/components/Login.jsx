@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "./globalStateForAuth";
+
 
 const LoginPopup = ({
   isOpen,
@@ -28,16 +28,18 @@ const LoginPopup = ({
       const apiUrl = `${API_BASE_URL}${endpoint}`;
 
       const response = await axios.post(apiUrl, {
-        email,
-        password,
+        email: email,
+        password: password,
+      }, {
+        withCredentials: true, 
       });
 
-      console.log(response.data, "ss", response.data.token);
+      console.log(response.data.message);
+      // console.log(token);
       if (response.data.message === "success") {
         if (role === "User") {
           userLoginStatusDone();
           onClose();
-          localStorage.setItem('access_token', response.data.token);
           alert("Welcome to play2earn");
         } else if (role === "Admin") {
           navigate("/dashboard");
@@ -150,11 +152,10 @@ const LoginPopup = ({
         <div className="flex justify-center mb-4">
           <button
             onClick={toggleRole}
-            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${
-              role === "Admin"
-                ? "bg-green-500 text-white"
-                : "bg-blue-500 text-white"
-            }`}
+            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${role === "Admin"
+              ? "bg-green-500 text-white"
+              : "bg-blue-500 text-white"
+              }`}
           >
             {role === "Admin" ? "Switch to User" : "Switch to Admin"}
           </button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useContext  } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Chatbox from "./components/Chatbot";
@@ -27,12 +27,58 @@ import ProjectDescriptionForm from "./components/CvAnalysis/ProjectDescriptionFr
 import TalentsFound from "./components/CvAnalysis/TalentsFound/TalentsFound";
 import CVLandingPage from "./components/CvAnalysis/LandingPage/LandingPage";
 import { AuthProvider } from "./components/globalStateForAuth";
+import UserDash from "./components/user_dash/userdash";
+import { AuthContext } from "./components/globalStateForAuth";
+import axios from "axios";
 
 const App = () => {
+  // mit prajapati 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { userLoginStatus, setUserLoginStatus } = useContext(AuthContext);
+  const userLoginStatusAppr = () => {
+    setUserLoginStatus(true);
+    console.log(userLoginStatus)
+  };
+
+  useEffect(() => {
+    // Check if the user is authenticated when the page loads
+    async function checkAuth() {
+      try {
+        const API_BASE_URL =
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:5002"  // Use backend API port in development
+            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+        const apiUrl = `${API_BASE_URL}/api/check`;
+
+        const response = await axios.get(apiUrl, {
+          withCredentials: true,  // This sends the cookies with the request
+        });
+
+        if (response.status === 200) {
+          console.log("yes");
+          console.log(response.data.message);  // e.g., 'Authenticated'
+          // User is authenticated
+          setIsAuthenticated(true);
+          userLoginStatusAppr()
+        } else {
+          console.log("no");
+          setIsAuthenticated(false);  // User is not authenticated
+        }
+      } catch (error) {
+        console.error('Error checking auth:', error);
+        setIsAuthenticated(false);  // Error, assume user is not authenticated
+      }
+    }
+
+    checkAuth();
+  }, []);
+
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <Router>
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+          {/* <div>{isAuthenticated ? "Authenticated" : "Not Authenticated"}</div> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -57,6 +103,7 @@ const App = () => {
             <Route path="/uploadCV" element={<CVUploadingPage />} />
             <Route path="/recruit" element={<ProjectDescriptionForm />} />
             <Route path="/talents-found" element={<TalentsFound />} />
+            <Route path="/userdash" element={<UserDash />} />
             {/* Add other routes here */}
 
             {/* foorter routes */}
@@ -69,7 +116,7 @@ const App = () => {
           <ScrollToTop />
         </div>
       </Router>
-    </AuthProvider>
+    // </AuthProvider>
   );
 };
 
