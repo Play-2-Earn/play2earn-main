@@ -1,6 +1,6 @@
 import numpy as np
 import nltk
-nltk.download('punkt') # Uncomment this for downloading punkt
+#nltk.download('punkt') # Uncomment this for downloading punkt
 from nltk.stem.porter import PorterStemmer
 stemmer = PorterStemmer()
 

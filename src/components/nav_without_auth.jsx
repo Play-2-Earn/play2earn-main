@@ -35,6 +35,7 @@ const WithoutAuth = ({ userLogOut }) => {
   };
 
   const handleProPlayerClick = () => {
+    console.log("clicked");
     navigate("/cv-home");
   };
 
@@ -57,7 +58,6 @@ const WithoutAuth = ({ userLogOut }) => {
         </button>
         {isItemsVisible ? (
           <>
-            {" "}
             <ul className="dropdu">
               <li className="dropwallet">
                 {" "}

@@ -8,6 +8,8 @@ from utils import process_cv_file, calculate_context_score, allowed_file, calcul
 from models import CVAnalysis, User
 from jwt import decode, ExpiredSignatureError, InvalidTokenError
 from dotenv import load_dotenv
+from CV_Analyze import analyze_cvs, scan_one_file
+
 load_dotenv()
 
 # Configure logging
@@ -207,37 +209,13 @@ def analyze_resumes():
     if not os.path.exists(upload_folder):
         logging.debug('No CVs found')
         return jsonify({"error": "No CVs found"}), 404
-    files = [f for f in os.listdir(upload_folder) if allowed_file(f, {'pdf', 'docx', 'doc'})]
     
-    scores = []
-
-    for file_name in files:
-        
-        file_path = os.path.join(upload_folder, file_name)
-        try:
-            _, text, name, designation, experience, education, skills = process_cv_file(file_path, file_name)
-
-            if name is None:
-                logging.warning(f"Skipping file due to extraction failure: {file_name}")
-                continue
-
-            # Calculate skill score
-            skill_score = calculate_skill_score(skills, sample_jd)
-
-            scores.append({
-                "file_name": file_name,
-                "context_score": skill_score * 100,  # Assuming composite score is the desired context score
-                "name": name,
-                "designation": designation,
-                "experience": experience,
-                "education": education,
-                "skills": skills
-            })
-        except Exception as e:
-            logging.error(f"Error processing file {file_name}: {e}")
-    logging.debug(scores)
-    # Sort by composite score in descending order and get top 5
-    top_scores = sorted(scores, key=lambda x: x['context_score'], reverse=True)[:5]
-
-    logging.debug('Returning top 5 CVs based on analysis')
-    return jsonify(top_scores), 200
+    # Calculate skill score
+    try:
+        result = analyze_cvs(sample_jd, upload_folder)
+        logging.debug(result)
+    except Exception as e:
+        logging.error(f"Error analyzing resumes: {e}")
+        return jsonify({"error": "Error analyzing resumes"}), 500
+    
+    return jsonify(result), 200

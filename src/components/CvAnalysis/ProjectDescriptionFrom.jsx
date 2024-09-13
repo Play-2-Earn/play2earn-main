@@ -6,13 +6,9 @@ const ProjectDescriptionForm = () => {
     goal: "",
     objectives: "",
     deliverables: "",
-    scope: "",
     requirements: "",
-    dependencies: "",
-    risks: "",
-    exclusions: "",
     skills: "",
-    timeline: "",
+    experience: "",
   });
   const navigate = useNavigate();
   const backendUrl = process.env.NODE_ENV === "development"
@@ -36,14 +32,12 @@ const ProjectDescriptionForm = () => {
       Goal: ${formData.goal}\n
       Objectives: ${formData.objectives}\n
       Deliverables: ${formData.deliverables}\n
-      Scope: ${formData.scope}\n
       Requirements: ${formData.requirements}\n
-      Dependencies: ${formData.dependencies}\n
-      Risks: ${formData.risks}\n
-      Exclusions: ${formData.exclusions}\n
       Skills: ${formData.skills}\n
-      Timeline: ${formData.timeline}
+      Experience: ${formData.experience}\n
     `;
+
+
 
     try {
       const token = localStorage.getItem('access_token');
@@ -110,7 +104,7 @@ const ProjectDescriptionForm = () => {
           <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 48%", marginBottom: "20px" }}>
               <div style={{ marginBottom: "20px",  paddingRight: "50px" }}>
-                <label>What is the main goal of the project?</label>
+                <label>What is the main goal of the role?</label>
                 <input
                   type="text"
                   name="goal"
@@ -140,16 +134,6 @@ const ProjectDescriptionForm = () => {
                 />
               </div>
               <div style={{ marginBottom: "20px", paddingRight: "50px"}}>
-                <label>What is the scope of the project?</label>
-                <input
-                  type="text"
-                  name="scope"
-                  value={formData.scope}
-                  onChange={handleChange}
-                  style={{ width: "100%" }}
-                />
-              </div>
-              <div style={{ marginBottom: "20px", paddingRight: "50px"}}>
                 <label>What are the requirements for the project?</label>
                 <input
                   type="text"
@@ -162,38 +146,9 @@ const ProjectDescriptionForm = () => {
             </div>
 
             <div style={{ flex: "1 1 48%", marginBottom: "20px"}}>
+
               <div style={{ marginBottom: "20px" }}>
-                <label>What are the dependencies?</label>
-                <input
-                  type="text"
-                  name="dependencies"
-                  value={formData.dependencies}
-                  onChange={handleChange}
-                  style={{ width: "100%" }}
-                />
-              </div>
-              <div style={{ marginBottom: "20px"}}>
-                <label>What are the risks?</label>
-                <input
-                  type="text"
-                  name="risks"
-                  value={formData.risks}
-                  onChange={handleChange}
-                  style={{ width: "100%" }}
-                />
-              </div>
-              <div style={{ marginBottom: "20px" }}>
-                <label>What should be excluded from the project?</label>
-                <input
-                  type="text"
-                  name="exclusions"
-                  value={formData.exclusions}
-                  onChange={handleChange}
-                  style={{ width: "100%" }}
-                />
-              </div>
-              <div style={{ marginBottom: "20px" }}>
-                <label>What skills and roles are needed?</label>
+                <label>What are the skills needed?</label>
                 <input
                   type="text"
                   name="skills"
@@ -203,11 +158,11 @@ const ProjectDescriptionForm = () => {
                 />
               </div>
               <div style={{ marginBottom: "20px" }}>
-                <label>What is the timeline and key milestones?</label>
+                <label>Required Experience</label>
                 <input
                   type="text"
-                  name="timeline"
-                  value={formData.timeline}
+                  name="experience"
+                  value={formData.experience}
                   onChange={handleChange}
                   style={{ width: "100%" }}
                 />
