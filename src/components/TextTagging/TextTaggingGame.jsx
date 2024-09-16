@@ -43,13 +43,12 @@ function TextTaggingGame() {
   const [savedLevel, setSavedLevel] = useState(1);
   const [completedLevels, setCompletedLevels] = useState([1]); // Initialize with level 1 completed
   const [gameCompleted, setGameCompleted] = useState(false);
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
   const fetchSentence = useCallback(async () => {
-    const API_BASE_URL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:5002"
-        : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
     setLoading(true);
     try {
       const response = await fetch(

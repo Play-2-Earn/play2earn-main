@@ -5,7 +5,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 const TaskCard = ({ task, onSelect }) => {
-  console.log("TaskCard Task:", task); // Log task details to verify
+  //console.log("TaskCard Task:", task); // Log task details to verify
   return (
     <div className="task-card" onClick={() => onSelect(task)}>
       <div className="task-card-content">
@@ -216,7 +216,7 @@ const Earn = () => {
         (selectedCategory === "All" || task.category === selectedCategory) &&
         task.category.toLowerCase().includes(searchLower)
     );
-    console.log("Filtered Tasks:", filtered); // Log filtered tasks to verify
+    //console.log("Filtered Tasks:", filtered); // Log filtered tasks to verify
     setFilteredTasks(filtered);
   }, [tasks, selectedCategory, searchTerm]);
 
@@ -260,7 +260,6 @@ const Earn = () => {
         navigate("/texttagging");
         break;
       default:
-        console.error("Unknown task category:", task.category);
         navigate("/default"); // Optional fallback route
         break;
     }
@@ -286,7 +285,7 @@ const Earn = () => {
     <>
       <Header />
       <div className="earn-container">
-        <h1>Task Marketplace</h1>
+        <h1>Game Marketplace</h1>
         <div className="search-filter-container">
           <input
             type="text"

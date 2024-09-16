@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext  } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Chatbox from "./components/Chatbot";
@@ -32,12 +32,12 @@ import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
 
 const App = () => {
-  // mit prajapati 
+  // mit prajapati
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { userLoginStatus, setUserLoginStatus } = useContext(AuthContext);
   const userLoginStatusAppr = () => {
     setUserLoginStatus(true);
-    console.log(userLoginStatus)
+    console.log(userLoginStatus);
   };
 
   useEffect(() => {
@@ -46,28 +46,35 @@ const App = () => {
       try {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
-            ? "http://localhost:5002"  // Use backend API port in development
+            ? "http://localhost:5002" // Use backend API port in development
             : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}/api/check`;
 
         const response = await axios.get(apiUrl, {
-          withCredentials: true,  // This sends the cookies with the request
+          withCredentials: true, // Include credentials like cookies
+          headers: {
+            "Content-Type": "application/json", // Set appropriate headers
+            "Access-Control-Allow-Origin":
+              process.env.NODE_ENV === "development"
+                ? "http://localhost:3000" // Development frontend origin
+                : "https://dev.d3sxwpggtsq5rq.amplifyapp.com", // Production frontend origin
+          },
         });
 
         if (response.status === 200) {
           console.log("yes");
-          console.log(response.data.message);  // e.g., 'Authenticated'
+          console.log(response.data.message); // e.g., 'Authenticated'
           // User is authenticated
           setIsAuthenticated(true);
-          userLoginStatusAppr()
+          userLoginStatusAppr();
         } else {
           console.log("no");
-          setIsAuthenticated(false);  // User is not authenticated
+          setIsAuthenticated(false); // User is not authenticated
         }
       } catch (error) {
-        console.error('Error checking auth:', error);
-        setIsAuthenticated(false);  // Error, assume user is not authenticated
+        console.error("Error checking auth:", error);
+        setIsAuthenticated(false); // Error, assume user is not authenticated
       }
     }
 
@@ -76,46 +83,43 @@ const App = () => {
 
   return (
     // <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-          {/* <div>{isAuthenticated ? "Authenticated" : "Not Authenticated"}</div> */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/referrals" element={<ReferralsPage />} />
-            <Route path="/earn" element={<Earn />} />
-            <Route path="/survey" element={<Survey />} />
-            <Route path="/translation" element={<Translation />} />
-            <Route path="/imagecaption" element={<ImageCaption />} />
-            <Route path="/captcha" element={<Captcha />} />
-            <Route path="/texttagging" element={<TextTagging />} />
-            <Route path="/Wordify" element={<Wordify />} />
-            <Route path="/wizard" element={<Wizard />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/dashboard" element={<AdminDashboard />} />
-            <Route path="/FollowTask" element={<FollowTask />} />
-            <Route
-              path="/AudioTranscription"
-              element={<AudioTranscription />}
-            />
+    <Router>
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+        {/* <div>{isAuthenticated ? "Authenticated" : "Not Authenticated"}</div> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/referrals" element={<ReferralsPage />} />
+          <Route path="/earn" element={<Earn />} />
+          <Route path="/survey" element={<Survey />} />
+          <Route path="/translation" element={<Translation />} />
+          <Route path="/imagecaption" element={<ImageCaption />} />
+          <Route path="/captcha" element={<Captcha />} />
+          <Route path="/texttagging" element={<TextTagging />} />
+          <Route path="/Wordify" element={<Wordify />} />
+          <Route path="/wizard" element={<Wizard />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/FollowTask" element={<FollowTask />} />
+          <Route path="/AudioTranscription" element={<AudioTranscription />} />
 
-            <Route path="/cv-home" element={<CVLandingPage />} />
-            <Route path="/uploadCV" element={<CVUploadingPage />} />
-            <Route path="/recruit" element={<ProjectDescriptionForm />} />
-            <Route path="/talents-found" element={<TalentsFound />} />
-            <Route path="/userdash" element={<UserDash />} />
-            {/* Add other routes here */}
+          <Route path="/cv-home" element={<CVLandingPage />} />
+          <Route path="/uploadCV" element={<CVUploadingPage />} />
+          <Route path="/recruit" element={<ProjectDescriptionForm />} />
+          <Route path="/talents-found" element={<TalentsFound />} />
+          <Route path="/userdash" element={<UserDash />} />
+          {/* Add other routes here */}
 
-            {/* foorter routes */}
-            <Route path="/about" element={<About />} />
-            <Route path="/help-and-support" element={<HelpAndSupport />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsAndConditions />} />
-          </Routes>
-          {/*<Chatbox />*/}
-          <ScrollToTop />
-        </div>
-      </Router>
+          {/* foorter routes */}
+          <Route path="/about" element={<About />} />
+          <Route path="/help-and-support" element={<HelpAndSupport />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+        </Routes>
+        {/*<Chatbox />*/}
+        <ScrollToTop />
+      </div>
+    </Router>
     // </AuthProvider>
   );
 };

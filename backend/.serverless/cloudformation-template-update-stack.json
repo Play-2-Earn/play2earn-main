@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-aws-api/dev/1725032972920-2024-08-30T15:49:32.920Z/app.zip"
+          "S3Key": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z/app.zip"
         },
         "Handler": "handler.handler",
         "Runtime": "nodejs18.x",
@@ -173,10 +173,10 @@
           "Variables": {
             "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
             "PORT": "5002",
-            "JWT_SECRET": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyNDA3NjI2OCwiaWF0IjoxNzI0MDc2MjY4fQ.LnAAGJ-pYJMcn9OeIB7doFX55lh40tIAM0m1VzXnaj0",
-            "CLOUDINARY_CLOUD_NAME": "dd1wedeot",
-            "CLOUDINARY_API_KEY": "335558959357962",
-            "CLOUDINARY_API_SECRET": "95OeyT-igisGcxu7Hnhl7-ZYHlg"
+            "JWT_SECRET": "",
+            "CLOUDINARY_CLOUD_NAME": "",
+            "CLOUDINARY_API_KEY": "",
+            "CLOUDINARY_API_SECRET": ""
           }
         },
         "Role": {
@@ -190,14 +190,14 @@
         "AppLogGroup"
       ]
     },
-    "AppLambdaVersionierAZSa8SZsCLLXrFb59LU52H35dyxfs42Va1OXPk": {
+    "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "8vwmslT2KtJpeNocunOHE5hRn8qeYU5a8vjQD4NpmHw="
+        "CodeSha256": "NZeJvSWvr565okyTeEyDsAoIO2Z7flVpilpei5nEgYk="
       }
     },
     "ApiGatewayRestApi": {
@@ -318,7 +318,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1725032956428": {
+    "ApiGatewayDeployment1726242537372": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -381,7 +381,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionierAZSa8SZsCLLXrFb59LU52H35dyxfs42Va1OXPk"
+        "Ref": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
       },
       "Export": {
         "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"

@@ -7,8 +7,8 @@ const userRoutes = require("./routes/userRoutes");
 const followTaskRouter = require("./routes/FollowTaskRouter");
 const textTagRoutes = require("./routes/TextTagRouter");
 const wordcountRoutes = require("./routes/wordcountRoutes");
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
 require("dotenv").config();
@@ -22,10 +22,12 @@ const PORT = process.env.PORT;
 server.use(cookieParser());
 
 // Middleware
-server.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-})); // Allow cross-origin requests
+server.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+); // Allow cross-origin requests
 server.use(bodyParser.json()); // Parse JSON bodies
 server.use(express.json());
 
@@ -70,12 +72,10 @@ server.post("/verify", (req, res) => {
       user_id,
       level,
     });
-    return res
-      .status(400)
-      .json({
-        error:
-          "User translation, correct translation, user_id, and level are required.",
-      });
+    return res.status(400).json({
+      error:
+        "User translation, correct translation, user_id, and level are required.",
+    });
   }
 
   // Check if user translation is correct
@@ -88,27 +88,31 @@ server.post("/verify", (req, res) => {
   });
 });
 
-// checking the cookies 
+// checking the cookies
 
-server.get('/api/check', (req, res) => {
-  console.log('Request received at /check');
-  console.log('Cookies:', req.cookies);
+server.get("/api/check", (req, res) => {
+  console.log("Request received at /check");
+  console.log("Cookies:", req.cookies);
 
   try {
     const token = req.cookies.token;
 
     if (!token) {
-      return res.status(401).json({ message: 'No token, authentication failed' });
+      return res
+        .status(401)
+        .json({ message: "No token, authentication failed" });
     }
 
     const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
-    return res.status(200).json({ message: 'Authenticated', user: verifiedUser });
+    return res
+      .status(200)
+      .json({ message: "Authenticated", user: verifiedUser });
   } catch (err) {
-    console.error('Server error:', err);
+    console.error("Server error:", err);
     if (err instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ message: 'Invalid or expired token' });
+      return res.status(401).json({ message: "Invalid or expired token" });
     }
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 
