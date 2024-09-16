@@ -26,7 +26,7 @@ const corsOptions = {
   origin: 'https://dev.d3sxwpggtsq5rq.amplifyapp.com',
   credentials: true
 };
-app.use(cors(corsOptions));
+server.use(cors(corsOptions));
 
 
 server.use(bodyParser.json()); // Parse JSON bodies
