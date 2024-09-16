@@ -22,12 +22,13 @@ const PORT = process.env.PORT;
 server.use(cookieParser());
 
 // Middleware
-server.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-); // Allow cross-origin requests
+const corsOptions = {
+  origin: 'https://dev.d3sxwpggtsq5rq.amplifyapp.com',
+  credentials: true
+};
+app.use(cors(corsOptions));
+
+
 server.use(bodyParser.json()); // Parse JSON bodies
 server.use(express.json());
 
@@ -91,16 +92,14 @@ server.post("/verify", (req, res) => {
 // checking the cookies
 
 server.get("/api/check", (req, res) => {
-  console.log("Request received at /check");
-  console.log("Cookies:", req.cookies);
+  // console.log("Request received at /check");
+  // console.log("Cookies:", req.cookies);
 
   try {
     const token = req.cookies.token;
 
     if (!token) {
-      return res
-        .status(401)
-        .json({ message: "No token, authentication failed" });
+      return res .status(403).json({ message: "No token, authentication failed" });
     }
 
     const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
