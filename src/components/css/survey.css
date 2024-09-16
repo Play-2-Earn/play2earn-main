@@ -132,6 +132,7 @@
   text-align: right;
 }
 
+
 .form-container {
   width: 90%; /* Set a relative width to make it flexible */
   max-width: 400px; /* Limit the maximum size */
@@ -140,12 +141,12 @@
   background-color: #fff; /* Optional background color */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
   border-radius: 8px; /* Rounded corners */
-  text-align: left;
+  text-align: left; 
 }
-.form-container h3 {
+.form-container h3{
   font-size: 1.5em !important;
 }
-.form-container p {
+.form-container p{
   padding-left: 0px;
 }
 .task-status {
@@ -154,10 +155,10 @@
   text-align: center;
   gap: 10px;
 }
-.task-actions button {
-  margin-bottom: 30px;
+.task-actions button{
+    margin-bottom: 30px;
 }
-.task-actions button:disabled {
+.task-actions button:disabled{
   flex: none; /* Disables flex auto behavior */
   margin: 0 auto; /* Centers the button horizontally */
   text-align: center; /* Ensures text inside the button is centered */
@@ -180,6 +181,7 @@
 }
 
 .share-buttons button {
+
   align-items: center;
   gap: 2px;
   padding: 8px 10px;
@@ -208,6 +210,7 @@
   background-color: #0088cc;
   color: white;
 }
+
 
 @media (min-width: 768px) {
   .tasks-container .card {
