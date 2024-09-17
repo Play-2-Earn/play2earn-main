@@ -113,7 +113,7 @@ const MainGame = () => {
       }
     }
   }, [view]);
-  
+
 
   useEffect(() => {
     if (isGameStarted) {
@@ -137,10 +137,10 @@ const MainGame = () => {
       setSelectedLevel(levelId);
       setIsGameStarted(true);
       setView('game');
-      
+
       // Clear any existing interval
       if (intervalId) clearTimer(intervalId);
-      
+
       // Start a new timer
       const id = startTimer(getTimerDuration(levelId), setTimer, () => {
         setFeedback('Time is up! Game Over!');
@@ -151,7 +151,7 @@ const MainGame = () => {
       setIntervalId(id);
     }
   };
-  
+
 
   const handleCaptionChange = (e) => {
     setCaption(e.target.value);
@@ -178,7 +178,7 @@ const MainGame = () => {
   const handleCorrectAnswer = useCallback(() => {
     // Show EvaluationModal
     setShowScoreModal(true);
-  
+
     // Update unlockedLevels if necessary
     setUnlockedLevels(prev => {
       if (!prev.includes(level + 1) && level < TOTAL_LEVELS) {
@@ -186,13 +186,13 @@ const MainGame = () => {
       }
       return prev;
     });
-  
+
     // Increment score or handle other logic
     setScore(prevScore => prevScore + 10); // Adjust score increment as needed
-  
+
     // Reset caption
     setCaption('');
-    
+
     // Set a timeout to advance to the next level after a short delay
     setTimeout(() => {
       // Move to the next level
@@ -202,7 +202,7 @@ const MainGame = () => {
           setLevel(nextLevel);
           setSelectedLevel(nextLevel);
           setIsGameStarted(true);
-  
+
           const nextImage = getRandomImage(usedImages);
           if (nextImage) {
             setUsedImages(prev => new Set(prev).add(nextImage.id));
@@ -214,13 +214,13 @@ const MainGame = () => {
           return prevLevel;
         }
       });
-      
+
       setShowScoreModal(false); // Close the modal
     }, 1000); // Delay in milliseconds before closing the modal and moving to the next level
   }, [level, usedImages]);
-  
-  
-  
+
+
+
 
   const handleIncorrectAnswer = (correctCaption) => {
     setFeedback(`Incorrect caption. The correct caption was: "${correctCaption}". Try again!`);
@@ -279,7 +279,7 @@ const MainGame = () => {
     color: unlockedLevels.includes(levelId) ? 'white' : 'white',
     cursor: unlockedLevels.includes(levelId) ? 'pointer' : 'not-allowed',
   });
-  
+
 
 
 
@@ -305,8 +305,17 @@ const MainGame = () => {
       {view === 'main' ? (
         <>
           {/* Main Page */}
-          <div>
-            <h1 style={{ fontSize: '36px', color:'white' }}>Welcome to the AI Image Caption game</h1>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '20px',
+              minHeight: '100vh',
+              boxSizing: 'border-box'
+            }}
+          >
+            <h1 style={{ fontSize: '36px', color: 'white', margin: '20px 0' }}>Welcome to the AI Image Caption game</h1>
             <br />
             <br />
             <br />
@@ -314,18 +323,22 @@ const MainGame = () => {
             <br />
             <div
               style={{
-                display: 'inline-block',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 textAlign: 'center',
                 border: '4px solid white',
                 borderRadius: '25px',
                 padding: '20px',
+                maxWidth: '90vw',
                 width: '710px',
-                height: '357px',
+                height: 'auto',
                 backgroundColor: 'rgba(247, 250, 255, 0.8)',
-                color: 'black'
+                color: 'black',
+                boxSizing: 'border-box'
               }}
             >
-              <h1 style={{ fontSize: '36px' }}>Image Captioning Task</h1>
+              <h1 style={{ fontSize: '36px', color: 'black' }}>Image Captioning Task</h1>
               <br />
               <p style={{ fontSize: '24px' }}>
                 Please read the instruction below <br />before you start the game.
@@ -335,13 +348,16 @@ const MainGame = () => {
               <Button
                 onClick={handleStartClick}
                 style={{
-                  border: '4px',
+                  border: '4px solid transparent',
                   borderRadius: '100px',
                   color: 'white',
-                  fontSize: '36px',
+                  fontSize: '1.5rem',
                   background: 'rgba(15, 98, 254, 1)',
-                  width: '375px',
-                  height: '80px'
+                  width: '60%',
+                  maxWidth: '375px',
+                  height: '80px',
+                  cursor: 'pointer',
+                  margin: '20px 0'
                 }}
               >
                 Start
@@ -363,7 +379,7 @@ const MainGame = () => {
                 In this task, you will be provided with an image and an AI-generated caption.
                 Your goal is to refine and enhance the caption to make it SEO-friendly and include trending hashtags.
                 The refined caption should be unique, engaging, and relevant to the image. Your caption will be evaluated by an AI system,
-                and you will receive points and tokens based<br /> on the quality of your caption.
+                and you will receive points and tokens based on the quality of your caption.
               </section>
             </div>
           </div>
@@ -371,150 +387,187 @@ const MainGame = () => {
       ) : view === 'level' ? (
         <>
           {/* Level Selection Page */}
-          <div style={{ textAlign: 'center' }}>
-            <br /><br /><br /><br />
-            <h1 style={{ fontSize: '48px',color:'white' }}>Level Select</h1>
-            <br /><br /><br />
-            <ButtonGroup size="large" style={{ height: '100px' }}>
-      {[1, 2, 3, 4, 5].map(level => (
-        <Button
-          key={level}
-          style={getButtonStyle(level)}
-          onClick={() => handleLevelSelect(level)}
-          disabled={!unlockedLevels.includes(level)} // Disable if not unlocked
-        >
-          Level {level}
-        </Button>
-      ))}
-    </ButtonGroup>
-    <br /><br />
-    <ButtonGroup size="large" style={{ height: '100px' }}>
-      {[6, 7, 8, 9, 10].map(level => (
-        <Button
-          key={level}
-          style={getButtonStyle(level)}
-          onClick={() => handleLevelSelect(level)}
-          disabled={!unlockedLevels.includes(level)} // Disable if not unlocked
-        >
-          Level {level}
-        </Button>
-      ))}
-    </ButtonGroup>
+          <div className="container">
+            <h1
+              style={{
+                fontSize: '48px',
+                color: 'white',
+                margin: '0.5em 0'
+              }}
+            >Level Select</h1>
 
-            <br /><br /><br />
+            <ButtonGroup className="button-group" size="large">
+              {[1, 2, 3, 4, 5].map(level => (
+                <Button
+                  key={level}
+                  style={getButtonStyle(level)}
+                  onClick={() => handleLevelSelect(level)}
+                  disabled={!unlockedLevels.includes(level)} // Disable if not unlocked
+                >
+                  Level {level}
+                </Button>
+              ))}
+            </ButtonGroup>
+
+            <ButtonGroup className="button-group" size="large">
+              {[6, 7, 8, 9, 10].map(level => (
+                <Button
+                  key={level}
+                  style={getButtonStyle(level)}
+                  onClick={() => handleLevelSelect(level)}
+                  disabled={!unlockedLevels.includes(level)} // Disable if not unlocked
+                >
+                  Level {level}
+                </Button>
+              ))}
+            </ButtonGroup>
+            <br />
+
             <Button
               onClick={() => setView('main')}
               style={{
-                border: '4px',
-                borderRadius: '100px',
-                color: 'white',
+                border: '4px solid transparent',
+                borderRadius: '50px',
                 fontSize: '36px',
                 background: 'rgba(15, 98, 254, 1)',
-                width: '375px',
-                height: '80px'
+                width: '250px',
+                color: 'white',
+                margin: '1em 0'
               }}
             >
               Home
             </Button>
-            <br /><br />
-            <p style={{ fontSize: '24px' }}>Current Score: {score}</p>
+            <br />
+            <br />
+            <br />
+            <p
+              style={{
+                fontSize: '36px',
+                margin: '1em 0',
+                color: 'white'
+              }}
+            >Current Score: {score}</p>
           </div>
         </>
+
       ) : (
         <>
-        <br/>
-        <br/>
-          {/* Game Page */}
-          <div style={{
-            textAlign: 'center',
-            border: '4px solid black',
-            borderRadius: '25px',
-            padding: '20px',
-            width: '710px',
-            height: '704px',
-            position: 'relative',
-            margin: 'auto',
-            backgroundColor: 'rgba(247, 250, 255, 0.8)',
-            color: 'black'
-          }}>
-<Button
-  onClick={() => {
-    setView('level'); // Navigate to level selection
-    // Optionally reset the selected level if you want to make sure it doesn't affect the UI
-    setSelectedLevel(level); 
-  }}
-  style={{
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-    background: 'rgba(15, 98, 254, 1)',
-    color: 'white',
-    borderRadius: '50%',
-    padding: '10px 20px',
-    fontSize: '18px',
-    border: 'none',
-    cursor: 'pointer'
-  }}
->
-  Back
-</Button>
-
-
-            <h1>Level {level}</h1>
-            <p>Time left: {timer}s</p>
-            <p>Lives: {renderLives(lives)}</p>
-            <img
-              src={currentImage?.src}
-              alt={currentImage?.alt}
-              style={{ width: '300px', height: '200px', display: 'block', margin: 'auto' }}
+        <br />
+        <br />
+        {/* Game Page */}
+        <div style={{
+          textAlign: 'center',
+          border: '4px solid black',
+          borderRadius: '25px',
+          padding: '20px',
+          maxWidth: '90vw',  // Adjusts width for mobile view
+          width: '710px',    // Fixed width for PC view
+          height: 'auto',    // Adjust height based on content
+          position: 'relative',
+          margin: 'auto',
+          backgroundColor: 'rgba(247, 250, 255, 0.8)',
+          color: 'black',
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <Button
+            onClick={() => {
+              setView('level'); // Navigate to level selection
+              setSelectedLevel(level);
+            }}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              left: '20px',
+              background: 'rgba(15, 98, 254, 1)',
+              color: 'white',
+              borderRadius: '50%',
+              padding: '10px 20px',
+              fontSize: '14px',
+              fontWeight:'bolder',
+              border: 'none',
+              cursor: 'pointer',
+              zIndex: 1
+            }}
+          >
+            Back
+          </Button>
+      
+          <h1 style={{ color: 'black' }}>Level {level}</h1>
+          <p>Time left: {timer}s</p>
+          <p>Lives: {renderLives(lives)}</p>
+          <img
+            src={currentImage?.src}
+            alt={currentImage?.alt}
+            style={{ 
+              width: '100%',   // Make image responsive
+              maxWidth: '300px', 
+              height: 'auto', 
+              display: 'block', 
+              margin: 'auto' 
+            }}
+          />
+          <p style={{ fontSize: '1.25rem', marginTop: '10px' }}>
+            {currentImage?.caption}
+          </p>
+          <br />
+          <form onSubmit={handleSubmit} style={{ textAlign: 'center', width: '100%' }}>
+            <textarea
+              value={caption}
+              onChange={handleCaptionChange}
+              placeholder="Enter your caption here"
+              rows="4"
+              cols="50"
+              style={{ 
+                fontSize: '1rem', 
+                padding: '10px', 
+                borderRadius: '10px', 
+                border: '2px solid rgba(15, 124, 255, 1)', 
+                resize: 'none', 
+                width: '100%',
+                maxWidth: '500px', // Constrain max width
+                boxSizing: 'border-box'
+              }}
+              disabled={buttonDisabled}
             />
-            <p style={{ fontSize: '20px', marginTop: '10px' }}>
-              {currentImage?.caption}
-            </p><br />
-            <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
-              <textarea
-                value={caption}
-                onChange={handleCaptionChange}
-                placeholder="Enter your caption here"
-                rows="4"
-                cols="50"
-                style={{ fontSize: '18px', padding: '10px', borderRadius: '10px', border: '2px solid rgba(15, 124, 255, 1)', resize: 'none' }}
-                disabled={buttonDisabled}
-              />
-              <br />
-              <br />
-              <Button
-                type="submit"
-                disabled={buttonDisabled}
-                style={{
-                  background: 'rgba(63, 212, 60, 1)',
-                  padding: '10px',
-                  border: '4px',
-                  borderRadius: '100px',
-                  color: 'white',
-                  fontSize: '24px',
-                  width: '150px',
-                  height: '50px',
-                  marginRight: '20px'
-                }}
-              >
-                Evaluate
-              </Button>
-              <br/>
-              <br/>
-              
-             <ShareButton/>
-            </form>
-
-            {showScoreModal && (
-              <EvaluationModal
-                score={score}
-                open={showScoreModal}
-                onClose={() => setShowScoreModal(false)}
-              />
-            )}
-          </div>
-        </>
+            <br />
+            <br />
+            <Button
+              type="submit"
+              disabled={buttonDisabled}
+              style={{
+                background: 'rgba(63, 212, 60, 1)',
+                padding: '10px',
+                border: '4px',
+                borderRadius: '50px',
+                color: 'white',
+                fontSize: '1.5rem',
+                width: 'auto',
+                minWidth: '150px',
+                height: '50px',
+                marginRight: '20px'
+              }}
+            >
+              Evaluate
+            </Button>
+            <br />
+            <br />
+      
+            <ShareButton />
+          </form>
+      
+          {showScoreModal && (
+            <EvaluationModal
+              score={score}
+              open={showScoreModal}
+              onClose={() => setShowScoreModal(false)}
+            />
+          )}
+        </div>
+      </>
+      
       )}
     </div>
   );
@@ -536,72 +589,68 @@ const GameCompleted = ({ score, onRestart }) => {
 
   return (
     <div className='results'> <Confetti
-        width={windowWidth}
-        height={windowHeight}
-        recycle={false}
-        numberOfPieces={200}
-        gravity={0.2}
-      />
-    <div
+      width={windowWidth}
+      height={windowHeight}
+      recycle={false}
+      numberOfPieces={200}
+      gravity={0.2}
+    />
+   <div
+  style={{
+    textAlign: 'center',
+    border: '4px solid black',
+    borderRadius: '25px',
+    padding: '20px',
+    maxWidth: '90vw', // Use a percentage width to adapt to different screen sizes
+    maxHeight: '80vh', // Adjust height based on viewport height
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(247, 250, 255, 0.8)',
+    color: 'black',
+    boxSizing: 'border-box' // Ensure padding and borders are included in width/height calculations
+  }}
+>
+
+  <h1 style={{ fontSize: '24px',fontWeight:'bolder' , color: 'black' }}>Congratulations🎉</h1><br/><br/>
+  <p style={{  fontSize: '24px' }}>Your final score: {score}</p><br/>
+
+  <div style={{ marginTop: '20px' }}>
+    <Button
+      onClick={onRestart}
       style={{
-        textAlign: 'center',
-        border: '4px solid black',
-        borderRadius: '25px',
-        padding: '20px',
-        width: '710px',
-        height: '504px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: 'rgba(247, 250, 255, 0.8)',
-        color: 'black'
+        border: '4px solid',
+        borderRadius: '30px',
+        color: 'white',
+        fontSize: '1.5rem',
+        background: 'rgba(205, 26, 26, 1)',
+        padding: '10px 20px',
+        margin: '10px',
+        display: 'inline-block' // Ensure buttons are inline on smaller screens
       }}
     >
-     
-      <h1 style={{ fontSize: '32px' }}>Congratulations🎉</h1>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <p style={{ fontSize: '24px' }}>Your final score: {score}</p>
-      <br/>
-      <br/>
-      <br/><br/>
-      <br/>
-      <br/>
-      <Button
-        onClick={onRestart}
-        style={{
-          border: '4px',
-          borderRadius: '60px',
-          color: 'white',
-          fontSize: '24px',
-          background: 'rgba(205, 26, 26, 1)',
-          padding: '15px',
-          position: 'relative',
-          right: '50px'
-        }}
-      >
-        Play again
-      </Button>
-      <Button
-        href='/'
-        style={{
-          border: '4px',
-          borderRadius: '60px',
-          color: 'white',
-          fontSize: '24px',
-          background: 'rgba(15, 98, 254, 1)',
-          padding: '15px',
-          position: 'relative',
-          left: '70px'
-        }}
-      >
-        Home
-      </Button>
-    </div></div>
+      Play again
+    </Button>
+    <Button
+      href='/'
+      style={{
+        border: '4px solid',
+        borderRadius: '30px',
+        color: 'white',
+        fontSize: '1.5rem',
+        background: 'rgba(15, 98, 254, 1)',
+        padding: '10px 20px',
+        margin: '10px',
+        display: 'inline-block' // Ensure buttons are inline on smaller screens
+      }}
+    >
+      Home
+    </Button>
+  </div>
+</div>
+
+    </div>
   );
 };
 
