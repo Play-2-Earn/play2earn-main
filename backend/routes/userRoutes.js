@@ -7,9 +7,6 @@ require("dotenv").config();
 const crypto = require("crypto");
 // const jwt = require("jsonwebtoken");
 const jwt = require('jsonwebtoken');
-// const cookieParser = require('cookie-parser');
-
-
 const {
   getUserProfile,
   updateUserProfile,
@@ -20,6 +17,8 @@ const {
   requestUserPasswordReset,
   passwordSet,
 } = require("../controllers/userController");
+const cookieParser = require("cookie-parser");
+const User = require("../models/User");
 
 const router = express.Router();
 // router.use(express.json());
@@ -104,6 +103,8 @@ router.post("/log_in", (request, response) => {
           secure: process.env.NODE_ENV === 'production',
           sameSite: 'strict',
         })
+        
+        // console.log(token)
         response.json({ message: 'success' });
 
       } else {
@@ -222,5 +223,18 @@ router.get('/check', (req, res) => {
   }
 });
 
+// for user dashboard
+router.get('/users_data', async (req, res) => {
+
+  console.log("reached to data")
+  
+  try {
+    const users = await UserModel.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

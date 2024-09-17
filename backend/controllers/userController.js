@@ -63,6 +63,7 @@ exports.deleteUser = async (req, res) => {
 
 // List all users
 exports.getAllUsers = async (req, res) => {
+    console.log("reaced to users")
     try {
         const users = await UserModel.find();
         res.json(users);

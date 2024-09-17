@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
@@ -23,7 +23,7 @@ server.use(cookieParser());
 
 // Middleware
 const corsOptions = {
-  origin: 'https://dev.d3sxwpggtsq5rq.amplifyapp.com',
+  origin: 'http://localhost:5173',
   credentials: true
 };
 server.use(cors(corsOptions));
@@ -108,9 +108,9 @@ server.get("/api/check", (req, res) => {
       .json({ message: "Authenticated", user: verifiedUser });
   } catch (err) {
     console.error("Server error:", err);
-    if (err instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
+    // if (err instanceof jwt.JsonWebTokenError) {
+    //   return res.status(401).json({ message: "Invalid or expired token" });
+    // }
     return res.status(500).json({ message: "Internal server error" });
   }
 });

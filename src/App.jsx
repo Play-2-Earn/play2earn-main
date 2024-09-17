@@ -37,7 +37,7 @@ const App = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(AuthContext);
   const userLoginStatusAppr = () => {
     setUserLoginStatus(true);
-    console.log(userLoginStatus);
+    // console.log(userLoginStatus);
   };
 
   useEffect(() => {
@@ -55,24 +55,28 @@ const App = () => {
           withCredentials: true, // Include credentials like cookies
           headers: {
             "Content-Type": "application/json", // Set appropriate headers
-            "Access-Control-Allow-Origin":
-              process.env.NODE_ENV === "development"
-                ? "http://localhost:3000" // Development frontend origin
-                : "https://dev.d3sxwpggtsq5rq.amplifyapp.com", // Production frontend origin
           },
         });
 
         if (response.status === 200) {
-          console.log("yes");
-          console.log(response.data.message); // e.g., 'Authenticated'
+          // console.log("yes");
+          // console.log(response.data.message); // e.g., 'Authenticated'
           // User is authenticated
           setIsAuthenticated(true);
           userLoginStatusAppr();
-        } else {
+        }
+
+        else if (response.status === 403) {
+          console.log("user is not logged in")
+        }
+
+        else {
           console.log("no");
           setIsAuthenticated(false); // User is not authenticated
         }
-      } catch (error) {
+      }
+
+      catch (error) {
         console.error("Error checking auth:", error);
         setIsAuthenticated(false); // Error, assume user is not authenticated
       }

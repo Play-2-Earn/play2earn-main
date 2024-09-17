@@ -8,17 +8,27 @@ import axios from "axios";
 
 
 const UserDash = () => {
+    async function User_dash_data() {
+        try {
+            const API_BASE_URL =
+                process.env.NODE_ENV === "development"
+                    ? "http://localhost:5002"
+                    : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
-    // const API_BASE_URL =
-    //     process.env.NODE_ENV === "development"
-    //         ? "http://localhost:5002"
-    //         : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+            const apiUrl = `${API_BASE_URL}`;
+            const response = await fetch(`${apiUrl}/api/users`)
+            const user_data = response.json()
+            console.log(user_data)
+            return user_data
+        }
 
-    // const apiUrl = `${API_BASE_URL}`;
-    // const response = axios.get(`${apiUrl}/api/userdata`)
-    // console.log(response)
-    
-    
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    User_dash_data()
+
     const [showMore, setShowMore] = useState(false)
     const showMoreReset = () => {
         setShowMore((preState) => !preState)
@@ -83,7 +93,7 @@ const UserDash = () => {
                                         </>) : null}
 
                                 </div>
-                                <a className="cursor-pointer px-4 py-2  text-white rounded-3xl bg-blue-500 hover:bg-blue-700 " onClick={() => showMoreReset()} >Show {showMore ? ("Less-"):"More+" }</a>
+                                <a className="cursor-pointer px-4 py-2  text-white rounded-3xl bg-blue-500 hover:bg-blue-700 " onClick={() => showMoreReset()} >Show {showMore ? ("Less-") : "More+"}</a>
                             </div>
 
                             {/* Upcoming Tasks */}
