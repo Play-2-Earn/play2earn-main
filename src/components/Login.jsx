@@ -13,17 +13,16 @@ const LoginPopup = ({
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("User");
   const navigate = useNavigate();
+  const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5002"
+      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const endpoint =
       role === "Admin" ? "/api/admin/log_in" : "/api/users/log_in";
     try {
-      const API_BASE_URL =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5002"
-          : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
-
       const apiUrl = `${API_BASE_URL}${endpoint}`;
 
       // Configure axios
