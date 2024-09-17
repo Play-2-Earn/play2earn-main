@@ -14,6 +14,10 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
 dotenv.config(); // Load environment variables
+const allowedOrigins = [
+  "https://dev.d3sxwpggtsq5rq.amplifyapp.com",
+  "https://www.play2earn.ai",
+];
 
 const app = express(); // Use app for express instance
 
@@ -22,15 +26,37 @@ app.use(cookieParser()); // Cookie middleware
 // Middleware
 app.use(
   cors({
-    origin: [
-      "https://www.play2earn.ai",
-      "https://dev.d3sxwpggtsq5rq.amplifyapp.com",
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// Middleware to set CORS headers for all responses
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(express.json()); // Parse JSON
 
 // Routes

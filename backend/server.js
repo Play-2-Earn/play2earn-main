@@ -23,11 +23,14 @@ server.use(cookieParser());
 
 // Middleware
 const corsOptions = {
-  origin: 'http://localhost:5173',
-  credentials: true
+  origin: [
+    "https://www.play2earn.ai", // Production frontend URL
+    "https://dev.d3sxwpggtsq5rq.amplifyapp.com", // Amplify dev URL
+    "http://localhost:5173", // Local development URL
+  ],
+  credentials: true,
 };
 server.use(cors(corsOptions));
-
 
 server.use(bodyParser.json()); // Parse JSON bodies
 server.use(express.json());
@@ -99,7 +102,9 @@ server.get("/api/check", (req, res) => {
     const token = req.cookies.token;
 
     if (!token) {
-      return res .status(403).json({ message: "No token, authentication failed" });
+      return res
+        .status(403)
+        .json({ message: "No token, authentication failed" });
     }
 
     const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);

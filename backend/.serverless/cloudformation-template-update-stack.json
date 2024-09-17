@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z/app.zip"
+          "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
         },
         "Handler": "handler.handler",
         "Runtime": "nodejs18.x",
@@ -173,10 +173,7 @@
           "Variables": {
             "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
             "PORT": "5002",
-            "JWT_SECRET": "",
-            "CLOUDINARY_CLOUD_NAME": "",
-            "CLOUDINARY_API_KEY": "",
-            "CLOUDINARY_API_SECRET": ""
+            "JWT_SECRET": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcyNDA3NjI2OCwiaWF0IjoxNzI0MDc2MjY4fQ.LnAAGJ-pYJMcn9OeIB7doFX55lh40tIAM0m1VzXnaj0"
           }
         },
         "Role": {
@@ -190,14 +187,14 @@
         "AppLogGroup"
       ]
     },
-    "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk": {
+    "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "NZeJvSWvr565okyTeEyDsAoIO2Z7flVpilpei5nEgYk="
+        "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
       }
     },
     "ApiGatewayRestApi": {
@@ -318,7 +315,7 @@
         "AppLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1726242537372": {
+    "ApiGatewayDeployment1726589551821": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -381,7 +378,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+        "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
       },
       "Export": {
         "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"

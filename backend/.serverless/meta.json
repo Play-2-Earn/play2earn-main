@@ -1,7 +1,7 @@
 {
   "/Users/qadirkilledar/Desktop/play2earn-main/backend": {
     "versionSfCore": null,
-    "versionFramework": "4.3.2",
+    "versionFramework": "4.3.3",
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
@@ -23,10 +23,7 @@
               "environment": {
                 "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
                 "PORT": "5002",
-                "JWT_SECRET": "<REDACTED>",
-                "CLOUDINARY_CLOUD_NAME": "",
-                "CLOUDINARY_API_KEY": "<REDACTED>",
-                "CLOUDINARY_API_SECRET": "<REDACTED>"
+                "JWT_SECRET": "<REDACTED>"
               },
               "versionFunctions": true,
               "compiledCloudFormationTemplate": {
@@ -193,7 +190,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -204,10 +201,7 @@
                         "Variables": {
                           "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
                           "PORT": "5002",
-                          "JWT_SECRET": "<REDACTED>",
-                          "CLOUDINARY_CLOUD_NAME": "",
-                          "CLOUDINARY_API_KEY": "<REDACTED>",
-                          "CLOUDINARY_API_SECRET": "<REDACTED>"
+                          "JWT_SECRET": "<REDACTED>"
                         }
                       },
                       "Role": {
@@ -221,14 +215,14 @@
                       "AppLogGroup"
                     ]
                   },
-                  "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk": {
+                  "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AppLambdaFunction"
                       },
-                      "CodeSha256": "NZeJvSWvr565okyTeEyDsAoIO2Z7flVpilpei5nEgYk="
+                      "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -349,7 +343,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1726242537372": {
+                  "ApiGatewayDeployment1726589551821": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -412,7 +406,7 @@
                   "AppLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+                      "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
                     },
                     "Export": {
                       "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -545,7 +539,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -7764,7 +7758,7 @@
                 "timeout": 90,
                 "runtime": "nodejs18.x",
                 "vpc": {},
-                "versionLogicalId": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+                "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               }
             }
           },
@@ -7800,10 +7794,7 @@
               "environment": {
                 "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
                 "PORT": "5002",
-                "JWT_SECRET": "<REDACTED>",
-                "CLOUDINARY_CLOUD_NAME": "",
-                "CLOUDINARY_API_KEY": "<REDACTED>",
-                "CLOUDINARY_API_SECRET": "<REDACTED>"
+                "JWT_SECRET": "<REDACTED>"
               },
               "versionFunctions": true,
               "compiledCloudFormationTemplate": {
@@ -7970,7 +7961,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -7981,10 +7972,7 @@
                         "Variables": {
                           "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
                           "PORT": "5002",
-                          "JWT_SECRET": "<REDACTED>",
-                          "CLOUDINARY_CLOUD_NAME": "",
-                          "CLOUDINARY_API_KEY": "<REDACTED>",
-                          "CLOUDINARY_API_SECRET": "<REDACTED>"
+                          "JWT_SECRET": "<REDACTED>"
                         }
                       },
                       "Role": {
@@ -7998,14 +7986,14 @@
                       "AppLogGroup"
                     ]
                   },
-                  "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk": {
+                  "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AppLambdaFunction"
                       },
-                      "CodeSha256": "NZeJvSWvr565okyTeEyDsAoIO2Z7flVpilpei5nEgYk="
+                      "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -8126,7 +8114,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1726242537372": {
+                  "ApiGatewayDeployment1726589551821": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -8189,7 +8177,7 @@
                   "AppLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+                      "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
                     },
                     "Export": {
                       "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -8322,7 +8310,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -15541,7 +15529,7 @@
                 "timeout": 90,
                 "runtime": "nodejs18.x",
                 "vpc": {},
-                "versionLogicalId": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+                "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               }
             }
           },
@@ -15579,10 +15567,7 @@
         "environment": {
           "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
           "PORT": "5002",
-          "JWT_SECRET": "<REDACTED>",
-          "CLOUDINARY_CLOUD_NAME": "",
-          "CLOUDINARY_API_KEY": "<REDACTED>",
-          "CLOUDINARY_API_SECRET": "<REDACTED>"
+          "JWT_SECRET": "<REDACTED>"
         },
         "versionFunctions": true,
         "compiledCloudFormationTemplate": {
@@ -15749,7 +15734,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z/app.zip"
+                  "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                 },
                 "Handler": "handler.handler",
                 "Runtime": "nodejs18.x",
@@ -15760,10 +15745,7 @@
                   "Variables": {
                     "MONGO_URI": "mongodb+srv://p2etokens:Play2earn%40@cluster0.hfnr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
                     "PORT": "5002",
-                    "JWT_SECRET": "<REDACTED>",
-                    "CLOUDINARY_CLOUD_NAME": "",
-                    "CLOUDINARY_API_KEY": "<REDACTED>",
-                    "CLOUDINARY_API_SECRET": "<REDACTED>"
+                    "JWT_SECRET": "<REDACTED>"
                   }
                 },
                 "Role": {
@@ -15777,14 +15759,14 @@
                 "AppLogGroup"
               ]
             },
-            "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk": {
+            "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "NZeJvSWvr565okyTeEyDsAoIO2Z7flVpilpei5nEgYk="
+                "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
               }
             },
             "ApiGatewayRestApi": {
@@ -15905,7 +15887,7 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1726242537372": {
+            "ApiGatewayDeployment1726589551821": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -15968,7 +15950,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+                "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               },
               "Export": {
                 "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -16101,7 +16083,7 @@
         "patterns": [
           "!node_modules/**"
         ],
-        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726242558970-2024-09-13T15:49:18.970Z"
+        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
       },
       "plugins": [
         "serverless-dotenv-plugin",
@@ -23320,7 +23302,7 @@
           "timeout": 90,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersiony1xx4lnizEzbJAUFUF9hgiqFg0E2iwg91LLrxBsuKk"
+          "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
         }
       }
     },
@@ -23331,7 +23313,7 @@
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "dd4e329dcf9f0f465bfad74376a85d62",
+    "machineId": "664a1ddf3dad3024bcb05d1fc91bdcb1",
     "stage": "dev",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
@@ -23363,18 +23345,18 @@
     "serviceProviderAwsCredentials": "<REDACTED>",
     "serviceProviderAwsAccountId": "311141544549",
     "projectType": "traditional",
-    "versionSf": "4.3.2",
+    "versionSf": "4.3.3",
     "serviceProviderAwsCfStackName": "serverless-aws-api-dev",
     "integrations": {},
     "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:311141544549:stack/serverless-aws-api-dev/38f2a8d0-63a7-11ef-b26d-0a458e817779",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:311141544549:stack/serverless-aws-api-dev/38f2a8d0-63a7-11ef-b26d-0a458e817779",
     "serviceProviderAwsCfStackCreated": "2024-08-26T12:32:13.858Z",
-    "serviceProviderAwsCfStackUpdated": "2024-09-13T15:49:44.483Z",
+    "serviceProviderAwsCfStackUpdated": "2024-09-17T16:13:22.225Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "AppLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:311141544549:function:serverless-aws-api-dev-app:9",
+        "OutputValue": "arn:aws:lambda:eu-north-1:311141544549:function:serverless-aws-api-dev-app:11",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
       },
