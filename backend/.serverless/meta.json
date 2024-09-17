@@ -190,7 +190,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -215,14 +215,14 @@
                       "AppLogGroup"
                     ]
                   },
-                  "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas": {
+                  "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AppLambdaFunction"
                       },
-                      "CodeSha256": "45Yfd5lU+zpna7/LnLlxGYkgk73cMkA7nXdZ8d0R8rc="
+                      "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -343,7 +343,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1726582999351": {
+                  "ApiGatewayDeployment1726589551821": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -406,7 +406,7 @@
                   "AppLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+                      "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
                     },
                     "Export": {
                       "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -539,7 +539,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -7758,7 +7758,7 @@
                 "timeout": 90,
                 "runtime": "nodejs18.x",
                 "vpc": {},
-                "versionLogicalId": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+                "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               }
             }
           },
@@ -7961,7 +7961,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z/app.zip"
+                        "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                       },
                       "Handler": "handler.handler",
                       "Runtime": "nodejs18.x",
@@ -7986,14 +7986,14 @@
                       "AppLogGroup"
                     ]
                   },
-                  "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas": {
+                  "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AppLambdaFunction"
                       },
-                      "CodeSha256": "45Yfd5lU+zpna7/LnLlxGYkgk73cMkA7nXdZ8d0R8rc="
+                      "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -8114,7 +8114,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1726582999351": {
+                  "ApiGatewayDeployment1726589551821": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -8177,7 +8177,7 @@
                   "AppLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+                      "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
                     },
                     "Export": {
                       "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -8310,7 +8310,7 @@
               "patterns": [
                 "!node_modules/**"
               ],
-              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z"
+              "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
             },
             "plugins": [
               "serverless-dotenv-plugin",
@@ -15529,7 +15529,7 @@
                 "timeout": 90,
                 "runtime": "nodejs18.x",
                 "vpc": {},
-                "versionLogicalId": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+                "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               }
             }
           },
@@ -15734,7 +15734,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z/app.zip"
+                  "S3Key": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z/app.zip"
                 },
                 "Handler": "handler.handler",
                 "Runtime": "nodejs18.x",
@@ -15759,14 +15759,14 @@
                 "AppLogGroup"
               ]
             },
-            "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas": {
+            "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "45Yfd5lU+zpna7/LnLlxGYkgk73cMkA7nXdZ8d0R8rc="
+                "CodeSha256": "oM8BVLzr7EXQoApPMVEodJKJZCxjQsydt7aW4I8f3D8="
               }
             },
             "ApiGatewayRestApi": {
@@ -15887,7 +15887,7 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1726582999351": {
+            "ApiGatewayDeployment1726589551821": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -15950,7 +15950,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+                "Ref": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
               },
               "Export": {
                 "Name": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
@@ -16083,7 +16083,7 @@
         "patterns": [
           "!node_modules/**"
         ],
-        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726583019075-2024-09-17T14:23:39.075Z"
+        "artifactDirectoryName": "serverless/serverless-aws-api/dev/1726589577420-2024-09-17T16:12:57.420Z"
       },
       "plugins": [
         "serverless-dotenv-plugin",
@@ -23302,7 +23302,7 @@
           "timeout": 90,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersion7JLy5LBEQwxwopTVB1vmYBWOzQA49HIax15ZUOgas"
+          "versionLogicalId": "AppLambdaVersionpfNIiTUhTTj5f9XDK71iGe99XX7gfjzfTbN1tiAXk"
         }
       }
     },
@@ -23313,7 +23313,7 @@
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "bcae8847f444c05163bf8b079c86949a",
+    "machineId": "664a1ddf3dad3024bcb05d1fc91bdcb1",
     "stage": "dev",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
@@ -23351,12 +23351,12 @@
     "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:311141544549:stack/serverless-aws-api-dev/38f2a8d0-63a7-11ef-b26d-0a458e817779",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:311141544549:stack/serverless-aws-api-dev/38f2a8d0-63a7-11ef-b26d-0a458e817779",
     "serviceProviderAwsCfStackCreated": "2024-08-26T12:32:13.858Z",
-    "serviceProviderAwsCfStackUpdated": "2024-09-17T14:24:02.232Z",
+    "serviceProviderAwsCfStackUpdated": "2024-09-17T16:13:22.225Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "AppLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:311141544549:function:serverless-aws-api-dev-app:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:311141544549:function:serverless-aws-api-dev-app:11",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-aws-api-dev-AppLambdaFunctionQualifiedArn"
       },
