@@ -269,6 +269,25 @@ textarea {
   margin-bottom: 5px;
   margin-top: 1px;
 }
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  display: flex;
+  flex-direction: column; /* Stack spinner and text vertically */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Ensure it stays on top */
+}
+.loading-text {
+  margin-top: 16px; /* Space between spinner and text */
+  color: #b7acac; /* Dimmer text color */
+  font-size: 1.2rem; /* Adjust the text size */
+  text-align: center;
+}
 /* Button Styles */
 .button-container {
   white-space: nowrap;

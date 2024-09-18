@@ -56,15 +56,11 @@ const CVUploadingPage = () => {
     formData.append('job_title', jobTitle);
 
     try {
-      console.log("up", formData)
-      const token = localStorage.getItem('access_token');
-      console.log("token", token);
+      console.log("up", formData);
       const response = await fetch(`${backendUrl}/cv/upload`, {
         method: 'POST',
         body: formData,
-        headers: {
-          'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
-        },
+        credentials: 'include', 
       });
   
       if (!response.ok) {
@@ -74,6 +70,7 @@ const CVUploadingPage = () => {
       alert('Files uploaded successfully');
     } catch (error) {
       console.error(error);
+      alert('Failed to upload files');
     }
   };
   
@@ -81,13 +78,12 @@ const CVUploadingPage = () => {
     
   const handleSubmitCVData = async () => {
     try {
-      const token = localStorage.getItem('access_token');
       const response = await fetch(`${backendUrl}/cv/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
         },
+        credentials: 'include', 
         body: JSON.stringify(formData),
       });
   

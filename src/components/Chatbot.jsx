@@ -21,7 +21,7 @@ const Chatbox = () => {
     setInput("");
 
     try {
-      const response = await axios.post("http://localhost:5000/predict", {
+      const response = await axios.post("http://localhost:5000/chatbot/predict", {
         message: input,
       });
       const botMessage = {

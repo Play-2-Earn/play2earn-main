@@ -96,7 +96,7 @@ router.post("/log_in", (request, response) => {
   UserModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        const payload = { id: UserModel.username };
+        const payload = { id: user.username };
         const uniqueToken = tokenGenerator(payload);
 
         response.cookie("token", uniqueToken, {

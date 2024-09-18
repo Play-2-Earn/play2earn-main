@@ -121,6 +121,7 @@ const App = () => {
           <Route path="/terms" element={<TermsAndConditions />} />
         </Routes>
         {/*<Chatbox />*/}
+        <Chatbox />
         <ScrollToTop />
       </div>
     </Router>

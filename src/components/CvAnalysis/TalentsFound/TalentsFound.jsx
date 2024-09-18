@@ -16,24 +16,28 @@ const TalentsFound = () => {
         {topCVs.map((cv, index) => (
           <div key={index} className="talent-card">
             <div className="talent-header">
-              <p className="talent-name">{cv.name}</p>
-              <p className="talent-title">{cv.designation}</p>
+              <p className="talent-name">{cv.candidate_name}</p>
             </div>
             <div className="talent-details">
-              {cv.context_score && (
-                <p className="talent-score">Context Score: {cv.context_score}%</p>
+              {cv.combined_score && (
+                <p className="talent-score">Score: {cv.combined_score}%</p>
               )}
               {cv.experience && (
-                <p className="talent-experience">Experience: {cv.experience}</p>
+                <ul className="talent-experience">
+                  <b>Experience: </b>
+                  {cv.experience.slice(0, 5).map((exp, index) => (
+                    <li key={index} style={{ listStyleType: 'disc' }}>{exp}</li>
+                  ))}
+                </ul>
               )}
               {cv.education && (
-                <p className="talent-education">Education: {cv.education}</p>
+                <p className="talent-education"><b>Education:</b> {cv.education}</p>
               )}
               {cv.skills && (
-                <p className="talent-skills">Skills: {cv.skills}</p>
+                <p className="talent-experience"><b>Skills:</b> {cv.skills}</p>
               )}
             </div>
-            <button className="talent-action-button">ADD/INVITE</button>
+            <button className="talent-action-button">INVITE</button>
           </div>
         ))}
       </div>
