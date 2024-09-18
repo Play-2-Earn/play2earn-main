@@ -1,8 +1,8 @@
-# FBA-Backend Project
+# Flask Backend Project for CV + CHATBOT
 
 ## Overview
 
-This project provides a backend service for user authentication and CV analysis. It is built using Flask and integrates functionalities for user registration, login, and uploading CVs for analysis.
+This project provides a backend service for user authentication and CV analysis and chatbot. It is built using Flask and integrates functionalities for user registration, login, and uploading CVs for analysis.
 
 ## Prerequisites
 
