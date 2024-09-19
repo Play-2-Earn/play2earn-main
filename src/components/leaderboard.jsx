@@ -1,127 +1,258 @@
-import React, { useState } from "react";
-import "./css/Leaderboard.css";
+import React, { useState, useEffect } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Crown,
+  Zap,
+  Target,
+  Swords,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import leadlead_bod_image1 from "/assets/lead_bod_image1.png";
-import leadlead_bod_image2 from "/assets/lead_bod_image2.png";
-import profile_for_leaderboard from "/assets/profile_for_leaderboard.png";
 import Header from "./header";
 import Footer from "./footer";
 
-/**
- * Sorts users by points in descending order and assigns ranks.
- * @param {Array} users - Array of user objects with properties `username` and `points`.
- * @returns {Array} - Array of user objects with updated `rank` based on sorted order.
- */
-const getSortedUsersWithRanks = (users) => {
-  const sortedUsers = [...users].sort((a, b) => b.points - a.points);
-  return sortedUsers.map((user, index) => ({
-    ...user,
-    rank: index + 1,
-  }));
-};
-
-// Dummy data for users
 const dummyUsersData = [
-  { username: "Player1", points: 5000 },
-  { username: "Player2", points: 4000 },
-  { username: "Player3", points: 3800 },
-  { username: "Player4", points: 3600 },
-  { username: "Player5", points: 3500 },
-  { username: "Player6", points: 3400 },
-  { username: "Player7", points: 3300 },
-  { username: "Player8", points: 3200 },
-  { username: "Player9", points: 3100 },
-  { username: "Player10", points: 3000 },
-  { username: "Player11", points: 2900 },
-  { username: "Player12", points: 2800 },
-  { username: "Player13", points: 2700 },
-  { username: "Player14", points: 2600 },
-  { username: "Player15", points: 2500 },
-  { username: "Player16", points: 2400 },
-  { username: "Player17", points: 2300 },
-  { username: "Player18", points: 2200 },
-  { username: "Player19", points: 2100 },
-  { username: "Player20", points: 9000 },
+  {
+    username: "DragonSlayer",
+    points: 9500,
+    level: 42,
+    streak: 7,
+    achievements: 15,
+  },
+  {
+    username: "PixelNinja",
+    points: 9000,
+    level: 40,
+    streak: 5,
+    achievements: 14,
+  },
+  {
+    username: "CosmoQuest",
+    points: 8800,
+    level: 39,
+    streak: 3,
+    achievements: 13,
+  },
+  {
+    username: "LevelUpLegend",
+    points: 8600,
+    level: 38,
+    streak: 4,
+    achievements: 12,
+  },
+  {
+    username: "EpicGamer123",
+    points: 8500,
+    level: 37,
+    streak: 2,
+    achievements: 11,
+  },
+  {
+    username: "QuestMaster",
+    points: 8400,
+    level: 36,
+    streak: 6,
+    achievements: 10,
+  },
+  {
+    username: "StrategyKing",
+    points: 8300,
+    level: 35,
+    streak: 1,
+    achievements: 9,
+  },
+  {
+    username: "PowerPlayer",
+    points: 8200,
+    level: 34,
+    streak: 3,
+    achievements: 8,
+  },
+  {
+    username: "VictoryViper",
+    points: 8100,
+    level: 33,
+    streak: 2,
+    achievements: 7,
+  },
+  {
+    username: "TechTitan",
+    points: 8000,
+    level: 32,
+    streak: 4,
+    achievements: 6,
+  },
 ];
 
 const Leaderboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 10;
+  const [animatedPoints, setAnimatedPoints] = useState({});
+  const usersPerPage = 5;
 
-  const sortedUsersWithRanks = getSortedUsersWithRanks(dummyUsersData);
-  const totalPages = Math.ceil(sortedUsersWithRanks.length / usersPerPage);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = sortedUsersWithRanks.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = dummyUsersData.slice(indexOfFirstUser, indexOfLastUser);
 
-  const handleClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  const totalPages = Math.ceil(dummyUsersData.length / usersPerPage);
+
+  const nextPage = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
+  useEffect(() => {
+    const animationIntervals = [];
+
+    currentUsers.forEach((user) => {
+      if (animatedPoints[user.username] === undefined) {
+        setAnimatedPoints((prev) => ({ ...prev, [user.username]: 0 }));
+        const interval = setInterval(() => {
+          setAnimatedPoints((prev) => {
+            if (prev[user.username] >= user.points) {
+              clearInterval(interval);
+              return prev;
+            }
+            return {
+              ...prev,
+              [user.username]: Math.min(
+                prev[user.username] + Math.ceil(user.points / 100),
+                user.points
+              ),
+            };
+          });
+        }, 20);
+        animationIntervals.push(interval);
+      }
+    });
+
+    return () => animationIntervals.forEach(clearInterval);
+  }, [currentUsers, animatedPoints]);
 
   return (
-    <>
+    <div className="min-h-screen w-full bg-gradient-to-b from-blue-50 to-blue-100 text-blue-800 overflow-hidden relative">
+      {/* Header */}
       <Header />
-      <div className="leaderboard-title-container">
-        <h1 className="leaderboard-title">Leaderboard</h1>
-      </div>
-      <div className="main-content">
-        <div className="flex-container">
-          <div className="title2">
-            <h2>
-              Earn more points to reach the top 50 on the leaderboard.
-              <br />A $100 prize pool will also be shared among the top 10
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-2 h-2 bg-blue-200 rounded-full animate-float"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDuration: `${Math.random() * 10 + 5}s`,
+            animationDelay: `${Math.random() * 5}s`,
+          }}
+        ></div>
+      ))}
+
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-6xl font-extrabold text-center mb-8 animate-pulse text-blue-600">
+          Epic Gamers Arena
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="bg-white/70 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 flex items-center text-blue-700">
+              <Target className="mr-2" /> Daily Challenge
             </h2>
-            <div className="you-earned">
-              <div className="circle-container">
-                <img
-                  src={profile_for_leaderboard}
-                  alt="profile"
-                  className="profile-image"
-                />
-                <div className="earned-info">
-                  <h2 className="earned">You Earned:</h2>
-                  <h2 className="points">30000</h2>
+            <p className="text-blue-600">
+              Complete 3 quests to earn bonus points!
+            </p>
+            <div className="mt-4 h-4 bg-blue-100 rounded-full">
+              <div
+                className="h-full bg-blue-500 rounded-full"
+                style={{ width: "66%" }}
+              ></div>
+            </div>
+            <p className="text-right mt-2 text-blue-600">2/3 completed</p>
+          </div>
+          <div className="bg-white/70 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 flex items-center text-blue-700">
+              <Crown className="mr-2" /> Current Champion
+            </h2>
+            <p className="text-3xl font-bold text-blue-600">DragonSlayer</p>
+            <p className="text-blue-500">Ruling for: 3 days</p>
+          </div>
+          <div className="bg-white/70 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 flex items-center text-blue-700">
+              <Swords className="mr-2" /> Next Tournament
+            </h2>
+            <p className="text-3xl font-bold text-green-600">2d 7h 15m</p>
+            <p className="text-blue-500">Prize pool: 10,000 coins</p>
+          </div>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+          <h2 className="text-4xl font-bold mb-6 text-center text-blue-700">
+            Leaderboard Elite
+          </h2>
+          {currentUsers.map((user, index) => (
+            <div
+              key={user.username}
+              className="mb-6 bg-blue-50 rounded-xl overflow-hidden shadow-md transform transition-all duration-300 hover:scale-105 hover:rotate-1"
+            >
+              <div className="flex items-center justify-between p-4 relative">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-100/50 to-blue-200/50 transform skew-x-12 -z-10"></div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-extrabold text-3xl border-4 border-blue-200 transform rotate-12">
+                    {indexOfFirstUser + index + 1}
+                  </div>
+                  <div>
+                    <p className="font-bold text-2xl text-blue-700">
+                      {user.username}
+                    </p>
+                    <p className="text-blue-500">Level {user.level}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-extrabold text-4xl text-blue-600 animate-bounce">
+                    {animatedPoints[user.username] || 0}
+                  </p>
+                  <p className="text-blue-500">points</p>
                 </div>
               </div>
+              <div className="px-4 py-2 bg-blue-100 flex justify-between items-center">
+                <div className="flex items-center">
+                  <Zap className="text-yellow-500 mr-2" />
+                  <span className="text-blue-600">
+                    Streak: {user.streak} days
+                  </span>
+                </div>
+                <div>
+                  <span className="bg-blue-200 text-xs font-bold rounded-full px-3 py-1 text-blue-700">
+                    {user.achievements} Achievements
+                  </span>
+                </div>
+              </div>
+              <div className="bg-blue-200 h-2 w-full">
+                <div
+                  className="bg-gradient-to-r from-blue-400 to-blue-500 h-full"
+                  style={{ width: `${(user.points / 10000) * 100}%` }}
+                ></div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="leaderboard-container">
-          <div className="leaderboard">
-            <table>
-              <thead>
-                <tr>
-                  <th className="th1">Rank</th>
-                  <th className="th2">Username</th>
-                  <th className="th2">Points Earned</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentUsers.map((user, index) => (
-                  <tr key={index}>
-                    <td className="td1">{user.rank}</td>
-                    <td className="td2">{user.username}</td>
-                    <td className="td3">{user.points}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="pagination">
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleClick(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+          ))}
+          <div className="flex justify-between mt-6">
+            <Button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className="bg-blue-500 hover:bg-blue-600 text-white"
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            <Button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className="bg-blue-500 hover:bg-blue-600 text-white"
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
+      {/* Footer */}
       <Footer />
-    </>
+    </div>
   );
 };
 

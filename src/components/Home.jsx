@@ -188,10 +188,10 @@ const Home = () => {
                   style={{ backgroundImage: `url(${card.image})` }}
                 />
                 <div className="relative h-full flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-4 md:p-8">
-                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4 text-white">
+                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4">
                     {card.title}
                   </h2>
-                  <p className="text-base md:text-xl mb-4 md:mb-8 text-white">
+                  <p className="text-base md:text-xl mb-4 md:mb-8">
                     {card.description}
                   </p>
                   <Button
@@ -208,6 +208,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Tasks We Offer Section */}
+      <TasksWeOffer />
+      
       {/* Task Types Section */}
       <section className="py-10 md:py-16 bg-blue-50">
         <div className="container mx-auto px-4">
@@ -287,8 +290,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Tasks We Offer Section */}
-      <TasksWeOffer />
+
 
       {/* Leaderboard Section */}
       <section

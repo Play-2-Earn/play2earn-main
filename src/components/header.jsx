@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import WithAuth from "./nav_with_auth";
 import WithoutAuth from "./nav_without_auth";
-import DropdownAfterAuth from "./user_dropdown";
 import LoginPopup from "./Login";
 import SignUpPopup from "./Signup";
 import ForgetPassPopup from "./Forgetpassword";
@@ -151,13 +150,6 @@ const Header = () => {
       <PasswordReset
         isOpen={isPassResetOpen}
         onClose={closeResetPasswordLink}
-      />
-
-      {/* mit prajapati dropdown menu */}
-      {/* onClose={closeSignUpPopup} */}
-      <DropdownAfterAuth
-        isOpen={isDropdownMenu}
-        onClose={closDropdownMenuLink}
       />
     </>
   );
