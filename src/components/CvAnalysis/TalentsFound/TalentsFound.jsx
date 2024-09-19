@@ -19,8 +19,8 @@ const TalentsFound = () => {
               <p className="talent-name">{cv.candidate_name}</p>
             </div>
             <div className="talent-details">
-              {cv.combined_score && (
-                <p className="talent-score">Score: {cv.combined_score}%</p>
+              {cv.full_score && (
+                <p className="talent-score" style={{ fontSize: '1.2em' }}>Score: {cv.full_score}%</p>
               )}
               {cv.experience && (
                 <ul className="talent-experience">
@@ -33,8 +33,11 @@ const TalentsFound = () => {
               {cv.education && (
                 <p className="talent-education"><b>Education:</b> {cv.education}</p>
               )}
-              {cv.skills && (
-                <p className="talent-experience"><b>Skills:</b> {cv.skills}</p>
+              {cv.matched_skills && (
+                <p className="talent-experience"><b>Relevant Skills:</b> {cv.matched_skills}</p>
+              )}
+              {cv.cv_skills && (
+                <p className="talent-experience"><b>All Skills:</b> {cv.cv_skills}</p>
               )}
             </div>
             <button className="talent-action-button">INVITE</button>

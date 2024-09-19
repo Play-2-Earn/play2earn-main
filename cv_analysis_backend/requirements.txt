@@ -19,6 +19,7 @@ numpy==1.25.1
 sentence-transformers
 spacy
 tensorflow-hub
+pdfplumber==0.11.4
 torch
 torchvision
 nltk
