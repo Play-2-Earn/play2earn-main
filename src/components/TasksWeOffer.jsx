@@ -1,4 +1,3 @@
-// TasksWeOffer.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -222,8 +221,6 @@ const TasksWeOffer = () => {
       navigate("/Wordify");
     } else if (task.category === "Audio Transcription") {
       navigate("/AudioTranscription");
-    } else if (task.category === "Translation Challenge") {
-      navigate("/translation");
     }
     setSelectedTask(null);
   };
@@ -232,7 +229,7 @@ const TasksWeOffer = () => {
     <section className="py-10 md:py-16 bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto px-4">
         <h3 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-blue-800">
-          Tasks We Offer
+          Games We Offer
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {tasks.map((task) => (

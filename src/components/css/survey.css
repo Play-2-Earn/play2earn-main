@@ -11,7 +11,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .survey-header {
   width: 90%;
   max-width: 1200px;
@@ -22,45 +21,36 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
-
 .survey-header h1 {
   margin: 0;
   font-size: 2.5em;
 }
-
 .survey-header p {
   margin: 10px 0 0;
   font-size: 1.2em;
   align-items: center;
   justify-content: space-between;
-  align-items: left;
-  text-align: center;
+  align-items: center;
+  padding-left: 290px;
 }
-
 .header-content {
   align-items: center;
   justify-content: space-between;
   align-items: center;
 }
-
 .header-left {
   text-align: left;
 }
-
 .header-right {
   font-size: 32px;
   padding-left: 20px;
 }
-
 .tasks-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center; /* Centers the cards horizontally */
-  padding: 10px;
+  padding: 20px;
 }
-
 .task-card {
   background: rgba(255, 255, 255, 0.8);
   color: black;
@@ -74,40 +64,25 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.tasks-container .card {
-  width: 90%; /* Sets width to 90% of the screen for flexibility */
-  max-width: 350px; /* Limits the maximum size on larger screens */
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-  border-radius: 8px; /* Rounded corners */
-  margin: 10px;
-  background-color: #fff; /* Ensure a background color for the card */
-}
 .task-card.incomplete {
   border-left: 5px solid red;
 }
-
 .task-card.in-progress {
   border-left: 5px solid orange;
 }
-
 .task-card.completed {
   border-left: 5px solid green;
 }
-
 .task-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .task-details {
   text-align: left;
 }
-
 .task-actions button {
-  background-color: #6200ea;
+  background-color: #6200EA;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -116,116 +91,63 @@
   font-size: 16px;
   transition: background-color 0.3s, transform 0.3s;
 }
-
 .task-actions button:hover {
-  background-color: #3700b3;
+  background-color: #3700B3;
   transform: scale(1.05);
 }
-
 .task-actions button:disabled {
-  background-color: #a0a0a0;
+  background-color: #A0A0A0;
   cursor: not-allowed;
   transform: none;
 }
-
 .task-actions {
   text-align: right;
 }
-
-
 .form-container {
-  width: 90%; /* Set a relative width to make it flexible */
-  max-width: 400px; /* Limit the maximum size */
-  margin: 0 auto; /* Center the form horizontally */
-  padding: 15px; /* Optional padding for spacing */
-  background-color: #fff; /* Optional background color */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-  border-radius: 8px; /* Rounded corners */
-  text-align: left; 
-}
-.form-container h3{
-  font-size: 1.5em !important;
-}
-.form-container p{
-  padding-left: 0px;
+  margin-top: 20px;
 }
 .task-status {
   margin-top: auto;
+  display: flex;
   align-items: center;
-  text-align: center;
   gap: 10px;
-}
-.task-actions button{
-    margin-bottom: 30px;
-}
-.task-actions button:disabled{
-  flex: none; /* Disables flex auto behavior */
-  margin: 0 auto; /* Centers the button horizontally */
-  text-align: center; /* Ensures text inside the button is centered */
-  display: block; /* Ensures button takes block layout so centering works */
 }
 /* Styles for share options */
 .share-options {
   margin-top: 20px;
   text-align: left;
 }
-
 .share-options h4 {
   margin-bottom: 10px;
-  text-align: center;
 }
-
 .share-buttons {
   display: flex;
   gap: 10px;
 }
-
 .share-buttons button {
-
+  display: flex;
   align-items: center;
-  gap: 2px;
-  padding: 8px 10px;
+  gap: 5px;
+  padding: 8px 12px;
   border: none;
-  border-radius: 2px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 12.5px;
+  font-size: 14px;
   transition: background-color 0.3s;
+  flex-wrap: wrap;
 }
-
 .share-buttons button:hover {
   opacity: 0.8;
 }
-
 .share-buttons button:nth-child(1) {
-  background-color: #1da1f2;
+  background-color: #1DA1F2;
   color: white;
 }
-
 .share-buttons button:nth-child(2) {
-  background-color: #25d366;
+  background-color: #25D366;
   color: white;
 }
-
 .share-buttons button:nth-child(3) {
-  background-color: #0088cc;
+  background-color: #0088CC;
   color: white;
-}
-
-
-@media (min-width: 768px) {
-  .tasks-container .card {
-    width: 45%; /* On larger screens, cards take up 45% of the width */
-  }
-}
-
-@media (min-width: 1024px) {
-  .tasks-container .card {
-    width: 30%; /* On even larger screens, cards take up 30% of the width */
-  }
-}
-
-@media (max-width: 480px) {
-  .tasks-container .card {
-    width: 95%; /* On small mobile screens, the card takes up most of the screen */
-  }
 }
