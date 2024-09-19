@@ -32,6 +32,8 @@
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",
     "framer-motion": "^11.4.0",
+    "json": "^11.0.0",
+    "json-parser": "^3.1.2",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",

@@ -5,9 +5,7 @@ const nodemailer = require("nodemailer");
 const { request } = require("http");
 require("dotenv").config();
 const crypto = require("crypto");
-// const jwt = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
-// const cookieParser = require('cookie-parser');
 
 const {
   getUserProfile,
@@ -25,7 +23,7 @@ const User = require("../models/User");
 const router = express.Router();
 // router.use(express.json());
 
-router.get("/:id", getUserProfile);
+router.post("/user_data", getUserProfile);
 router.patch("/:id", updateUserProfile);
 router.delete("/:id", deleteUser);
 router.get("/", getAllUsers);
@@ -43,9 +41,10 @@ function generateReferralCode(firstName, lastName) {
 }
 
 router.post("/sign_up", (request, response) => {
-  const { firstName, lastName, email, password, refBy } = request.body;
+  const { firstName, lastName, username, email, password, refBy } = request.body;
 
-  const username = firstName + crypto.randomInt(100000, 999999);
+  // const username = firstName + crypto.randomInt(100000, 999999);
+  const int_userId = crypto.randomInt(10000000000, 999999999999);
   // Check if a user with the given email already exists
   UserModel.findOne({ email: email })
     .then((user) => {
@@ -64,6 +63,7 @@ router.post("/sign_up", (request, response) => {
           password,
           userRefNum,
           refBy,
+          int_userId
         })
           .then((newUser) => response.status(201).json(newUser))
           .catch((err) => {
@@ -82,7 +82,7 @@ router.post("/sign_up", (request, response) => {
 
 const tokenGenerator = (payload) => {
   const exp = {
-    expiresIn: "1h",
+    expiresIn: "24h",
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, exp);
@@ -96,9 +96,11 @@ router.post("/log_in", (request, response) => {
   UserModel.findOne({ email: email }).then((user) => {
     if (user) {
       if (user.password === password) {
-        const payload = { id: user.username };
+        const payload = { _id: user._id};
         const uniqueToken = tokenGenerator(payload);
 
+        user.token = uniqueToken
+        user.save()
         response.cookie("token", uniqueToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
@@ -225,5 +227,18 @@ router.get("/check", (req, res) => {
   }
 });
 
+
+// router.get("/user_data", (res, req) => {
+  
+//   const UserToken = req.cookie.token
+
+//   try{
+//     console.log(UserToken)
+
+//   }
+//   catch (error){
+
+//   }
+// })
 
 module.exports = router;

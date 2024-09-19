@@ -25,6 +25,7 @@ const SignUpPopup = ({ isOpen, onClose, innLogInlink }) => {
       const response = await axios.post(`${apiUrl}/api/users/sign_up`, {
         firstName,
         lastName,
+        username,
         email,
         password,
         refBy,

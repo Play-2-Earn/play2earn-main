@@ -64,7 +64,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
 
-    token: {
+    int_userId: {
       type: String,
       unique: true,
     },
