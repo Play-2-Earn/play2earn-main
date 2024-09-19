@@ -9,7 +9,7 @@ from models import CVAnalysis, User
 from jwt import decode, ExpiredSignatureError, InvalidTokenError
 from dotenv import load_dotenv
 from CV_Analyze import analyze_cvs, scan_one_file
-
+from bson import ObjectId
 load_dotenv()
 
 # Configure logging
@@ -41,7 +41,8 @@ def upload_cv():
 
     logging.debug('Entering upload_cv function')
     user_identity = decoded
-    user = User.objects(username=user_identity["id"]).only('username').first()
+    user_identity_id = user_identity["_id"]
+    user = User.objects(id=ObjectId(user_identity_id)).only('username').first()
 
 
     if 'file' not in request.files:
@@ -129,8 +130,8 @@ def manual_upload_cv():
         return jsonify(decoded), 401
 
     user_identity = decoded
-    user = User.objects(username=user_identity["id"]).only('username').first()
-
+    user_identity_id = user_identity["_id"]
+    user = User.objects(id=ObjectId(user_identity_id)).only('username').first()
     logging.debug('Entering manual_upload_cv function')
     data = request.json
     full_name = data.get('name')
