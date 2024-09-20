@@ -54,7 +54,6 @@ body {
   position: relative;
   color: #fff;
   text-transform: uppercase;
-  -webkit-box-reflect: below 1px linear-gradient(transparent,#0008);
   line-height: 1.5em;
   outline: none;
   animation: animate 3s linear infinite;
@@ -464,11 +463,18 @@ body {
   max-height: 100%; /* Ensure the image does not exceed its container height */
 }
 
+.audio-player {
+  position: relative;
+  left: 45px; /* Shift the audio player 30px to the right */
+  top: 30px; /* Shift the audio player 30px down */
+  max-width: 150%; /* Ensure it does not go beyond the bounds on smaller devices */
+  box-sizing: border-box; /* Make sure the padding and borders are included in the element's width and height */
+}
+
 .feedback-message {
   margin-top: 20px;
   font-size: 30px;
 }
-
 
 .progress-bar-container {
   width: 100%;
@@ -548,8 +554,9 @@ body {
   text-align: center;
 }
 
+
 /* Apply styles specifically for iPhone SE and Samsung Galaxy S8+ */
-@media only screen and (max-width: 375px) and (orientation: portrait) { /* Samsung Galaxy S8+ */
+@media only screen and (max-width: 375px), (max-width: 390px) and (orientation: portrait) { /* Samsung Galaxy S8+ */
 
   /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
@@ -613,29 +620,31 @@ body {
     }
 }
 
-h1 {
-  font-family: 'Orbitron', sans-serif; /* Funky font */
-  font-size: 35px !important; /* Larger font size for visibility */
-  font-weight: bold; /* Bold font */
-  text-align: center;
-  letter-spacing: 4px !important;
-  position: relative;
-  color: #fff;
-  text-transform: uppercase;
-  -webkit-box-reflect: below 1px linear-gradient(transparent,#0008);
-  line-height: 1.5em;
-  outline: none;
-  animation: animate 3s linear infinite;
-  animation-delay: calc(0.1s * var(--i));
+.captcha-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 15px;
+  background: radial-gradient(circle at top left, #ff7e79, transparent),
+              linear-gradient(135deg, #ffb347, #42a5f5, #7e57c2);
+  color: #000000; /* Black text */
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  box-shadow: 0 0 15px #ffb347, 0 0 25px rgba(0, 0, 0, 0.8); /* Glowing shadow */
+  overflow: hidden;
+  animation: gradientAnimation 10s ease infinite; /* Apply smoother animation */
 }
 
-p {
+.captcha-container p {
   font-family: 'Orbitron', cursive; /* Funky font */
-  font-size: 20px;
+  font-size: 15px;
   color: #ffffff; /* White */
   text-shadow: 2px 2px #ffc0cb; /* Soft shadow to give a lively effect */
   letter-spacing: 1px; /* Slight letter spacing for added funk */
-  margin-bottom: 15px;
   padding-left: 15px;
 }
 
@@ -687,7 +696,7 @@ p {
 }
 
 /* Buttons */
-.button, .submit-button, .back-button, .learn-button {
+.button,.learn-button {
   padding: 10px 20px;
   font-size: clamp(16px, 3vw, 20px);
   font-weight: bold;
@@ -702,6 +711,17 @@ p {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s, box-shadow 0.2s;
   margin: 10px;
+}
+
+.submit-button,
+.back-button {
+  padding: 10px 20px;
+  background-color: #c94f5b; /* Deep pink */
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin above submit and back buttons */
+  margin-right: 10px; /* Add margin between buttons */
 }
 
 .button:hover, .submit-button:hover, .back-button:hover, .learn-button:hover {
@@ -764,7 +784,7 @@ p {
               linear-gradient(135deg, rgba(74, 144, 226, 0.6), rgba(255, 152, 0, 0.6) 50%, rgba(21, 201, 151, 0.6));
   padding: 20px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 1);
   max-width: 100%;
   margin: 0 auto;
 }
@@ -796,10 +816,6 @@ p {
   color: #ffffff;
   font-weight: bold;
   transition: width 0.5s ease;
-  white-space: nowrap; /* Prevents text from breaking */
-  display: flex; /* Makes text stay in one line */
-  justify-content: center; /* Centers the text horizontally */
-  align-items: center; /* Centers the text vertically */
 }
 
 /* Miscellaneous */
@@ -808,6 +824,14 @@ p {
   height: 100px;
   max-width: 100%;
   max-height: 100%;
+}
+
+.audio-player {
+  position: relative;
+  left: 10px; /* Shift the audio player 30px to the right */
+  top: 30px; /* Shift the audio player 30px down */
+  max-width: 150%; /* Ensure it does not go beyond the bounds on smaller devices */
+  box-sizing: border-box; /* Make sure the padding and borders are included in the element's width and height */
 }
 
 .feedback-message {
@@ -859,12 +883,12 @@ p {
 }
 
 /* Additional adjustments for very small screens */
-@media (max-width: 400px) {
+@media (max-width: 375px) {
   .captcha-container {
     padding: 5px;
   }
 
-  .button, .submit-button, .back-button, .learn-button {
+  .submit-button, .back-button, .learn-button {
     padding: 6px 12px;
     font-size: clamp(12px, 2.5vw, 16px);
   }
@@ -900,7 +924,7 @@ p {
   }
 
   .captcha-container {
-    padding: 10px 5px;
+    padding: 5px 5px;
     height: 100vh;
     max-height: 667px;
     overflow: hidden;
@@ -925,8 +949,8 @@ p {
   }
 
   .button, .submit-button, .back-button, .learn-button {
-    padding: 6px 10px;
-    font-size: 14px;
+    padding: 1px 10px;
+    font-size: 20px;
     margin: 3px;
   }
 
@@ -968,5 +992,47 @@ p {
   .captcha-container > * {
     width: 100%;
     height: 100%;
+  }
+}
+
+@media only screen and (max-width: 390px){ /* iPhone 12 Pro */
+  .button{
+    font-size: 20px;
+  }
+
+  .audio-player {
+  position: relative;
+  left: 20px; /* Shift the audio player 30px to the right */
+  top: 30px; /* Shift the audio player 30px down */
+  max-width: 150%; /* Ensure it does not go beyond the bounds on smaller devices */
+  box-sizing: border-box; /* Make sure the padding and borders are included in the element's width and height */
+  }
+}
+
+@media only screen and (max-width: 360px){ /* Samsung Galaxy S8+ */
+  .button{
+    font-size: 20px;
+  }
+
+  .audio-player {
+  position: relative;
+  left: 11.5px; /* Shift the audio player 30px to the right */
+  top: 30px; /* Shift the audio player 30px down */
+  max-width: 150%; /* Ensure it does not go beyond the bounds on smaller devices */
+  box-sizing: border-box; /* Make sure the padding and borders are included in the element's width and height */
+  }
+}
+
+@media only screen and (max-width: 344px){ /* Samsung Galaxy Z Fold 5 */
+  .button{
+    font-size: 20px;
+  }
+
+  .audio-player {
+  position: relative;
+  left: 4px; /* Shift the audio player 30px to the right */
+  top: 30px; /* Shift the audio player 30px down */
+  max-width: 100%; /* Ensure it does not go beyond the bounds on smaller devices */
+  box-sizing: border-box; /* Make sure the padding and borders are included in the element's width and height */
   }
 }

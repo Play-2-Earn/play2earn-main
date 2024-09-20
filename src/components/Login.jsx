@@ -34,13 +34,21 @@ const LoginPopup = ({
       });
 
       console.log(response.data.message);
+      
       if (response.data.message === "success") {
         if (role === "User") {
+
+          // session storage for refrall page (mit prajapati)
+
+          sessionStorage.setItem("email", email);
           userLoginStatusDone();
           onClose();
           alert("Welcome to play2earn");
-        } else if (role === "Admin") {
+        }
+
+        else if (role === "Admin") {
           navigate("/dashboard");
+          onClose();
         }
       } else {
         alert("Incorrect email or password");
@@ -167,11 +175,10 @@ const LoginPopup = ({
         <div className="flex justify-center mb-4">
           <button
             onClick={toggleRole}
-            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${
-              role === "Admin"
-                ? "bg-green-500 text-white"
-                : "bg-blue-500 text-white"
-            }`}
+            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${role === "Admin"
+              ? "bg-green-500 text-white"
+              : "bg-blue-500 text-white"
+              }`}
           >
             {role === "Admin" ? "Switch to User" : "Switch to Admin"}
           </button>

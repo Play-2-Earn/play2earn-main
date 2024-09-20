@@ -31,6 +31,7 @@ const WithoutAuth = ({ userLogOut }) => {
       console.log(logoutReq.data);
       if (logoutReq.status == 200) {
         alert("You are successfully logged out");
+        sessionStorage.removeItem("email")
         userLogOut();
       }
     } catch (error) {

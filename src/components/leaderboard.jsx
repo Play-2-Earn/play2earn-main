@@ -10,122 +10,54 @@ import {
 import { Button } from "@/components/ui/button";
 import Header from "./header";
 import Footer from "./footer";
-
-const dummyUsersData = [
-  {
-    username: "DragonSlayer",
-    points: 9500,
-    level: 42,
-    streak: 7,
-    achievements: 15,
-  },
-  {
-    username: "PixelNinja",
-    points: 9000,
-    level: 40,
-    streak: 5,
-    achievements: 14,
-  },
-  {
-    username: "CosmoQuest",
-    points: 8800,
-    level: 39,
-    streak: 3,
-    achievements: 13,
-  },
-  {
-    username: "LevelUpLegend",
-    points: 8600,
-    level: 38,
-    streak: 4,
-    achievements: 12,
-  },
-  {
-    username: "EpicGamer123",
-    points: 8500,
-    level: 37,
-    streak: 2,
-    achievements: 11,
-  },
-  {
-    username: "QuestMaster",
-    points: 8400,
-    level: 36,
-    streak: 6,
-    achievements: 10,
-  },
-  {
-    username: "StrategyKing",
-    points: 8300,
-    level: 35,
-    streak: 1,
-    achievements: 9,
-  },
-  {
-    username: "PowerPlayer",
-    points: 8200,
-    level: 34,
-    streak: 3,
-    achievements: 8,
-  },
-  {
-    username: "VictoryViper",
-    points: 8100,
-    level: 33,
-    streak: 2,
-    achievements: 7,
-  },
-  {
-    username: "TechTitan",
-    points: 8000,
-    level: 32,
-    streak: 4,
-    achievements: 6,
-  },
-];
+import axios from "axios";
 
 const Leaderboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [animatedPoints, setAnimatedPoints] = useState({});
+  const [loading, setLoading] = useState(true); // Loading state
+  const [userData, setUserData] = useState([]); // Empty array as default
   const usersPerPage = 5;
 
+  useEffect(() => {
+    async function LeaderBoardData() {
+      try {
+        const API_BASE_URL =
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:5002"
+            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+
+        const apiUrl = `${API_BASE_URL}/api/leaderboard/leaderBoardData`;
+        const response = await axios.get(apiUrl);
+
+        setUserData(response.data);  // Set user data from response
+        setLoading(false);  // Disable loading state
+        // console.log(response.data);  // Debugging the fetched data
+      } catch (error) {
+        console.log(error);
+        setLoading(false);  // Disable loading even on error
+      }
+    }
+
+    LeaderBoardData();  // Call the function
+  }, []);
+
+  // Pagination calculations
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = dummyUsersData.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(userData.length / usersPerPage);
 
-  const totalPages = Math.ceil(dummyUsersData.length / usersPerPage);
-
-  const nextPage = () =>
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-  useEffect(() => {
-    const animationIntervals = [];
+  if (loading) {
+    return <div>Loading...</div>;  // Display loading state
+  }
 
-    currentUsers.forEach((user) => {
-      if (animatedPoints[user.username] === undefined) {
-        setAnimatedPoints((prev) => ({ ...prev, [user.username]: 0 }));
-        const interval = setInterval(() => {
-          setAnimatedPoints((prev) => {
-            if (prev[user.username] >= user.points) {
-              clearInterval(interval);
-              return prev;
-            }
-            return {
-              ...prev,
-              [user.username]: Math.min(
-                prev[user.username] + Math.ceil(user.points / 100),
-                user.points
-              ),
-            };
-          });
-        }, 20);
-        animationIntervals.push(interval);
-      }
-    });
-
-    return () => animationIntervals.forEach(clearInterval);
-  }, [currentUsers, animatedPoints]);
+  if (userData.length === 0) {
+    return <div>No data available</div>;  // Display when no data is present
+  }
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-blue-50 to-blue-100 text-blue-800 overflow-hidden relative">
@@ -155,9 +87,7 @@ const Leaderboard = () => {
             <h2 className="text-2xl font-bold mb-4 flex items-center text-blue-700">
               <Target className="mr-2" /> Daily Challenge
             </h2>
-            <p className="text-blue-600">
-              Complete 3 quests to earn bonus points!
-            </p>
+            <p className="text-blue-600">Complete 3 quests to earn bonus points!</p>
             <div className="mt-4 h-4 bg-blue-100 rounded-full">
               <div
                 className="h-full bg-blue-500 rounded-full"
@@ -206,7 +136,7 @@ const Leaderboard = () => {
                 </div>
                 <div className="text-right">
                   <p className="font-extrabold text-4xl text-blue-600 animate-bounce">
-                    {animatedPoints[user.username] || 0}
+                    {animatedPoints[user.username] || user.points}
                   </p>
                   <p className="text-blue-500">points</p>
                 </div>

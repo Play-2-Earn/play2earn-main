@@ -14,6 +14,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@formfacade/embed-react": "^1.0.4",
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -24,13 +25,14 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.7.3",
+    "axios": "^1.7.7",
     "babel-plugin-module-resolver": "^5.0.2",
     "canvas-confetti": "^1.9.3",
     "chart.js": "^4.4.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",
+    "fortawesome": "^0.0.1-security",
     "framer-motion": "^11.4.0",
     "json": "^11.0.0",
     "json-parser": "^3.1.2",
@@ -54,7 +56,8 @@
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "winston": "^3.14.2"
   },
   "devDependencies": {
     "@types/aria-query": "^5.0.4",

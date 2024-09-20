@@ -30,6 +30,8 @@ import { AuthProvider } from "./components/globalStateForAuth";
 import UserDash from "./components/user_dash/userdash";
 import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
+// (admin dash) mit prajapati
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
   // mit prajapati

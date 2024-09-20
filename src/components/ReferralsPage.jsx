@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/Referrals.css';
 import { FaUserFriends } from 'react-icons/fa';
 import { FaBitcoin } from 'react-icons/fa';
@@ -9,8 +9,50 @@ import cards from "/assets/cards.png"
 import check from "/assets/check.png"
 import Header from './header';
 import Footer from './footer';
+import axios from 'axios';
+
 const ReferralsPage = () => {
-  const referralCode = "abgYOLOcghtkdo";
+
+  const email = sessionStorage.getItem('email');
+  const [referralCode, setReferralCode] = useState('');
+  const [refCount, setRefCount] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  console.log(email);
+  useEffect(() => {
+    async function fetchReferralInfo() {
+      try {
+        const API_BASE_URL =
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:5002"
+            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+        const apiUrl = `${API_BASE_URL}/api/user/${email}/referral-info`;
+        const response = await axios.get(apiUrl, { withCredentials: true });
+        console.log(email)
+        setReferralCode(response.data.refnum || 'No referral code available');
+        setRefCount(response.data.referredUsersCount || 'No referral code available');
+        setLoading(false);  // Disable loading state after fetching data
+      } catch (error) {
+        console.error("Failed to fetch referral info:", error);
+        setError(error.message);
+        setLoading(false);  // Disable loading state even on error
+      }
+    }
+    fetchReferralInfo();  // Call the async function
+  }, [email]);  // Dependency array ensures it runs when userId changes
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(referralCode)
+      .then(() => {
+        alert("Text copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
 
   return (
     <>
@@ -39,7 +81,7 @@ const ReferralsPage = () => {
                 <div className="code-box">
                   <span>{referralCode}</span>
                 </div>
-                <button className="copy-button refrall_btn" onClick={() => navigator.clipboard.writeText(referralCode)}>
+                <button className="copy-button refrall_btn" onClick={handleCopy}>
                   <FaClipboard /> Copy
                 </button>
               </div>
@@ -55,12 +97,12 @@ const ReferralsPage = () => {
                   <div className="summary-item">
                     <span>Referred Friends:</span>
                     <FaUserFriends size={32} color='blue' />
-                    <span>-2</span>
+                    <span>{refCount}</span>
                   </div>
                   <div className="summary-item">
                     <span>Bonus Earned:</span>
                     <FaBitcoin size={32} color='blue' />
-                    <span>0</span>
+                    <span>{refCount * 100}</span>
                   </div>
                 </div>
               </div>
