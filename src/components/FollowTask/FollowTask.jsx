@@ -417,7 +417,7 @@ const FollowTask = () => {
               handleShareAchievement(platform, accountLink, "twitter")
             }
           >
-            <FaTwitter /> Twitter
+            <FaTwitter /> X
           </button>
           <button
             onClick={() =>

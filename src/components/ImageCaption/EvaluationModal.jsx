@@ -50,7 +50,7 @@ const EvaluationModal = ({ score, open, onClose }) => {
           textAlign: 'center',
         }}
       >
-        <h1 id="evaluation-modal-title" style={{ fontWeight: 'bolder', fontSize: '32px' }}>
+        <h1 id="evaluation-modal-title" style={{ fontWeight: 'bolder', fontSize: '32px', color:'black' }}>
           Evaluating...
         </h1>
         <p id="evaluation-modal-description" style={{ fontSize: '20px' }}>

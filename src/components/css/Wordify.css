@@ -470,7 +470,9 @@ body {
 }
 
 .wordify-popup-content {
-  max-height: calc(80vh - 40px); /* Ensure the content is not taller than the popup */
+  max-height: calc(
+    80vh - 40px
+  ); /* Ensure the content is not taller than the popup */
   overflow-y: auto; /* Scroll within the content area if necessary */
 }
 
@@ -521,7 +523,6 @@ body {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s;
-  
 }
 .wordify-share-buttons button {
   padding: 1px 1px; /* Adjust the padding to make buttons smaller */

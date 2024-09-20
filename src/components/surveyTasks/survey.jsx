@@ -111,13 +111,13 @@ function Survey() {
     <div className="survey">
       <ToastContainer />
       <header className="survey-header">
-        <div className="header-content">
+        <div className="header-content text-white">
           <div className="header-left">
             <h1>Survey Forms Task</h1>
             <p>Complete the given survey forms to receive your points!</p>
           </div>
           <div className="header-right">
-            <h2>Your Points: {points}</h2>
+            <h2 className="text-white">Your Points: {points}</h2>
           </div>
         </div>
         <div className="tasks-container">

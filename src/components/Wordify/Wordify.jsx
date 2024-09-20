@@ -385,14 +385,17 @@ function Wordify() {
                 AI-Powered Word Creation and Matching Game
               </h2>
               <p>
-                Use AI to craft and match words, boosting your vocabulary in a fun challenge!
+                Welcome to the AI-Powered Word Creation and Matching Game! In
+                this game, you'll harness the power of artificial intelligence
+                to create and match words. It's a fun and educational way to
+                enhance your vocabulary and cognitive abilities.
               </p>
               <h3 className="wordify-obj">Objective: </h3>
               <p>
-              Create as many words as possible from given letters within a time limit.
-              </p>
-              <p>
-              Match your words with AI-generated words to earn points.
+                The goal is to create as many words as possible using the given
+                letters within a time limit. Match the words with the
+                AI-generated words to earn points. Challenge yourself and see
+                how many words you can create and match!
               </p>
             </div>
             <div className="wordify-start-container">

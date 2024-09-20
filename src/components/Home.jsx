@@ -61,19 +61,19 @@ const Home = () => {
       title: "Empower Your Play, Earn Rewards, and Shape the Future of AI",
       description:
         "Play exciting games, earn PlayCredits, and use them in the real world with our PlayCreditCard. Welcome to the Play2Earn ecosystem – where your gameplay fuels AI development.",
-      image: "assets/f.jpg",
+      image: "assets/image6.png",
     },
     {
       title: "AI-Driven Games",
       description:
         "Our games are not just fun; they contribute to the development of cutting-edge AI models.",
-      image: "assets/pic1.png",
+      image: "assets/image5.png",
     },
     {
       title: "Global PlayCreditCard",
       description:
         "Use your PlayCredits in the real world, just like any other debit or credit card.",
-      image: "assets/hero3.png",
+      image: "assets/image4.png",
     },
   ]);
 
@@ -188,7 +188,7 @@ const Home = () => {
                   style={{ backgroundImage: `url(${card.image})` }}
                 />
                 <div className="relative h-full flex flex-col justify-center items-center text-center text-white bg-black bg-opacity-50 p-4 md:p-8">
-                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4">
+                  <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4 text-white">
                     {card.title}
                   </h2>
                   <p className="text-base md:text-xl mb-4 md:mb-8">
@@ -210,7 +210,7 @@ const Home = () => {
 
       {/* Tasks We Offer Section */}
       <TasksWeOffer />
-      
+
       {/* Task Types Section */}
       <section className="py-10 md:py-16 bg-blue-50">
         <div className="container mx-auto px-4">
@@ -289,8 +289,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-
 
       {/* Leaderboard Section */}
       <section

@@ -186,15 +186,17 @@ const About = () => (
           </div>
         </div>
 
-        <div className="bg-sky-200 rounded-3xl overflow-hidden py-16 px-8 mb-5">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Our Roadmap</h2>
+        <div className="bg-sky-200 rounded-3xl overflow-hidden py-16 px-8 mb-5 mx-auto max-w-screen-lg">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            Our Roadmap
+          </h2>
           <p className="text-gray-800 mb-8 text-center">
             Check out our journey and future plans as we continue to innovate
             and expand. Our roadmap outlines the key milestones and upcoming
             features that will shape the future of Play2earn.
           </p>
-          <div className="flex flex-col md:flex-row justify-between gap-8">
-            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between h-36">
+          <div className="flex flex-col md:flex-row md:flex-wrap justify-between gap-8">
+            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between flex-grow min-w-[200px] md:min-w-0">
               <h4 className="text-xl font-semibold text-gray-800 mb-4">
                 Q1 2024
               </h4>
@@ -203,7 +205,7 @@ const About = () => (
                 resources.
               </p>
             </div>
-            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between h-36">
+            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between flex-grow min-w-[200px] md:min-w-0">
               <h4 className="text-xl font-semibold text-gray-800 mb-4">
                 Q2 2024
               </h4>
@@ -212,7 +214,7 @@ const About = () => (
                 with personalized features.
               </p>
             </div>
-            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between h-36">
+            <div className="bg-blue-100 border border-gray-300 rounded-lg p-6 shadow-lg text-center flex flex-col justify-between flex-grow min-w-[200px] md:min-w-0">
               <h4 className="text-xl font-semibold text-gray-800 mb-4">
                 Q3 2024
               </h4>
@@ -221,7 +223,7 @@ const About = () => (
                 reward categories.
               </p>
             </div>
-            <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-lg text-center ring-2 ring-white ring-offset-2 ring-offset-sky-200 flex flex-col justify-between h-36">
+            <div className="bg-white border border-gray-300 rounded-lg p-6 shadow-lg text-center ring-2 ring-white ring-offset-2 ring-offset-sky-200 flex flex-col justify-between flex-grow min-w-[200px] md:min-w-0">
               <h4 className="text-xl font-semibold text-gray-800 mb-4">
                 Q4 2024
               </h4>
