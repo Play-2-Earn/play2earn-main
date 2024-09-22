@@ -31,7 +31,7 @@ import UserDash from "./components/user_dash/userdash";
 import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
 // (admin dash) mit prajapati
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
   // mit prajapati
@@ -49,7 +49,7 @@ const App = () => {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
             ? "http://localhost:5002" // Use backend API port in development
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+            : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}/api/check`;
 
@@ -66,19 +66,13 @@ const App = () => {
           // User is authenticated
           setIsAuthenticated(true);
           userLoginStatusAppr();
-        }
-
-        else if (response.status === 403) {
-          console.log("user is not logged in")
-        }
-
-        else {
+        } else if (response.status === 403) {
+          console.log("user is not logged in");
+        } else {
           console.log("no");
           setIsAuthenticated(false); // User is not authenticated
         }
-      }
-
-      catch (error) {
+      } catch (error) {
         console.error("Error checking auth:", error);
         setIsAuthenticated(false); // Error, assume user is not authenticated
       }

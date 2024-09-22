@@ -16,7 +16,7 @@ const LoginPopup = ({
   const API_BASE_URL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:5002"
-      : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+      : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,19 +34,16 @@ const LoginPopup = ({
       });
 
       console.log(response.data.message);
-      
+
       if (response.data.message === "success") {
         if (role === "User") {
-
           // session storage for refrall page (mit prajapati)
 
           sessionStorage.setItem("email", email);
           userLoginStatusDone();
           onClose();
           alert("Welcome to play2earn");
-        }
-
-        else if (role === "Admin") {
+        } else if (role === "Admin") {
           navigate("/dashboard");
           onClose();
         }
@@ -175,10 +172,11 @@ const LoginPopup = ({
         <div className="flex justify-center mb-4">
           <button
             onClick={toggleRole}
-            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${role === "Admin"
-              ? "bg-green-500 text-white"
-              : "bg-blue-500 text-white"
-              }`}
+            className={`px-4 py-2 rounded-lg font-semibold focus:outline-none transition ${
+              role === "Admin"
+                ? "bg-green-500 text-white"
+                : "bg-blue-500 text-white"
+            }`}
           >
             {role === "Admin" ? "Switch to User" : "Switch to Admin"}
           </button>

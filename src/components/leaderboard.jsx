@@ -25,21 +25,21 @@ const Leaderboard = () => {
         const API_BASE_URL =
           process.env.NODE_ENV === "development"
             ? "http://localhost:5002"
-            : "https://4rzf4x59sk.execute-api.eu-north-1.amazonaws.com/dev";
+            : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
         const apiUrl = `${API_BASE_URL}/api/leaderboard/leaderBoardData`;
         const response = await axios.get(apiUrl);
 
-        setUserData(response.data);  // Set user data from response
-        setLoading(false);  // Disable loading state
+        setUserData(response.data); // Set user data from response
+        setLoading(false); // Disable loading state
         // console.log(response.data);  // Debugging the fetched data
       } catch (error) {
         console.log(error);
-        setLoading(false);  // Disable loading even on error
+        setLoading(false); // Disable loading even on error
       }
     }
 
-    LeaderBoardData();  // Call the function
+    LeaderBoardData(); // Call the function
   }, []);
 
   // Pagination calculations
@@ -48,15 +48,16 @@ const Leaderboard = () => {
   const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
   const totalPages = Math.ceil(userData.length / usersPerPage);
 
-  const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const nextPage = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
   if (loading) {
-    return <div>Loading...</div>;  // Display loading state
+    return <div>Loading...</div>; // Display loading state
   }
 
   if (userData.length === 0) {
-    return <div>No data available</div>;  // Display when no data is present
+    return <div>No data available</div>; // Display when no data is present
   }
 
   return (
@@ -87,7 +88,9 @@ const Leaderboard = () => {
             <h2 className="text-2xl font-bold mb-4 flex items-center text-blue-700">
               <Target className="mr-2" /> Daily Challenge
             </h2>
-            <p className="text-blue-600">Complete 3 quests to earn bonus points!</p>
+            <p className="text-blue-600">
+              Complete 3 quests to earn bonus points!
+            </p>
             <div className="mt-4 h-4 bg-blue-100 rounded-full">
               <div
                 className="h-full bg-blue-500 rounded-full"
