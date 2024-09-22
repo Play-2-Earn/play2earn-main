@@ -15,7 +15,8 @@ const dotenv = require("dotenv");
 
 dotenv.config(); // Load environment variables
 const allowedOrigins = [
-  "https://dev.d3sxwpggtsq5rq.amplifyapp.com",
+  "https://dev.d2lmg68j4s3hb1.amplifyapp.com",
+  "https://main.d2lmg68j4s3hb1.amplifyapp.com",
   "https://www.play2earn.ai",
 ];
 
