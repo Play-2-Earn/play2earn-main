@@ -99,8 +99,12 @@ if (cluster.isMaster) {
   server.use("/api/users", userRoutes);
   server.use("/api/follow-task", followTaskRouter);
   server.use("/api/leaderboard", leaderboardRouter);
+  server.use("/api/texttag", textTagRoutes)
+  server.use("/api/wordcount", wordcountRoutes)
+
   //  ref (mit prajapati)
   server.use("/api", fetchdataRoutes);
+
 
   // admin (mit prajati)
 
@@ -113,6 +117,33 @@ if (cluster.isMaster) {
 
   // user progress (mit prajapati)
   server.use('/api/progress', progressRoutes);
+
+  // this is for the authentication to checking cookies
+  server.get("/api/check", (req, res) => {
+    // console.log("Request received at /check");
+    // console.log("Cookies:", req.cookies);
+    const token = req.cookies.token;
+
+    try {
+
+      if (!token) {
+        return res
+          .status(403)
+          .json({ message: "No token, authentication failed" });
+      }
+
+      const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
+      return res
+        .status(200)
+        .json({ message: "Authenticated", user: verifiedUser });
+    } catch (err) {
+      console.error("Server error:", err);
+      // if (err instanceof jwt.JsonWebTokenError) {
+      //   return res.status(401).json({ message: "Invalid or expired token" });
+      // }
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  });
 
 
   // Server setup
@@ -176,31 +207,6 @@ server.post("/verify", (req, res) => {
 
 // checking the cookies
 
-server.get("/api/check", (req, res) => {
-  // console.log("Request received at /check");
-  // console.log("Cookies:", req.cookies);
-
-  try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res
-        .status(403)
-        .json({ message: "No token, authentication failed" });
-    }
-
-    const verifiedUser = jwt.verify(token, process.env.JWT_SECRET);
-    return res
-      .status(200)
-      .json({ message: "Authenticated", user: verifiedUser });
-  } catch (err) {
-    console.error("Server error:", err);
-    // if (err instanceof jwt.JsonWebTokenError) {
-    //   return res.status(401).json({ message: "Invalid or expired token" });
-    // }
-    return res.status(500).json({ message: "Internal server error" });
-  }
-});
 
 // Connect to MongoDB
 // mongoose
