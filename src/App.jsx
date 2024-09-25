@@ -61,15 +61,12 @@ const App = () => {
         });
 
         if (response.status === 200) {
-          // console.log("yes");
-          // console.log(response.data.message); // e.g., 'Authenticated'
-          // User is authenticated
           setIsAuthenticated(true);
           userLoginStatusAppr();
         } else if (response.status === 403) {
           console.log("user is not logged in");
         } else {
-          console.log("no");
+          // console.log("no");
           setIsAuthenticated(false); // User is not authenticated
         }
       } catch (error) {
@@ -121,7 +118,6 @@ const App = () => {
         <ScrollToTop />
       </div>
     </Router>
-    // </AuthProvider>
   );
 };
 

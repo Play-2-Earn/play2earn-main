@@ -227,18 +227,4 @@ router.get("/check", (req, res) => {
   }
 });
 
-
-// router.get("/user_data", (res, req) => {
-  
-//   const UserToken = req.cookie.token
-
-//   try{
-//     console.log(UserToken)
-
-//   }
-//   catch (error){
-
-//   }
-// })
-
 module.exports = router;
