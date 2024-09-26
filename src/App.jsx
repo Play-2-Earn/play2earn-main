@@ -32,6 +32,8 @@ import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
 // (admin dash) mit prajapati
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import JobDescriptionUpload from './components/JobDescription/jobDescriptionUpload'
+import CvJobUpload from './components/CVJobDescription/cvjobupload'
 
 const App = () => {
   // mit prajapati
@@ -108,6 +110,9 @@ const App = () => {
           <Route path="/recruit" element={<ProjectDescriptionForm />} />
           <Route path="/talents-found" element={<TalentsFound />} />
           <Route path="/userdash" element={<UserDash />} />
+
+          <Route path="/jobdescriptionupload" element={<JobDescriptionUpload />} />
+          <Route path="/cvjobupload" element={<CvJobUpload />} />
           {/* Add other routes here */}
 
           {/* foorter routes */}

@@ -1,0 +1,119 @@
+.main {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 46.58px;
+    text-align: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.upload {
+    width: 877px;
+    height: 500px; /* Increased height to fit the button */
+    border-radius: 8px;
+    background-color: rgba(217, 243, 255, 0.7);
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.uploadbox {
+    width: 710px;
+    height: 194px;
+    border-radius: 8px;
+    border: 2px dashed #999;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    opacity: 1;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
+
+.uploadbox:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #007BFF; /* Change border color on hover */
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.upload-icon {
+    width: 85px;
+    height: 85px;
+    margin-bottom: 10px;
+    background-image: url('src/components/CVJobDescription/upload.png'); /* Path to your icon */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.uploadbox p {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.upload-input {
+    display: none; /* Hide the actual file input */
+}
+
+/* Styles for the Upload Button */
+.upload-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    background: linear-gradient(180deg, #007BFF 0%, #00D4FF 84.97%), linear-gradient(0deg, #000000, #000000);
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Space above the button */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .upload {
+        width: 90%; /* Make the upload area narrower on smaller screens */
+        height: auto; /* Adjust height to auto */
+    }
+
+    .uploadbox {
+        width: 100%; /* Adjust box width to fit the container */
+        height: auto;
+        padding: 20px;
+    }
+
+    .upload-icon {
+        width: 70px; /* Slightly smaller icon on smaller screens */
+        height: 70px;
+    }
+
+    .uploadbox p {
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%; /* Make the button full width on smaller screens */
+        padding: 10px; /* Adjust padding for smaller devices */
+        font-size: 16px; /* Smaller font size */
+    }
+}
