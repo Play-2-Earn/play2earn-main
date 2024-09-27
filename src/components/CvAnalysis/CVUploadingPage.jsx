@@ -21,7 +21,7 @@ const CVUploadingPage = () => {
   //const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const backendUrl =
     process.env.NODE_ENV === "development"
-      ? "http://localhost:5000"
+      ? "http://localhost:5001"
       : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev";
 
   // Handle tab switching

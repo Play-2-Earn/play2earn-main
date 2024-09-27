@@ -8,7 +8,7 @@ from utils import process_cv_file, calculate_context_score, allowed_file, calcul
 from models import CVAnalysis, User
 from jwt import decode, ExpiredSignatureError, InvalidTokenError
 from dotenv import load_dotenv
-from CV_Analyze import analyze_cvs, scan_one_file
+from CV_Analyze_Multi_process_Final import analyze_cvs
 from bson import ObjectId
 load_dotenv()
 
@@ -181,7 +181,6 @@ def analyze_resumes():
         print(token)
         return jsonify({"msg": "Missing token"}), 401
 
-    print(token, "ff")
     decoded = verify_jwt(token)
     if "msg" in decoded:
         return jsonify(decoded), 401

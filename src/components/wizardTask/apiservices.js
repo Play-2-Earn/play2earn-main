@@ -3,13 +3,13 @@ import axios from "axios";
 //const API_BASE_URL = "http://localhost:5002/api/wordcount";
 const API_BASE_URL =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:5002/api/wordcount"
+    ? "http://localhost:5002"
     : "https://sjq6s9ict5.execute-api.eu-north-1.amazonaws.com/dev/api/wordcount";
 
 // Function to get paragraphs by level
 export const fetchParagraphs = async (level) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/paragraphs`, {
+    const response = await axios.get(`${API_BASE_URL}/api/wordcount/paragraphs`, {
       params: { level: `level${level}` },
     });
     return response.data;

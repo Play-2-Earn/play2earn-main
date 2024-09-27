@@ -9,7 +9,8 @@ import axios from "axios";
 const UserDash = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true); // Added loading state
-  const [showMore, setShowMore] = useState(false);
+  const [showMoreU, setShowMoreU] = useState(false);
+  const [showMoreD, setShowMoreD] = useState(false);
 
   // Fetch user data on component mount
   useEffect(() => {
@@ -27,7 +28,7 @@ const UserDash = () => {
 
         setUserData(response.data); // Set user data from response
         setLoading(false); // Disable loading state
-        console.log(response.data); // Debugging the fetched data
+        // console.log(response.data); // Debugging the fetched data
       } catch (error) {
         console.log(error);
         setLoading(false); // Disable loading even on error
@@ -37,8 +38,13 @@ const UserDash = () => {
     User_dash_data(); // Call the function
   }, []); // Empty array ensures the effect runs only on component mount
 
-  const showMoreReset = () => {
-    setShowMore((prevState) => !prevState);
+  const showMoreResetU = () => {
+    console.log(showMoreD)
+    setShowMoreU((prevState) => !prevState);
+  };
+  const showMoreResetD = () => {
+    console.log(showMoreD)
+    setShowMoreD((prevState) => !prevState);
   };
 
   if (loading) {
@@ -118,7 +124,7 @@ const UserDash = () => {
                       <Card />
                       <Card />
 
-                      {showMore ? (
+                      {showMoreU ? (
                         <>
                           <Card />
                           <Card />
@@ -129,9 +135,9 @@ const UserDash = () => {
                     </div>
                     <a
                       className="cursor-pointer px-4 py-2 text-white rounded-3xl bg-blue-500 hover:bg-blue-700"
-                      onClick={showMoreReset}
+                      onClick={showMoreResetU}
                     >
-                      Show {showMore ? "Less-" : "More+"}
+                      Show {showMoreU ? "Less-" : "More+"}
                     </a>
                   </div>
 
@@ -143,11 +149,22 @@ const UserDash = () => {
                     <div className="flex flex-wrap justify-center">
                       <Card />
                       <Card />
-                      <Card />
-                      <Card />
-                      <Card />
-                      <Card />
+                      {showMoreD ? (null) : (
+                        <>
+                          <Card />
+                          <Card />
+                          <Card />
+                          <Card />
+
+                        </>)}
+
                     </div>
+                    <a
+                      className="cursor-pointer px-4 py-2 text-white rounded-3xl bg-blue-500 hover:bg-blue-700"
+                      onClick={showMoreResetD}
+                    >
+                      Show {showMoreD ? "Less-" : "More+"}
+                    </a>
                   </div>
                 </div>
               </div>

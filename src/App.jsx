@@ -31,6 +31,7 @@ import UserDash from "./components/user_dash/userdash";
 import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
 // (admin dash) mit prajapati
+import SearchAndCapture from "./components/SearchAndCapture/Main";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
@@ -61,15 +62,12 @@ const App = () => {
         });
 
         if (response.status === 200) {
-          // console.log("yes");
-          // console.log(response.data.message); // e.g., 'Authenticated'
-          // User is authenticated
           setIsAuthenticated(true);
           userLoginStatusAppr();
         } else if (response.status === 403) {
           console.log("user is not logged in");
         } else {
-          console.log("no");
+          // console.log("no");
           setIsAuthenticated(false); // User is not authenticated
         }
       } catch (error) {
@@ -102,7 +100,8 @@ const App = () => {
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/FollowTask" element={<FollowTask />} />
           <Route path="/AudioTranscription" element={<AudioTranscription />} />
-
+          <Route path="/searchandcapture" element={<SearchAndCapture />} />
+          
           <Route path="/cv-home" element={<CVLandingPage />} />
           <Route path="/uploadCV" element={<CVUploadingPage />} />
           <Route path="/recruit" element={<ProjectDescriptionForm />} />
@@ -121,7 +120,6 @@ const App = () => {
         <ScrollToTop />
       </div>
     </Router>
-    // </AuthProvider>
   );
 };
 

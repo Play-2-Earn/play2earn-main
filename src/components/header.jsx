@@ -102,9 +102,12 @@ const Header = () => {
               to="/earn"
               className="text-white hover:text-blue-200 mx-2 my-1"
             >
-              Earn
+              Games
             </Link>
-            <Link to="/leaderboard" className="text-white hover:text-blue-200 mx-2 my-1">
+            <Link
+              to="/leaderboard"
+              className="text-white hover:text-blue-200 mx-2 my-1"
+            >
               Leaderboard
             </Link>
             <Link
