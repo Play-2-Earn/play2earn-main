@@ -25,8 +25,23 @@
     opacity: 1;
 }
 
-.uploadbox {
-    width: 710px;
+.jobuploadbox {
+    width: 300px;
+    height: 194px;
+    border-radius: 8px;
+    border: 2px dashed #999;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    opacity: 1;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
+.cvuploadbox {
+    width: 300px;
     height: 194px;
     border-radius: 8px;
     border: 2px dashed #999;
@@ -58,7 +73,7 @@
     width: 85px;
     height: 85px;
     margin-bottom: 10px;
-    background-image: url('src/components/CVJobDescription/upload.png'); /* Path to your icon */
+    background-image: url('src/components/JobDescription/upload.png'); /* Path to your icon */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -75,7 +90,7 @@
 }
 
 /* Styles for the Upload Button */
-.upload-btn {
+button {
     padding: 12px 24px;
     font-size: 18px;
     background: linear-gradient(180deg, #007BFF 0%, #00D4FF 84.97%), linear-gradient(0deg, #000000, #000000);
@@ -88,6 +103,9 @@
     margin-top: 20px; /* Space above the button */
 }
 
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -116,4 +134,54 @@
         padding: 10px; /* Adjust padding for smaller devices */
         font-size: 16px; /* Smaller font size */
     }
+}
+
+
+.file-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.progress-bar {
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0; /* Initial width */
+    transition: width 0.4s ease; /* Smooth progress bar movement */
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px; /* Center the text vertically */
+}
+
+.upload-container {
+    display: flex; /* Use flexbox to arrange children horizontally */
+    justify-content: space-between; /* Space between the boxes */
+    width: 100%; /* Full width of the upload area */
+    max-width: 600px; /* Optional: limit the max width */
+}
+
+.jobuploadbox, .cvuploadbox {
+    margin-right: 20px; /* Space between the boxes */
+}
+
+/* Optional: Remove margin on the last item to avoid excess space */
+.upload-container > div:last-child {
+    margin-right: 0;
 }
