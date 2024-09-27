@@ -18,6 +18,7 @@ const allowedOrigins = [
   "https://dev.d2lmg68j4s3hb1.amplifyapp.com",
   "https://main.d2lmg68j4s3hb1.amplifyapp.com",
   "https://www.play2earn.ai",
+  "https://play2earn.ai",
 ];
 
 const app = express(); // Use app for express instance
