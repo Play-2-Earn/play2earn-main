@@ -31,6 +31,7 @@ import UserDash from "./components/user_dash/userdash";
 import { AuthContext } from "./components/globalStateForAuth";
 import axios from "axios";
 // (admin dash) mit prajapati
+import SearchAndCapture from "./components/SearchAndCapture/Main";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
@@ -99,7 +100,8 @@ const App = () => {
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/FollowTask" element={<FollowTask />} />
           <Route path="/AudioTranscription" element={<AudioTranscription />} />
-
+          <Route path="/searchandcapture" element={<SearchAndCapture />} />
+          
           <Route path="/cv-home" element={<CVLandingPage />} />
           <Route path="/uploadCV" element={<CVUploadingPage />} />
           <Route path="/recruit" element={<ProjectDescriptionForm />} />

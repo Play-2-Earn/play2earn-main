@@ -274,6 +274,9 @@ const Earn = () => {
       case "Text tagging":
         navigate("/texttagging");
         break;
+      case "Search & Win":
+          navigate("/searchandcapture");
+          break;
       default:
         console.error("Unknown task category:", task.category);
         navigate("/default"); // Optional fallback route

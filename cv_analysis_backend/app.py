@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_login import LoginManager
 from flask_cors import CORS
 from cv import cv_bp
-from chatbot.chatbot_route import chatbot_bp
 from models import User
 import os
 from dotenv import load_dotenv
@@ -14,7 +13,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Enable CORS
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+CORS(app, supports_credentials=True)
 
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -27,7 +26,6 @@ login_manager = LoginManager(app)
 
 
 app.register_blueprint(cv_bp, url_prefix='/cv')
-app.register_blueprint(chatbot_bp, url_prefix='/chatbot')
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -63,4 +61,4 @@ def home():
     return "FBA Project"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
