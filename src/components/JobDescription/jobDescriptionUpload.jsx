@@ -55,7 +55,7 @@ const JobDescriptionUpload = () => {
                     )}
                 </div>     <br/>
                 <br/>
-                <button className='upload-btn'>Upload CV and job description</button>
+                <button className='upload-btn'>Upload job description</button>
             </div>
         </div>
     );
