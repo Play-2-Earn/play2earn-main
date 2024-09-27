@@ -275,8 +275,8 @@ const Earn = () => {
         navigate("/texttagging");
         break;
       case "Search & Win":
-          navigate("/searchandcapture");
-          break;
+        navigate("/searchandcapture");
+        break;
       default:
         console.error("Unknown task category:", task.category);
         navigate("/default"); // Optional fallback route
@@ -293,7 +293,7 @@ const Earn = () => {
     "Audio Transcription",
     "Follow Task",
     "Text tagging",
-    "Image Captcha Task",
+    "Image Captcha ",
     "Image Caption",
     "Translation Challenge",
     "Wizard",
@@ -304,7 +304,7 @@ const Earn = () => {
     <>
       <Header />
       <div className="earn-container">
-        <h1>Task Marketplace</h1>
+        <h1>Games Marketplace</h1>
         <div className="search-filter-container">
           <input
             type="text"
